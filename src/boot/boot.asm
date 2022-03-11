@@ -52,7 +52,7 @@ protected_mode:
 	call ata_lba_read           ; Read kernel from ATA device
 
     xchg bx, bx                 ; Debugging breakpoint for Bochs debugger before jumping to kernel
-    jmp 0x08:KERNEL_ADDRESS     ; Jump to C kernel code (at address 0x100000)
+    call 0x08:KERNEL_ADDRESS    ; Jump to C kernel code (at address 0x100000)
 .hang:
     hlt
     jmp .hang                   ; Endless jump to current address to halt CPU (should never get here)

@@ -6,6 +6,4 @@ void kernel_main()
 {
     terminal_initialize();
     terminal_printf("Hello, Kernel!\n");
-    for (;;)
-        asm volatile("hlt");
 }
