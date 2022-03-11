@@ -1,9 +1,11 @@
-void kernel_main() __attribute__ ((section (".text.kernel")));
+#include <terminal.h>
+#include <string.h>
+#include <kernel.h>
 
 void kernel_main()
 {
-    char *video_memory = 0xb8000;
-    video_memory[0] = 'V';
+    terminal_initialize();
+    terminal_printf("Hello, Kernel!\n");
     for (;;)
         asm volatile("hlt");
 }

@@ -1,6 +1,7 @@
 BUILD_DIR := build
 SRC_DIR   := src
-INCLUDE   := $(SRC_DIR)/libc/include
+KERNELINC := $(SRC_DIR)/kernel/include
+LIBCINC   := $(SRC_DIR)/libc/include
 MODULES   := kernel libc suite
 SOURCES   := $(wildcard $(addprefix src/, $(addsuffix /*.c, $(MODULES))))
 OBJECTS   := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SOURCES:$(SRC_DIR)/%=%))
@@ -15,7 +16,7 @@ CC  	  := /usr/local/cross/bin/i686-elf-gcc
 OBJCOPY   := /usr/local/cross/bin/i686-elf-objcopy
 OCFLAGS   := -O binary
 ASMFLAGS  := -I $(SRC_DIR)/boot/include/ -f bin
-CFLAGS 	  := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -I$(INCLUDE)
+CFLAGS 	  := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -I$(KERNELINC) -I$(LIBCINC)
 LFLAGS    := -g -T $(LINKER) -ffreestanding -nostdlib
 
 .PHONY: all qemud qemu bochs view clean
