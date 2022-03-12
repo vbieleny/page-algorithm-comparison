@@ -19,3 +19,7 @@ inline void io_wait()
 {
     outb(0x80, 0);
 }
+
+inline void invalidate_page(uint32_t address) {
+   asm volatile("invlpg [%0]" ::"r" (address) : "memory");
+}
