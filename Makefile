@@ -25,7 +25,7 @@ all: $(BUILD_DIR)/$(IMGFILE)
 
 $(BUILD_DIR)/$(IMGFILE): $(BUILD_DIR)/boot.bin $(BUILD_DIR)/$(BINFILE)
 	cat $^ > $@
-	truncate -c -s 128K $@
+	truncate -c -s 256K $@
 
 $(BUILD_DIR)/$(BINFILE): $(BUILD_DIR)/$(ELFFILE)
 	$(OBJCOPY) $(OCFLAGS) $(BUILD_DIR)/$(ELFFILE) $(BUILD_DIR)/$(BINFILE)

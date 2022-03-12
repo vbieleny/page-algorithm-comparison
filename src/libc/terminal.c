@@ -56,7 +56,7 @@ void terminal_scroll()
     memmove(terminal_buffer, terminal_buffer + VGA_WIDTH, VGA_WIDTH * 2 * (VGA_HEIGHT - 1));
     for (size_t i = 0; i < VGA_WIDTH; i++)
     {
-        terminal_putentryat(' ', 0x07, i, VGA_HEIGHT - 1);
+        terminal_putentryat(' ', terminal_color, i, VGA_HEIGHT - 1);
     }
 }
 
