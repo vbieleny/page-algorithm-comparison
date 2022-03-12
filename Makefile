@@ -6,6 +6,7 @@ MODULES   := kernel libc suite
 SOURCES   := $(wildcard $(addprefix src/, $(addsuffix /*.c, $(MODULES))))
 OBJECTS   := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SOURCES:$(SRC_DIR)/%=%))
 OBJDIRS   := $(patsubst %, $(BUILD_DIR)/%, $(MODULES))
+DEPS      := $(OBJECTS:.o=.d)
 LINKER    := $(SRC_DIR)/linker.ld
 ELFFILE   := os.elf
 BINFILE   := os.bin
@@ -33,7 +34,10 @@ $(BUILD_DIR)/$(BINFILE): $(BUILD_DIR)/$(ELFFILE)
 $(BUILD_DIR)/$(ELFFILE): $(LINKER) $(OBJECTS)
 	$(CC) $(LFLAGS) $(OBJECTS) -o $@
 
+-include $(DEPS)
+
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -MM -MT $@ -MF $(patsubst %.o,%.d,$@) $<
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR)/boot.bin: $(SRC_DIR)/boot/boot.asm | $(BUILD_DIR)

@@ -11,3 +11,11 @@ inline uint8_t inb(uint16_t port)
     asm volatile("inb %0, %1" : "=a"(ret) : "Nd"(port));
     return ret;
 }
+
+/**
+ * Wait a very small amount of time (1 to 4 microseconds, generally)
+ */
+inline void io_wait()
+{
+    outb(0x80, 0);
+}

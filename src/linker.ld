@@ -28,5 +28,6 @@ SECTIONS
     .asm : ALIGN(4k)
     {
         *(.asm)
+        kernel_end = .;
     }
 }
