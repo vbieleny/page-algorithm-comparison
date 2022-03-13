@@ -1,5 +1,10 @@
 #include <io.h>
 
+inline void bochs_breakpoint()
+{
+    asm volatile("xchg bx, bx");
+}
+
 inline void outb(uint16_t port, uint8_t value)
 {
     asm volatile("outb %1, %0" : : "a"(value), "Nd"(port));
@@ -18,8 +23,4 @@ inline uint8_t inb(uint16_t port)
 inline void io_wait()
 {
     outb(0x80, 0);
-}
-
-inline void invalidate_page(uint32_t address) {
-   asm volatile("invlpg [%0]" ::"r" (address) : "memory");
 }

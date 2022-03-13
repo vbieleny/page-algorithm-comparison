@@ -3,9 +3,13 @@
 
 void *memmove(void *destination, const void *source, size_t length)
 {
-    uint8_t *dest = destination;
-    const uint8_t *src = source;
-    for (size_t i = 0; i < length; i++)
-        dest[i] = src[i];
+    asm volatile("rep movsb"
+                : "=D" (destination),
+                  "=S" (source),
+                  "=c" (length)
+                : "0" (destination),
+                  "1" (source),
+                  "2" (length)
+                : "memory");
     return destination;
 }

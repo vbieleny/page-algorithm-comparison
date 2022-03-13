@@ -25,8 +25,12 @@
                     "ignoreFailures": true
                 },
                 {
+                    "text": "set output-radix 16",
+                    "description": "Show local variables in hexadecimal format"
+                },
+                {
                     "text": "file ${workspaceRoot}/build/os.elf",
-                    "description": "Load kernel debug symbols."
+                    "description": "Load kernel debug symbols"
                 }
             ],
             "preLaunchTask": "Launch QEMU"

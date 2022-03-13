@@ -1,8 +1,4 @@
 #include <random.h>
-#include <stdint.h>
-#include <limits.h>
-
-const unsigned long int RAND_MAX = INT_MAX - 1;
 
 static unsigned long int next = 1;
 

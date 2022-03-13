@@ -1,7 +1,6 @@
 bits 16                     ; This is implicit but we declare to make it clear that we are using 16-bit instructions
 org 0x7c00                  ; Our code will be loaded at 0x7C00 by BIOS, so we tell NASM we want to offset all addreses by 0x7C00
 
-xchg bx, bx                 ; Debugging breakpoint for Bochs debugger on bootloader start
 jmp 0x0000:_main            ; Far jump to ensure that CS = 0x0000
 
 %include "helpers.inc"
@@ -90,7 +89,6 @@ protected_mode:
 
     mov esp, 0xf00000           ; Set stack pointer at 16MB (0xf00000) so it won't be indentity mapped by paging
 
-    xchg bx, bx                 ; Debugging breakpoint for Bochs debugger before jumping to kernel
     call 0x08:KERNEL_ADDRESS    ; Jump to C kernel code (at address 0x100000)
 .hang:
     hlt
