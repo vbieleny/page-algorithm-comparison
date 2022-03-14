@@ -9,6 +9,11 @@ int rand()
     return (unsigned int) next % (RAND_MAX + 1);
 }
 
+int rand_between(int min, int max)
+{
+    return (rand() % (max + 1 - min)) + min;
+}
+
 void srand(unsigned int seed)
 {
     next = seed;

@@ -1,9 +1,14 @@
 #include <kernel.h>
-#include <io.h>
 #include <terminal.h>
+#include <string.h>
+#include <io.h>
+#include <lib.h>
+#include <memory_map.h>
+#include <pfa.h>
 #include <idt.h>
 #include <paging.h>
 
+// Defined in linker script
 extern uint32_t kernel_end;
 
 static uint32_t *page_directory = &kernel_end;
@@ -29,24 +34,23 @@ void page_fault_handler(interrupt_frame_t* frame, unsigned int error_code)
 void kernel_main()
 {
     terminal_initialize();
-    idt_set_descriptor(14, &page_fault_handler, 0x8e);
-    idt_init();
+
+    print_memory_map();
+
+    uint8_t *pages_start_address = (uint8_t*) &kernel_end;
+    pages_start_address += 1024 * 4;            // Page Directory
+    pages_start_address += 1024 * 1024 * 4;     // Page Tables
+    init_pages(pages_start_address, memory_map, 4);
 
     for (int i = 0; i < 1024; i++)
         page_directory[i] = (((uint32_t) page_tables) + (i * 0x1000)) | 3;
     for (int i = 0; i < 1024 * 4; i++)
         page_tables[i] = (i * 0x1000) | 3;
+
+    idt_set_descriptor(14, &page_fault_handler, 0x8e);
+    idt_init();
+
     enable_paging(page_directory);
 
-    char *address = (char*) 0x01000000;
-    terminal_printf("%x\n", *address);
-    address = (char*) 0x02000000;
-    terminal_printf("%x\n", *address);
-    address = (char*) 0x03000000;
-    terminal_printf("%x\n", *address);
-    address = (char*) 0x04000000;
-    terminal_printf("%x\n", *address);
-
-    terminal_printf("Hello, World\n");
-    terminal_printf("Page Faults: %d", page_fault_count);
+    terminal_printf("Page Faults: %d\n", page_fault_count);
 }

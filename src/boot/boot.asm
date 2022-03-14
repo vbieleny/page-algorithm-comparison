@@ -69,6 +69,25 @@ _main:
     call load_kernel_chunk  ; Load LOAD_SIZE sectors into temporary kernel buffer and copy it to final kernel destination address
     loop .load_loop         ; Loop until whole kernel is loaded
 
+    mov di, 0x7e00
+    xor ebx, ebx
+    mov edx, 0x534d4150
+    mov word [MEMORY_MAP_COUNT], 0
+.load_memory_map:
+    mov eax, 0xe820
+    mov ecx, 24
+    int 0x15
+
+    jc .load_memory_map_end
+
+    test ebx, ebx
+    jz .load_memory_map_end
+
+    add di, 24
+    add word [MEMORY_MAP_COUNT], 1
+    jmp .load_memory_map
+
+.load_memory_map_end:
     cli
     mov eax, cr0
     or al, 1
@@ -87,7 +106,7 @@ protected_mode:
     mov gs, eax
     mov ss, eax
 
-    mov esp, 0xf00000           ; Set stack pointer at 16MB (0xf00000) so it won't be indentity mapped by paging
+    mov esp, 0x7c00             ; Point stack to beginning of bootloader code (stack will have 31 KB)
 
     call 0x08:KERNEL_ADDRESS    ; Jump to C kernel code (at address 0x100000)
 .hang:
@@ -101,6 +120,8 @@ KERNEL_ADDRESS equ 0x100000     ; Where will our kernel reside
 
 LOAD_SIZE equ 64                ; How many sectors to load with one INT13 call
 LOAD_BYTES equ LOAD_SIZE * 512  ; How many bytes will be loaded with one INT13 call
+
+MEMORY_MAP_COUNT equ 0x9000     ; Address of size of memory map entries
 
 drive_index db 0                ; Index of boot drive that this bootloader was loaded from
 load_address dd KERNEL_ADDRESS  ; Address where next chunk of kernel will be copied

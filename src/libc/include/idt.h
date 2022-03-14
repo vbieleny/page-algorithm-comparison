@@ -27,4 +27,4 @@ extern idt_entry_t idt[IDT_ENTRIES];
 extern idtr_t idtr;
 
 void idt_init();
-void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags);
+void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags);
