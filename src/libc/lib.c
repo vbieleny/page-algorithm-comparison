@@ -10,7 +10,9 @@ typedef struct
     size_t size;
 } allocation_block_t;
 
-static allocation_block_t used_blocks[1024];
+#define SPREAD_PAGES 8
+
+static allocation_block_t used_blocks[1024 * 16];
 static size_t used_block_size = 0;
 
 static bool is_used(allocation_block_t block);
@@ -29,10 +31,19 @@ void* memmove(void *destination, const void *source, size_t length)
     return destination;
 }
 
+void* memmove_debug(void *destination, const void *source, size_t length)
+{
+    uint8_t *dest = destination;
+    const uint8_t *src = source;
+    for (size_t i = 0; i < length; i++)
+        dest[i] = src[i];
+    return destination;
+}
+
 void* rmalloc(size_t size)
 {
-    uint32_t start_address = pages[0].address;
-    uint32_t end_address = start_address + (0x1000 * get_pages_limit());
+    uint32_t start_address = (uint32_t) pages[0].address;
+    uint32_t end_address = start_address + (0x1000 * SPREAD_PAGES);
     allocation_block_t random_block = { .size = size };
     uint16_t counter = 0;
     do

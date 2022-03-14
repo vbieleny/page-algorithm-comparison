@@ -3,6 +3,8 @@
         "stddef.h": "c",
         "io.h": "c",
         "stdint.h": "c",
-        "cstdint": "c"
+        "cstdint": "c",
+        "pfa.h": "c",
+        "cstdlib": "c"
     }
 }
