@@ -23,5 +23,5 @@ uint32_t* memory_virtual_to_pte(uintptr_t virtual_memory)
 }
 
 void paging_enable(void *page_directory);
-void paging_invalidate_page(uintptr_t address);
-uintptr_t paging_read_cr2();
+__attribute__((no_caller_saved_registers)) void paging_invalidate_page(uintptr_t address);
+__attribute__((no_caller_saved_registers)) uintptr_t paging_read_cr2();

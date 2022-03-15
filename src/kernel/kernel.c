@@ -18,6 +18,7 @@ static const uint16_t PAGES_LIMIT = 4;
 static page_entry_t main_queue_memory[QUEUE_MAX_CAPACITY];
 static int page_fault_count = 0;
 
+__attribute__((no_caller_saved_registers))
 static void make_page_present(uintptr_t cr2, void *free_page)
 {
     uint32_t *pte = memory_virtual_to_pte(cr2);
@@ -32,6 +33,7 @@ static void make_page_present(uintptr_t cr2, void *free_page)
     page_queue_offer(page_entry);
 }
 
+__attribute__((no_caller_saved_registers))
 static void make_page_swapped(uintptr_t virtual_address)
 {
     void *swap_page = pfa_swap_page_allocate();
