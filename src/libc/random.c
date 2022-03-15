@@ -1,20 +1,23 @@
 #include <random.h>
+#include <limits.h>
 
-static unsigned long int next = 1;
+static const uint32_t RAND_MAX = (INT_MAX) - 1;
 
-int rand()
+static uint32_t next = 1;
+
+uint32_t random_next()
 {
     // A very simple LCG (linear congruential generator)
     next = next * 1103515245 + 12345;
-    return (unsigned int) next % (RAND_MAX + 1);
+    return (uint32_t) next % (RAND_MAX + 1);
 }
 
-int rand_between(int min, int max)
+uint32_t random_between(uint32_t min, uint32_t max)
 {
-    return (rand() % (max + 1 - min)) + min;
+    return (random_next() % (max + 1 - min)) + min;
 }
 
-void srand(unsigned int seed)
+void random_set_seed(uint32_t seed)
 {
     next = seed;
 }

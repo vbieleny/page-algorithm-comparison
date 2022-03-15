@@ -1,10 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <limits.h>
 
-#define RAND_MAX ((INT_MAX) - 1)
-
-int rand();
-int rand_between(int min, int max);
-void srand(unsigned int seed);
+uint32_t random_next();
+uint32_t random_between(uint32_t min, uint32_t max);
+void random_set_seed(uint32_t seed);

@@ -6,7 +6,7 @@
 
 typedef struct
 {
-    uint32_t virtual_address;
+    uintptr_t virtual_address;
 } page_entry_t;
 
 void page_queue_init(void *memory, size_t capacity);

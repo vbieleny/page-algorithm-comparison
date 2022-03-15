@@ -12,9 +12,6 @@ typedef struct
     uint32_t attributes;
 } memory_map_entry_t;
 
-#define MEMORY_MAP_ADDRESS (0x7e00)
-#define MEMORY_MAP_COUNT (0x9000)
-
 extern memory_map_entry_t *memory_map;
 
 void print_memory_map();

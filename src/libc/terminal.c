@@ -1,14 +1,16 @@
-#include <lib.h>
-#include <string.h>
 #include <terminal.h>
+#include <io.h>
+#include <lib.h>
+#include <string_utils.h>
 
+static const uintptr_t VGA_MEMORY_ADDRESS = 0xb8000;
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
-size_t terminal_row;
-size_t terminal_column;
-uint8_t terminal_color;
-uint16_t* terminal_buffer;
+static size_t terminal_row;
+static size_t terminal_column;
+static uint8_t terminal_color;
+static uint16_t* terminal_buffer;
 
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg)
 {
@@ -25,7 +27,7 @@ void terminal_initialize()
 	terminal_row = 0;
 	terminal_column = 0;
 	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
-	terminal_buffer = (uint16_t*) 0xB8000;
+	terminal_buffer = (uint16_t*) VGA_MEMORY_ADDRESS;
 	for (size_t y = 0; y < VGA_HEIGHT; y++)
     {
 		for (size_t x = 0; x < VGA_WIDTH; x++)
@@ -40,10 +42,10 @@ void terminal_move_cursor(size_t x, size_t y)
 {
 	uint16_t pos = y * VGA_WIDTH + x;
  
-	outb(0x3D4, 0x0F);
-	outb(0x3D5, (uint8_t) (pos & 0xFF));
-	outb(0x3D4, 0x0E);
-	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
+	io_out_byte(0x3D4, 0x0F);
+	io_out_byte(0x3D5, (uint8_t) (pos & 0xFF));
+	io_out_byte(0x3D4, 0x0E);
+	io_out_byte(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
 }
 
 void terminal_setcolor(uint8_t color)
@@ -53,7 +55,7 @@ void terminal_setcolor(uint8_t color)
 
 void terminal_scroll()
 {
-    memmove(terminal_buffer, terminal_buffer + VGA_WIDTH, VGA_WIDTH * 2 * (VGA_HEIGHT - 1));
+    memory_move(terminal_buffer, terminal_buffer + VGA_WIDTH, VGA_WIDTH * 2 * (VGA_HEIGHT - 1));
     for (size_t i = 0; i < VGA_WIDTH; i++)
     {
         terminal_putentryat(' ', terminal_color, i, VGA_HEIGHT - 1);
@@ -99,7 +101,7 @@ void terminal_write(const char *data, size_t size)
 
 void terminal_writestring(const char *data)
 {
-	terminal_write(data, strlen(data));
+	terminal_write(data, string_length(data));
 }
 
 void terminal_printf(const char *format, ...)
@@ -122,11 +124,11 @@ void terminal_printf(const char *format, ...)
                 terminal_writestring(va_arg(list, char *));
                 break;
             case 'd':
-                itoa(va_arg(list, int), buffer, 10);
+                string_int_to_string(va_arg(list, int), buffer, 10);
                 terminal_writestring(buffer);
                 break;
             case 'x':
-                itoa(va_arg(list, int), buffer, 16);
+                string_int_to_string(va_arg(list, int), buffer, 16);
                 terminal_writestring(buffer);
         }
         format++;

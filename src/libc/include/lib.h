@@ -2,6 +2,5 @@
 
 #include <stddef.h>
 
-void* memmove(void *destination, const void *source, size_t length);
-void* memmove_debug(void *destination, const void *source, size_t length);
-void* rmalloc(size_t size);
+void* memory_move(void *destination, const void *source, size_t length);
+void* memory_move_debug(void *destination, const void *source, size_t length);

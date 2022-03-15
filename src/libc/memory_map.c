@@ -1,6 +1,9 @@
 #include <memory_map.h>
 #include <terminal.h>
 
+static const uintptr_t MEMORY_MAP_ADDRESS = 0x7e00;
+static const uintptr_t MEMORY_MAP_COUNT = 0x9000;
+
 memory_map_entry_t *memory_map = (memory_map_entry_t*) MEMORY_MAP_ADDRESS;
 
 void print_memory_map()

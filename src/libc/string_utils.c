@@ -1,6 +1,14 @@
-#include <string.h>
+#include <string_utils.h>
 
-char* itoa(int value, char *result, int base)
+size_t string_length(const char *string)
+{
+	size_t length = 0;
+	while (string[length])
+		length++;
+	return length;
+}
+
+char* string_int_to_string(int32_t value, char *result, int32_t base)
 {
     if (base < 2 || base > 36)
     {
@@ -9,7 +17,7 @@ char* itoa(int value, char *result, int base)
     }
 
     char *ptr = result, *ptr1 = result, tmp_char;
-    int tmp_value;
+    int32_t tmp_value;
 
     do
     {
@@ -28,12 +36,4 @@ char* itoa(int value, char *result, int base)
         *ptr1++ = tmp_char;
     }
     return result;
-}
-
-size_t strlen(const char *str)
-{
-	size_t len = 0;
-	while (str[len])
-		len++;
-	return len;
 }

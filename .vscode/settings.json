@@ -5,6 +5,10 @@
         "stdint.h": "c",
         "cstdint": "c",
         "pfa.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "string.h": "c",
+        "strings.h": "c",
+        "lib.h": "c",
+        "malloc.h": "c"
     }
 }
