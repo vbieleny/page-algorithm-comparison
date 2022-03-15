@@ -10,7 +10,7 @@
                 "problemMatcher": {
                     "pattern": {
                         "regexp": "^(Starting QEMU)",
-                        "line": 1,
+                        "line": 1
                     },
                     "background": {
                         "activeOnStart": true,
