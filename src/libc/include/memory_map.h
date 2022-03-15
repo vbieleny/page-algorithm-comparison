@@ -14,4 +14,4 @@ typedef struct
 
 extern memory_map_entry_t *memory_map;
 
-void print_memory_map();
+void memory_map_print();

@@ -6,7 +6,7 @@ static const uintptr_t MEMORY_MAP_COUNT = 0x9000;
 
 memory_map_entry_t *memory_map = (memory_map_entry_t*) MEMORY_MAP_ADDRESS;
 
-void print_memory_map()
+void memory_map_print()
 {
     terminal_printf("Memory map:\n");
     uint16_t count = *((uint16_t*) MEMORY_MAP_COUNT);

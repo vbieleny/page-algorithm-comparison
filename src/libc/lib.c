@@ -1,5 +1,4 @@
 #include <lib.h>
-#include <stdint.h>
 
 void* memory_move(void *destination, const void *source, size_t length)
 {
@@ -11,14 +10,5 @@ void* memory_move(void *destination, const void *source, size_t length)
                   "1" (source),
                   "2" (length)
                 : "memory");
-    return destination;
-}
-
-void* memory_move_debug(void *destination, const void *source, size_t length)
-{
-    uint8_t *dest = destination;
-    const uint8_t *src = source;
-    for (size_t i = 0; i < length; i++)
-        dest[i] = src[i];
     return destination;
 }

@@ -1,15 +1,11 @@
 #include <kernel.h>
 #include <terminal.h>
-#include <string_utils.h>
 #include <io.h>
 #include <lib.h>
-#include <random.h>
-#include <memory_map.h>
 #include <pfa.h>
 #include <idt.h>
 #include <paging.h>
 #include <page_queue.h>
-#include <kernel_malloc.h>
 
 void test_sort();
 
@@ -17,7 +13,6 @@ void test_sort();
 #define HEAP_START 0x200000
 
 static const uint16_t PAGES_LIMIT = 4;
-extern const uint32_t KERNEL_END;
 
 static uint32_t *page_directory = (uint32_t*) HEAP_START;
 static uint32_t *page_tables = (uint32_t*) (HEAP_START + 0x1000);
@@ -56,6 +51,8 @@ static void make_page_swapped(uintptr_t virtual_address)
     page_queue_poll();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winterrupt-service-routine"
 __attribute__((interrupt))
 void page_fault_handler(interrupt_frame_t* frame, unsigned int error_code)
 {
@@ -78,10 +75,11 @@ void page_fault_handler(interrupt_frame_t* frame, unsigned int error_code)
     paging_invalidate_page(cr2);
     page_fault_count++;
 }
+#pragma clang diagnostic pop
 
+__attribute__((unused))
 void kernel_main()
 {
-    kernel_set_heap_start((void*) HEAP_START);
     terminal_initialize();
 
     uint32_t identity_pages_count = 1024 * 4;

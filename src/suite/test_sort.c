@@ -1,5 +1,4 @@
 #include <terminal.h>
-#include <lib.h>
 #include <malloc.h>
 
 typedef struct linked_list
