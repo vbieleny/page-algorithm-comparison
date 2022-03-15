@@ -44,6 +44,11 @@ size_t page_queue_get_size()
     return page_queue_size;
 }
 
+bool page_queue_is_full()
+{
+    return page_queue_size >= page_queue_capacity;
+}
+
 void page_queue_print()
 {
     terminal_printf("Size/Capacity: %d/%d\n", page_queue_size, page_queue_capacity);

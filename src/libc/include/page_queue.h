@@ -14,4 +14,5 @@ bool page_queue_offer(page_entry_t page);
 page_entry_t page_queue_poll();
 page_entry_t* page_queue_peek();
 size_t page_queue_get_size();
+bool page_queue_is_full();
 void page_queue_print();

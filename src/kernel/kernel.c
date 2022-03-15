@@ -10,23 +10,13 @@
 void test_sort();
 
 #define QUEUE_MAX_CAPACITY 1024
-#define HEAP_START 0x200000
+#define HEAP_START 0x200000     // Must be page-aligned (4 KB)
+#define PAGE_DIRECTORY_START HEAP_START
 
 static const uint16_t PAGES_LIMIT = 4;
 
-static uint32_t *page_directory = (uint32_t*) HEAP_START;
-static uint32_t *page_tables = (uint32_t*) (HEAP_START + 0x1000);
 static page_entry_t main_queue_memory[QUEUE_MAX_CAPACITY];
 static int page_fault_count = 0;
-
-static uint32_t* memory_virtual_to_pte(uintptr_t virtual_memory)
-{
-    uint16_t pte_index = (virtual_memory >> 12) & 0x3ff;
-    uint16_t pde_index = (virtual_memory >> 22) & 0x3ff;
-
-    uint32_t *page_table_address = (uint32_t*) (page_directory[pde_index] & ~0xfff);
-    return page_table_address + pte_index;
-}
 
 static void make_page_present(uintptr_t cr2, void *free_page)
 {
@@ -51,31 +41,28 @@ static void make_page_swapped(uintptr_t virtual_address)
     page_queue_poll();
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winterrupt-service-routine"
 __attribute__((interrupt))
 void page_fault_handler(interrupt_frame_t* frame, unsigned int error_code)
 {
-    uint32_t cr2 = paging_read_cr2();
+    uint32_t accessed_address = paging_read_cr2();
     void *free_page = pfa_page_allocate();
     if (free_page)
     {
-        make_page_present(cr2, free_page);
+        make_page_present(accessed_address, free_page);
     }
     else
     {
         uint32_t victim_virtual = page_queue_peek()->virtual_address;
         uint32_t *victim_pte = memory_virtual_to_pte(victim_virtual);
-        void *free_address = (void*) ((*victim_pte) & ~0xfff);
+        void *victim_address = (void*) ((*victim_pte) & ~0xfff);
         make_page_swapped(victim_virtual);
-        make_page_present(cr2, free_address);
+        make_page_present(accessed_address, victim_address);
         paging_invalidate_page(victim_virtual);
     }
 
-    paging_invalidate_page(cr2);
+    paging_invalidate_page(accessed_address);
     page_fault_count++;
 }
-#pragma clang diagnostic pop
 
 __attribute__((unused))
 void kernel_main()
@@ -87,17 +74,13 @@ void kernel_main()
     void *swap_pages_start_address = pages_start_address - (pfa_get_swap_page_count() * 0x1000);
     pfa_init(pages_start_address, swap_pages_start_address, PAGES_LIMIT);
 
-    for (size_t i = 0; i < 1024; i++)
-        page_directory[i] = (((uint32_t) page_tables) + (i * 0x1000)) | 3;
-    for (size_t i = 0; i < identity_pages_count; i++)
-        page_tables[i] = (i * 0x1000) | 3;
+    paging_init((void*) PAGE_DIRECTORY_START, identity_pages_count);
 
     idt_set_descriptor(14, &page_fault_handler, 0x8e);
     idt_init();
 
     page_queue_init(main_queue_memory, PAGES_LIMIT);
-
-    paging_enable(page_directory);
+    paging_enable((void*) PAGE_DIRECTORY_START);
 
     test_sort();
 

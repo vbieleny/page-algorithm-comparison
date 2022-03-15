@@ -1,8 +1,12 @@
 #pragma once
 
 #include <stdint.h>
+#include <stddef.h>
 
-inline void paging_enable(uint32_t *page_directory)
+void paging_init(void *page_directory, size_t identity_pages_count);
+uint32_t* memory_virtual_to_pte(uintptr_t virtual_memory);
+
+inline void paging_enable(void *page_directory)
 {
     asm volatile("mov cr3, eax" : : "a"(page_directory));
     asm volatile(
