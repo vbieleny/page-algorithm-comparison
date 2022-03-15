@@ -3,29 +3,16 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#define PAGE_FLAG_PRESENT 1
+#define PAGE_FLAG_READ_WRITE (1 << 1)
+#define PAGE_FLAG_ACCESSED (1 << 5)
+
 void paging_init(void *page_directory, size_t identity_pages_count);
+void paging_enable(void *page_directory);
 __attribute__((no_caller_saved_registers)) uint32_t* memory_virtual_to_pte(uintptr_t virtual_memory);
-
-inline void paging_enable(void *page_directory)
-{
-    asm volatile("mov cr3, eax" : : "a"(page_directory));
-    asm volatile(
-        "mov eax, cr0\n"
-        "or eax, 0x80000000\n"
-        "mov cr0, eax\n"
-    );
-}
-
-__attribute__((no_caller_saved_registers))
-inline void paging_invalidate_page(uintptr_t address)
-{
-   asm volatile("invlpg [%0]" :: "r" (address) : "memory");
-}
-
-__attribute__((no_caller_saved_registers))
-inline uintptr_t paging_read_cr2()
-{
-    uintptr_t cr2;
-    asm volatile("mov %0, cr2" : "=r"(cr2));
-    return cr2;
-}
+__attribute__((no_caller_saved_registers)) void paging_invalidate_page(uintptr_t address);
+__attribute__((no_caller_saved_registers)) uintptr_t paging_read_cr2();
+__attribute__((no_caller_saved_registers)) void paging_make_page_present(uintptr_t virtual_address, void *free_page_memory);
+__attribute__((no_caller_saved_registers)) void paging_make_page_swapped(uintptr_t virtual_address);
+__attribute__((no_caller_saved_registers)) void paging_increment_page_fault_counter();
+uint32_t paging_get_page_fault_count();
