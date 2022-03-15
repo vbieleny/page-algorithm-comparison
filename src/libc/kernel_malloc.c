@@ -25,28 +25,25 @@ void* kernel_memory_allocate(size_t size)
         return NULL;
     size += sizeof(memory_control_block_t);
     uint8_t *current_location = managed_memory_start;
-    uint8_t *memory_location;
+    uint8_t *memory_location = NULL;
     while (current_location != last_valid_address)
     {
-        memory_control_block_t *current_memory_control_block = (memory_control_block_t*) current_location;
-        if (current_memory_control_block->is_available)
+        memory_control_block_t *current_mcb = (memory_control_block_t*) current_location;
+        if (current_mcb->is_available && current_mcb->size >= size)
         {
-            if (current_memory_control_block->size >= size)
-            {
-                current_memory_control_block->is_available = false;
-                memory_location = current_location;
-                break;
-            }
+            current_mcb->is_available = false;
+            memory_location = current_location;
+            break;
         }
-        current_location += current_memory_control_block->size;
+        current_location += current_mcb->size;
     }
     if (!memory_location)
     {
         memory_location = last_valid_address;
-        last_valid_address = last_valid_address + size;
-        memory_control_block_t *memory_location_control_block = (memory_control_block_t*) memory_location;
-        memory_location_control_block->is_available = false;
-        memory_location_control_block->size = size;
+        last_valid_address += size;
+        memory_control_block_t *memory_location_mcb = (memory_control_block_t*) memory_location;
+        memory_location_mcb->is_available = false;
+        memory_location_mcb->size = size;
     }
     return (void*) (memory_location + sizeof(memory_control_block_t));
 }

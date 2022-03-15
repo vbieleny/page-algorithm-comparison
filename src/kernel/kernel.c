@@ -14,13 +14,13 @@
 void test_sort();
 
 #define QUEUE_MAX_CAPACITY 1024
+#define HEAP_START 0x200000
 
-static const uintptr_t HEAP_START = 0x200000;
 static const uint16_t PAGES_LIMIT = 4;
 extern const uint32_t KERNEL_END;
 
-static uint32_t *page_directory = (uint32_t*) 0x200000;
-static uint32_t *page_tables = (uint32_t*) (0x200000 + 0x1000);
+static uint32_t *page_directory = (uint32_t*) HEAP_START;
+static uint32_t *page_tables = (uint32_t*) (HEAP_START + 0x1000);
 static page_entry_t main_queue_memory[QUEUE_MAX_CAPACITY];
 static int page_fault_count = 0;
 
