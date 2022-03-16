@@ -19,6 +19,14 @@ void test_sort();
 extern const uint32_t KERNEL_END;
 static page_entry_t main_queue_memory[QUEUE_MAX_CAPACITY];
 
+__attribute__((noreturn))
+__attribute__((interrupt))
+static void kernel_panic(interrupt_frame_t* frame, unsigned int error_code);
+
+__attribute__((noreturn))
+__attribute__((no_caller_saved_registers))
+static void halt();
+
 __attribute__((unused))
 void kernel_main()
 {
@@ -26,7 +34,7 @@ void kernel_main()
     if (!serial_init())
     {
         io_printf(DEFAULT_STREAM, "Cannot initialize serial port!\n");
-        asm volatile("hlt");
+        halt();
     }
 
     uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - 0x100000;
@@ -37,15 +45,31 @@ void kernel_main()
     void *swap_pages_start_address = pages_start_address - (pfa_get_swap_page_count() * 0x1000);
     pfa_init(pages_start_address, swap_pages_start_address);
     paging_init((void*) PAGE_DIRECTORY_START, identity_pages_count);
+
+    idt_set_descriptor(13, &kernel_panic, 0x8e);
     idt_init();
+
     page_queue_init(main_queue_memory, 0);
     paging_enable((void*) PAGE_DIRECTORY_START);
+
+    run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 2, 8);
+    run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 2, 8);
 
     run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 4, 8);
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 4, 8);
 
     run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 6, 8);
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
+}
 
-    io_shutdown();
+static void kernel_panic(interrupt_frame_t* frame, unsigned int error_code)
+{
+    io_printf(DEFAULT_STREAM, "Kernel Panic (Error Code: 0x%x)\n", error_code);
+    halt();
+}
+
+static void halt()
+{
+    for (;;)
+        asm volatile("hlt");
 }
