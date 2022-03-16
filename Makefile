@@ -59,7 +59,7 @@ qemud: $(BUILD_DIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
 qemus: $(BUILD_DIR)/$(IMGFILE)
-	qemu-system-i386 -serial stdio -drive file=$<,format=raw,index=0,media=disk
+	qemu-system-i386 -nographic -drive file=$<,format=raw,index=0,media=disk
 
 qemu: $(BUILD_DIR)/$(IMGFILE)
 	qemu-system-i386 -serial stdio -drive file=$<,format=raw,index=0,media=disk

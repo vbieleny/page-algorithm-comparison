@@ -30,7 +30,7 @@ void kernel_main()
     }
 
     uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - 0x100000;
-    io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n", kernel_size / 1024);
+    io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n\n", kernel_size / 1024);
 
     uint32_t identity_pages_count = 1024 * 4;
     void *pages_start_address = (void*) (identity_pages_count * 0x1000);
@@ -46,4 +46,6 @@ void kernel_main()
 
     run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 6, 8);
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
+
+    io_shutdown();
 }

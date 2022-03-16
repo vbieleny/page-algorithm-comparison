@@ -64,10 +64,23 @@ void io_out_byte(uint16_t port, uint8_t value)
     asm volatile("outb %1, %0" : : "a"(value), "Nd"(port));
 }
 
+void io_out_word(uint16_t port, uint16_t value)
+{
+    asm volatile("outw %1, %0" : : "a"(value), "Nd"(port));
+}
+
+
 uint8_t io_in_byte(uint16_t port)
 {
     uint8_t value;
     asm volatile("inb %0, %1" : "=a"(value) : "Nd"(port));
+    return value;
+}
+
+uint16_t io_in_word(uint16_t port)
+{
+    uint16_t value;
+    asm volatile("inw %0, %1" : "=a"(value) : "Nd"(port));
     return value;
 }
 
@@ -77,4 +90,11 @@ uint8_t io_in_byte(uint16_t port)
 void io_wait()
 {
     io_out_byte(0x80, 0);
+}
+
+void io_shutdown()
+{
+    io_out_word(0xb004, 0x2000);    // Bochs and QEMU < 2.0
+    io_out_word(0x604, 0x2000);     // QEMU
+    io_out_word(0x4004, 0x3400);    // VirtualBox
 }
