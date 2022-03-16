@@ -29,4 +29,5 @@ SECTIONS
     {
         *(.asm)
     }
+    KERNEL_END = .;
 }

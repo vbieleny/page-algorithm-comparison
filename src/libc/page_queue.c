@@ -39,6 +39,18 @@ page_entry_t* page_queue_peek()
     return &page_queue_memory[0];
 }
 
+void page_queue_clear()
+{
+    for (size_t i = 0; i < page_queue_capacity; i++)
+        page_queue_memory[i] = invalid_entry;
+    page_queue_size = 0;
+}
+
+void page_queue_set_capacity(size_t capacity)
+{
+    page_queue_capacity = capacity;
+}
+
 size_t page_queue_get_size()
 {
     return page_queue_size;

@@ -115,7 +115,7 @@ protected_mode:
 
 bits 16                         ; Switch back to 16-bit mode (not necessary - just in case if there will be some code)
 
-KERNEL_SIZE equ 256             ; Kernel size in sectors
+KERNEL_SIZE equ 512             ; Kernel size in sectors
 KERNEL_ADDRESS equ 0x100000     ; Where will our kernel reside
 
 LOAD_SIZE equ 64                ; How many sectors to load with one INT13 call

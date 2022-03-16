@@ -1,5 +1,4 @@
 #include <malloc.h>
-#include <stdint.h>
 #include <stdbool.h>
 #include <random.h>
 #include <pfa.h>
@@ -12,7 +11,7 @@ typedef struct
 
 #define MAX_ALLOCATION_BLOCKS (1024 * 16)
 
-static const uint8_t MAX_PAGES_TO_ALLOCATE = 8;
+static uint32_t max_pages_to_allocate = 0;
 
 static memory_block_t used_blocks[MAX_ALLOCATION_BLOCKS];
 static size_t used_block_size = 0;
@@ -22,7 +21,7 @@ static void memory_make_used(memory_block_t block);
 
 static bool memory_is_used(memory_block_t block)
 {
-    for (size_t i = 0; i < sizeof(used_blocks) / sizeof(used_blocks[0]); i++)
+    for (size_t i = 0; i < used_block_size; i++)
     {
         if (block.address >= used_blocks[i].address + used_blocks[i].size)
             continue;
@@ -41,7 +40,7 @@ static void memory_make_used(memory_block_t block)
 void* memory_random_allocate(size_t size)
 {
     uintptr_t start_address = (uintptr_t) pfa_get_start_address();
-    uintptr_t end_address = start_address + (0x1000 * MAX_PAGES_TO_ALLOCATE);
+    uintptr_t end_address = start_address + (0x1000 * max_pages_to_allocate);
     memory_block_t random_block = { .size = size };
     uint16_t counter = 0;
     do
@@ -53,4 +52,14 @@ void* memory_random_allocate(size_t size)
     } while (memory_is_used(random_block));
     memory_make_used(random_block);
     return (void*) random_block.address;
+}
+
+void memory_free_all()
+{
+    used_block_size = 0;
+}
+
+void set_max_pages_to_allocate(uint32_t max_pages)
+{
+    max_pages_to_allocate = max_pages;
 }

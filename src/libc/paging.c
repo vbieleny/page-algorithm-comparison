@@ -18,9 +18,21 @@ void paging_init(void *page_directory_address, size_t identity_pages_count)
         page_tables[i] = (i * 0x1000) | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
 }
 
-void paging_enable(void *page_directory)
+void paging_reset()
+{
+    for (size_t i = 1024 * 4; i < 1024 * (1024 - 4); i++)
+        page_tables[i] = 0;
+    paging_invalidate_all(page_directory);
+}
+
+void paging_invalidate_all(void *page_directory)
 {
     asm volatile("mov cr3, eax" : : "a"(page_directory));
+}
+
+void paging_enable(void *page_directory)
+{
+    paging_invalidate_all(page_directory);
     asm volatile(
     "mov eax, cr0\n"
     "or eax, 0x80000000\n"
@@ -74,6 +86,11 @@ void paging_make_page_swapped(uintptr_t virtual_address)
 void paging_increment_page_fault_counter()
 {
     page_fault_counter++;
+}
+
+void paging_reset_page_fault_counter()
+{
+    page_fault_counter = 0;
 }
 
 uint32_t paging_get_page_fault_count()

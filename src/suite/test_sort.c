@@ -42,5 +42,9 @@ void test_sort()
 
     next = root;
     for (int i = 0; i < numbers_count; i++, next = next->next)
-        terminal_printf("%d ", next->value);
+    {
+        const char *format = i == numbers_count - 1 ? "%d" : "%d ";
+        terminal_printf(format, next->value);
+    }
+    terminal_printf("\n");
 }
