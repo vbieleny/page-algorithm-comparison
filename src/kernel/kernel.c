@@ -50,7 +50,7 @@ void kernel_main()
     idt_init();
 
     page_queue_init(main_queue_memory, 0);
-    paging_enable((void*) PAGE_DIRECTORY_START);
+    paging_enable();
 
     run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 2, 8);
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 2, 8);

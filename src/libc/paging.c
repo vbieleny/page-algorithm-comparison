@@ -22,17 +22,17 @@ void paging_reset()
 {
     for (size_t i = 1024 * 4; i < 1024 * (1024 - 4); i++)
         page_tables[i] = 0;
-    paging_invalidate_all(page_directory);
+    paging_invalidate_all();
 }
 
-void paging_invalidate_all(void *page_directory)
+void paging_invalidate_all()
 {
     asm volatile("mov cr3, eax" : : "a"(page_directory));
 }
 
-void paging_enable(void *page_directory)
+void paging_enable()
 {
-    paging_invalidate_all(page_directory);
+    paging_invalidate_all();
     asm volatile(
     "mov eax, cr0\n"
     "or eax, 0x80000000\n"
