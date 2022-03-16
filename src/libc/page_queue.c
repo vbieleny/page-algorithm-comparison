@@ -1,5 +1,5 @@
 #include <page_queue.h>
-#include <terminal.h>
+#include <io.h>
 
 static page_entry_t *page_queue_memory;
 static size_t page_queue_capacity;
@@ -63,17 +63,17 @@ bool page_queue_is_full()
 
 void page_queue_print()
 {
-    terminal_printf("Size/Capacity: %d/%d\n", page_queue_size, page_queue_capacity);
+    io_printf(DEFAULT_STREAM, "Size/Capacity: %d/%d\n", page_queue_size, page_queue_capacity);
     page_entry_t *peek = page_queue_peek();
     if (peek)
-        terminal_printf("Peek: 0x%x\n", peek->virtual_address);
+        io_printf(DEFAULT_STREAM, "Peek: 0x%x\n", peek->virtual_address);
     else
-        terminal_printf("Peek: NULL\n");
-    terminal_printf("Contents: [");
+        io_printf(DEFAULT_STREAM, "Peek: NULL\n");
+    io_printf(DEFAULT_STREAM, "Contents: [");
     for (int i = 0; i < page_queue_size; i++)
     {
         const char *format = i == page_queue_size - 1 ? "0x%x" : "0x%x, ";
-        terminal_printf(format, page_queue_memory[i].virtual_address);
+        io_printf(DEFAULT_STREAM, format, page_queue_memory[i].virtual_address);
     }
-    terminal_printf("]\n");
+    io_printf(DEFAULT_STREAM, "]\n");
 }

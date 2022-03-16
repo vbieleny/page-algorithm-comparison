@@ -23,6 +23,7 @@ CFLAGS 	   := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel
 LFLAGS     := -g -T $(LINKER) -ffreestanding -nostdlib
 
 .PHONY: all qemud qemu bochs view clean
+.SILENT: qemus
 
 all: $(BUILD_DIR)/$(IMGFILE)
 
@@ -55,10 +56,13 @@ $(BUILD_DIR):
 	mkdir -p $(dir $(OBJECTS))
 
 qemud: $(BUILD_DIR)/$(IMGFILE)
-	qemu-system-i386 -s -S -drive file=$<,format=raw,index=0,media=disk
+	qemu-system-i386 -s -S -serial stdio -drive file=$<,format=raw,index=0,media=disk
+
+qemus: $(BUILD_DIR)/$(IMGFILE)
+	qemu-system-i386 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
 qemu: $(BUILD_DIR)/$(IMGFILE)
-	qemu-system-i386 -drive file=$<,format=raw,index=0,media=disk
+	qemu-system-i386 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
 bochs: $(BUILD_DIR)/$(IMGFILE)
 	bochs -f bochsrc.txt -q

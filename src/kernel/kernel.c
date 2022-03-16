@@ -8,6 +8,7 @@
 #include <pfh_fifo.h>
 #include <pfh_second.h>
 #include <test_runner.h>
+#include <serial.h>
 
 void test_sort();
 
@@ -22,8 +23,14 @@ __attribute__((unused))
 void kernel_main()
 {
     terminal_initialize();
+    if (!serial_init())
+    {
+        io_printf(DEFAULT_STREAM, "Cannot initialize serial port!\n");
+        asm volatile("hlt");
+    }
+
     uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - 0x100000;
-    terminal_printf("Kernel Size: %d KB\n", kernel_size / 1024);
+    io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n", kernel_size / 1024);
 
     uint32_t identity_pages_count = 1024 * 4;
     void *pages_start_address = (void*) (identity_pages_count * 0x1000);
@@ -36,4 +43,7 @@ void kernel_main()
 
     run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 4, 8);
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 4, 8);
+
+    run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 6, 8);
+    run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
 }

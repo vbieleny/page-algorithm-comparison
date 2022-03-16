@@ -5,7 +5,7 @@
 #include <malloc.h>
 #include <paging.h>
 #include <random.h>
-#include <terminal.h>
+#include <io.h>
 
 uint32_t run_test(const char *test_name, const char *isr_name, void *pra_isr, void (*test_function)(), uint32_t pages_limit, uint32_t allocation_spread)
 {
@@ -20,9 +20,9 @@ uint32_t run_test(const char *test_name, const char *isr_name, void *pra_isr, vo
     memory_free_all();
     random_set_seed(1);
 
-    terminal_printf("%s | %s | Pages: %d | Spread: %d (%d KB)\n", test_name, isr_name, pages_limit, allocation_spread, (allocation_spread * 0x1000) / 1024);
+    io_printf(DEFAULT_STREAM, "%s | %s | Pages: %d | Spread: %d (%d KB)\n", test_name, isr_name, pages_limit, allocation_spread, (allocation_spread * 0x1000) / 1024);
     test_function();
     uint32_t page_faults = paging_get_page_fault_count();
-    terminal_printf("Page Faults: %d\n\n", page_faults);
+    io_printf(DEFAULT_STREAM, "Page Faults: %d\n\n", page_faults);
     return page_faults;
 }

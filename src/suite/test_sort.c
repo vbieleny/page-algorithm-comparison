@@ -1,4 +1,4 @@
-#include <terminal.h>
+#include <io.h>
 #include <malloc.h>
 
 typedef struct linked_list
@@ -44,7 +44,7 @@ void test_sort()
     for (int i = 0; i < numbers_count; i++, next = next->next)
     {
         const char *format = i == numbers_count - 1 ? "%d" : "%d ";
-        terminal_printf(format, next->value);
+        io_printf(DEFAULT_STREAM, format, next->value);
     }
-    terminal_printf("\n");
+    io_printf(DEFAULT_STREAM, "\n");
 }
