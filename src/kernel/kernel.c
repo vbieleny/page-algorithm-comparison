@@ -9,12 +9,14 @@
 #include <pfh_second.h>
 #include <test_runner.h>
 #include <serial.h>
+#include <kmalloc.h>
 
 void test_sort();
 
 #define QUEUE_MAX_CAPACITY 1024
-#define HEAP_START 0x200000     // Must be page-aligned (4 KB)
-#define PAGE_DIRECTORY_START HEAP_START
+#define IDENTITY_PAGES_COUNT 4096           // First 16 MB (4096 pages with 4 KB each)
+#define HEAP_START 0x200000                 // 2 MB
+#define HEAP_SIZE (0x1000000 - 0x200000)    // 14 MB (from 2 MB to 16 MB)
 
 extern const uint32_t KERNEL_END;
 static page_entry_t main_queue_memory[QUEUE_MAX_CAPACITY];
@@ -30,6 +32,7 @@ static void halt();
 __attribute__((unused))
 void kernel_main()
 {
+    kernel_memory_init((void*) HEAP_START, HEAP_SIZE);
     terminal_initialize();
     if (!serial_init())
     {
@@ -40,11 +43,10 @@ void kernel_main()
     uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - 0x100000;
     io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n\n", kernel_size / 1024);
 
-    uint32_t identity_pages_count = 1024 * 4;
-    void *pages_start_address = (void*) (identity_pages_count * 0x1000);
+    void *pages_start_address = (void*) (IDENTITY_PAGES_COUNT * 0x1000);
     void *swap_pages_start_address = pages_start_address - (pfa_get_swap_page_count() * 0x1000);
     pfa_init(pages_start_address, swap_pages_start_address);
-    paging_init((void*) PAGE_DIRECTORY_START, identity_pages_count);
+    paging_init(IDENTITY_PAGES_COUNT);
 
     idt_set_descriptor(13, &kernel_panic, 0x8e);
     idt_init();

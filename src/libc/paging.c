@@ -2,26 +2,36 @@
 #include <lib.h>
 #include <pfa.h>
 #include <page_queue.h>
+#include <kmalloc.h>
 
 static uint32_t *page_directory;
-static uint32_t *page_tables;
+static uint32_t *identity_page_tables;
 static uint32_t page_fault_counter;
+static uint32_t identity_pages_count;
 
-void paging_init(void *page_directory_address, size_t identity_pages_count)
+void paging_init(size_t pages_count)
 {
-    page_directory = (uint32_t*) page_directory_address;
-    page_tables = (uint32_t*) page_directory + 0x1000;
+    identity_pages_count = pages_count;
+    page_directory = (uint32_t*) kernel_memory_allocate(1024 * sizeof(uint32_t), 0x1000);
+    identity_page_tables = (uint32_t*) kernel_memory_allocate(identity_pages_count * sizeof(uint32_t), 0x1000);
 
-    for (size_t i = 0; i < 1024; i++)
-        page_directory[i] = (((uint32_t) page_tables) + (i * 0x1000)) | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
+    for (size_t i = 0; i < identity_pages_count / 1024; i++)
+        page_directory[i] = (((uint32_t) identity_page_tables) + (i * 0x1000)) | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
     for (size_t i = 0; i < identity_pages_count; i++)
-        page_tables[i] = (i * 0x1000) | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
+        identity_page_tables[i] = (i * 0x1000) | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
 }
 
 void paging_reset()
 {
-    for (size_t i = 1024 * 4; i < 1024 * (1024 - 4); i++)
-        page_tables[i] = 0;
+    for (size_t i = identity_pages_count / 1024; i < 1024; i++)
+    {
+        if (page_directory[i] & PAGE_FLAG_PRESENT)
+        {
+            void *page_table_address = (void*) (page_directory[i] & ~0xfff);
+            kernel_memory_free(page_table_address);
+            page_directory[i] = 0;
+        }
+    }
     paging_invalidate_all();
 }
 
@@ -38,6 +48,12 @@ void paging_enable()
     "or eax, 0x80000000\n"
     "mov cr0, eax\n"
     );
+}
+
+uint32_t* memory_virtual_to_pde(uintptr_t virtual_memory)
+{
+    uint16_t pde_index = (virtual_memory >> 22) & 0x3ff;
+    return page_directory + pde_index;
 }
 
 uint32_t* memory_virtual_to_pte(uintptr_t virtual_memory)
@@ -62,6 +78,13 @@ uintptr_t paging_read_cr2()
 
 void paging_make_page_present(uintptr_t virtual_address, void *free_page_memory)
 {
+    uint32_t *pde = memory_virtual_to_pde(virtual_address);
+    if (!(*pde & PAGE_FLAG_PRESENT))
+    {
+        uint32_t *page_table = (uint32_t*) kernel_memory_allocate(1024 * sizeof(uint32_t), 0x1000);
+        memory_set(page_table, 0, 1024 * sizeof(uint32_t));
+        *pde = (uint32_t) page_table | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
+    }
     uint32_t *pte = memory_virtual_to_pte(virtual_address);
     uint32_t swap_address = (*pte) & ~0xfff;
     *pte = (uint32_t) free_page_memory | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);

@@ -1,5 +1,12 @@
 #include <lib.h>
 
+void memory_set(void *memory, uint8_t value, size_t length)
+{
+    uint8_t *destination_memory = (uint8_t*) memory;
+    for (size_t i = 0; i < length; i++)
+        destination_memory[i] = value;
+}
+
 void* memory_move(void *destination, const void *source, size_t length)
 {
     asm volatile("rep movsb"

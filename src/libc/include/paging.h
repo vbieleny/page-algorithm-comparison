@@ -7,10 +7,11 @@
 #define PAGE_FLAG_READ_WRITE (1 << 1)
 #define PAGE_FLAG_ACCESSED (1 << 5)
 
-void paging_init(void *page_directory, size_t identity_pages_count);
+void paging_init(size_t identity_pages_count);
 void paging_reset();
 void paging_invalidate_all();
 void paging_enable();
+__attribute__((no_caller_saved_registers)) uint32_t* memory_virtual_to_pde(uintptr_t virtual_memory);
 __attribute__((no_caller_saved_registers)) uint32_t* memory_virtual_to_pte(uintptr_t virtual_memory);
 __attribute__((no_caller_saved_registers)) void paging_invalidate_page(uintptr_t address);
 __attribute__((no_caller_saved_registers)) uintptr_t paging_read_cr2();
