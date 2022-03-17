@@ -9,6 +9,7 @@
 #include <test_runner.h>
 #include <serial.h>
 #include <kmalloc.h>
+#include <memory_map.h>
 
 void test_sort();
 
@@ -39,6 +40,9 @@ void kernel_main()
 
     uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - 0x100000;
     io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n\n", kernel_size / 1024);
+
+    memory_map_print();
+    io_printf(DEFAULT_STREAM, "\n");
 
     void *pages_start_address = (void*) (IDENTITY_PAGES_COUNT * 0x1000);
     void *swap_pages_start_address = pages_start_address - (pfa_get_swap_page_count() * 0x1000);
