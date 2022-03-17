@@ -4,7 +4,6 @@
 #include <pfa.h>
 #include <idt.h>
 #include <paging.h>
-#include <page_queue.h>
 #include <pfh_fifo.h>
 #include <pfh_second.h>
 #include <test_runner.h>
@@ -13,13 +12,11 @@
 
 void test_sort();
 
-#define QUEUE_MAX_CAPACITY 1024
 #define IDENTITY_PAGES_COUNT 4096           // First 16 MB (4096 pages with 4 KB each)
 #define HEAP_START 0x200000                 // 2 MB
 #define HEAP_SIZE (0x1000000 - 0x200000)    // 14 MB (from 2 MB to 16 MB)
 
 extern const uint32_t KERNEL_END;
-static page_entry_t main_queue_memory[QUEUE_MAX_CAPACITY];
 
 __attribute__((noreturn))
 __attribute__((interrupt))
@@ -51,7 +48,6 @@ void kernel_main()
     idt_set_descriptor(13, &kernel_panic, 0x8e);
     idt_init();
 
-    page_queue_init(main_queue_memory, 0);
     paging_enable();
 
     run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 2, 8);

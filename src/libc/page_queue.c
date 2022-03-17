@@ -1,17 +1,11 @@
 #include <page_queue.h>
 #include <io.h>
+#include <kmalloc.h>
 
 static page_entry_t *page_queue_memory;
 static size_t page_queue_capacity;
 static size_t page_queue_size;
 static page_entry_t invalid_entry = { 0 };
-
-void page_queue_init(void *memory, size_t capacity)
-{
-    page_queue_memory = (page_entry_t*) memory;
-    page_queue_capacity = capacity;
-    page_queue_size = 0;
-}
 
 bool page_queue_offer(page_entry_t page)
 {
@@ -48,6 +42,13 @@ void page_queue_clear()
 
 void page_queue_set_capacity(size_t capacity)
 {
+    if (page_queue_capacity != capacity)
+    {
+        if (!page_queue_memory)
+            page_queue_memory = (page_entry_t*) kernel_memory_allocate(capacity * sizeof(page_entry_t), 1);
+        else
+            page_queue_memory = (page_entry_t*) kernel_memory_reallocate(page_queue_memory, capacity * sizeof(page_entry_t), 1);
+    }
     page_queue_capacity = capacity;
 }
 

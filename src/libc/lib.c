@@ -7,7 +7,7 @@ void memory_set(void *memory, uint8_t value, size_t length)
         destination_memory[i] = value;
 }
 
-void* memory_move(void *destination, const void *source, size_t length)
+void* memory_copy(void *destination, const void *source, size_t length)
 {
     asm volatile("rep movsb"
                 : "=D" (destination),

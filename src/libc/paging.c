@@ -90,7 +90,7 @@ void paging_make_page_present(uintptr_t virtual_address, void *free_page_memory)
     *pte = (uint32_t) free_page_memory | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
     if (swap_address)
     {
-        memory_move((void*) (virtual_address & ~0xfff), (void*) swap_address, 0x1000);
+        memory_copy((void*)(virtual_address & ~0xfff), (void*)swap_address, 0x1000);
         pfa_mark_swap_free((void*) swap_address);
     }
     page_entry_t page_entry = { virtual_address };
@@ -100,7 +100,7 @@ void paging_make_page_present(uintptr_t virtual_address, void *free_page_memory)
 void paging_make_page_swapped(uintptr_t virtual_address)
 {
     void *swap_page_memory = pfa_swap_page_allocate();
-    memory_move(swap_page_memory, (void*) (virtual_address & ~0xfff), 0x1000);
+    memory_copy(swap_page_memory, (void*)(virtual_address & ~0xfff), 0x1000);
     uint32_t *pte = memory_virtual_to_pte(virtual_address);
     *pte = (uint32_t) swap_page_memory | 2;
     page_queue_poll();
