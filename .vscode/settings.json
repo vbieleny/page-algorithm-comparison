@@ -1,14 +1,6 @@
 {
     "files.associations": {
-        "stddef.h": "c",
-        "io.h": "c",
-        "stdint.h": "c",
-        "cstdint": "c",
-        "pfa.h": "c",
-        "cstdlib": "c",
-        "string.h": "c",
-        "strings.h": "c",
-        "lib.h": "c",
-        "malloc.h": "c"
+        "*.h": "c",
+        "*.c": "c"
     }
 }

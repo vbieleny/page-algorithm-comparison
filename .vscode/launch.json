@@ -5,28 +5,17 @@
             "name": "Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/build/os.img",
+            "program": "${workspaceRoot}/build/os.elf",
             "cwd": "${workspaceRoot}",
             "args": [],
-            "targetArchitecture": "x86",
             "MIMode": "gdb",
             "miDebuggerPath": "/usr/bin/gdb",
-            "miDebuggerArgs": "",
-            "customLaunchSetupCommands": [
-                {
-                    "text": "target remote localhost:1234",
-                    "description": "Connect to QEMU remote debugger"
-                }
-            ],
             "setupCommands": [
                 {
+                    "text": "target remote localhost:1234"
+                },
+                {
                     "text": "source ${workspaceFolder}/.gdbinit"
-                },
-                {
-                    "text": "-enable-pretty-printing"
-                },
-                {
-                    "text": "file ${workspaceRoot}/build/os.elf"
                 }
             ],
             "preLaunchTask": "Launch QEMU"

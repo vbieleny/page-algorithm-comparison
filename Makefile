@@ -19,7 +19,7 @@ CC  	   := /usr/local/cross/bin/i686-elf-gcc
 OBJCOPY    := /usr/local/cross/bin/i686-elf-objcopy
 OCFLAGS    := -O binary
 ASMFLAGS   := -I $(SRC_DIR)/boot/include/ -f bin
-CFLAGS 	   := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -I$(KERNELINC) -I$(LIBCINC)
+CFLAGS 	   := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(KERNELINC) -I$(LIBCINC)
 LFLAGS     := -g -T $(LINKER) -ffreestanding -nostdlib
 
 .PHONY: all qemud qemu bochs view clean

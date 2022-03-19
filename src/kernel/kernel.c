@@ -63,7 +63,7 @@ void kernel_main()
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
 }
 
-static void kernel_panic(interrupt_frame_t* frame, unsigned int error_code)
+static void kernel_panic(interrupt_frame_t *frame, unsigned int error_code)
 {
     io_printf(DEFAULT_STREAM, "Kernel Panic (Error Code: 0x%x)\n", error_code);
     halt();
