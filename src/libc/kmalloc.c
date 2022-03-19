@@ -1,6 +1,6 @@
 #include <kmalloc.h>
 #include <lib.h>
-#include <stdint.h>
+#include <types.h>
 
 typedef struct free_block
 {
@@ -22,20 +22,20 @@ void* kernel_memory_allocate(size_t bytes, size_t alignment)
     free_block_t *previous_block = NULL;
     for (; block; previous_block = block, block = block->next)
     {
-        uint8_t *next_aligned_address = (void*) ((uintptr_t) ((uint8_t*) block + sizeof(free_block_t) + alignment - 1) & ~(uintptr_t) (alignment - 1));
-        if (next_aligned_address + bytes < (uint8_t*) block + block->size)
+        u8 *next_aligned_address = (void*) ((uintptr_t) ((u8*) block + sizeof(free_block_t) + alignment - 1) & ~(uintptr_t) (alignment - 1));
+        if (next_aligned_address + bytes < (u8*) block + block->size)
         {
-            if (next_aligned_address - sizeof(free_block_t) > (uint8_t*) block)
+            if (next_aligned_address - sizeof(free_block_t) > (u8*) block)
             {
                 free_block_t *next_block = (free_block_t*) (next_aligned_address + bytes);
-                next_block->size = (size_t) ((uint8_t*) block + block->size - (next_aligned_address + bytes));
-                block->size = (size_t) ((next_aligned_address - sizeof(free_block_t)) - (uint8_t*) block);
+                next_block->size = (size_t) ((u8*) block + block->size - (next_aligned_address + bytes));
+                block->size = (size_t) ((next_aligned_address - sizeof(free_block_t)) - (u8*) block);
                 next_block->next = block->next;
                 block->next = next_block;
             }
-            else if (next_aligned_address - sizeof(free_block_t) == (uint8_t*) block)
+            else if (next_aligned_address - sizeof(free_block_t) == (u8*) block)
             {
-                size_t block_size = (size_t) (((uint8_t*) block + block->size) - (next_aligned_address + bytes));
+                size_t block_size = (size_t) (((u8*) block + block->size) - (next_aligned_address + bytes));
                 free_block_t *next_block = block->next;
                 block = (free_block_t*) (next_aligned_address + bytes);
                 block->size = block_size;
@@ -52,13 +52,13 @@ void* kernel_memory_allocate(size_t bytes, size_t alignment)
             *((size_t*) (next_aligned_address - sizeof(free_block_t))) = bytes;
             return next_aligned_address;
         }
-        else if (next_aligned_address + bytes == ((uint8_t*) block + block->size))
+        else if (next_aligned_address + bytes == ((u8*) block + block->size))
         {
-            if (next_aligned_address - sizeof(free_block_t) > (uint8_t*) block)
+            if (next_aligned_address - sizeof(free_block_t) > (u8*) block)
             {
-                block->size = (next_aligned_address - sizeof(free_block_t)) - (uint8_t*) block;
+                block->size = (next_aligned_address - sizeof(free_block_t)) - (u8*) block;
             }
-            else if (next_aligned_address - sizeof(free_block_t) == (uint8_t*) block)
+            else if (next_aligned_address - sizeof(free_block_t) == (u8*) block)
             {
                 if (previous_block)
                     previous_block->next = block->next;
@@ -78,9 +78,9 @@ void* kernel_memory_allocate(size_t bytes, size_t alignment)
 
 void* kernel_memory_reallocate(void *allocated_memory, size_t memory_new_size_bytes, size_t alignment)
 {
-    uint8_t *allocated_address = (uint8_t*) allocated_memory;
+    u8 *allocated_address = (u8*) allocated_memory;
     size_t allocated_size = *((size_t*) (allocated_address - sizeof(free_block_t)));
-    uint8_t *new_allocated_memory = (uint8_t*) kernel_memory_allocate(memory_new_size_bytes, alignment);
+    u8 *new_allocated_memory = (u8*) kernel_memory_allocate(memory_new_size_bytes, alignment);
     size_t new_size = allocated_size < memory_new_size_bytes ? allocated_size : memory_new_size_bytes;
     memory_copy(new_allocated_memory, allocated_memory, new_size);
     kernel_memory_free(allocated_memory);
@@ -89,7 +89,7 @@ void* kernel_memory_reallocate(void *allocated_memory, size_t memory_new_size_by
 
 void kernel_memory_free(void *allocated_memory)
 {
-    uint8_t *allocated_address = (uint8_t*) allocated_memory;
+    u8 *allocated_address = (u8*) allocated_memory;
     size_t allocated_size = *((size_t*) (allocated_address - sizeof(free_block_t))) + sizeof(free_block_t);
     free_block_t *allocated_block = (free_block_t*) (allocated_address - sizeof(free_block_t));
     allocated_block->size = allocated_size;
@@ -122,7 +122,7 @@ void kernel_memory_free(void *allocated_memory)
     {
         if (!previous_block)
             continue;
-        if ((uint8_t*) previous_block + previous_block->size == (uint8_t*) block)
+        if ((u8*) previous_block + previous_block->size == (u8*) block)
         {
             previous_block->next = block->next;
             previous_block->size += block->size;

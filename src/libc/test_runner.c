@@ -7,7 +7,7 @@
 #include <random.h>
 #include <io.h>
 
-uint32_t run_test(const char *test_name, const char *isr_name, void *pra_isr, void (*test_function)(), uint32_t pages_limit, uint32_t allocation_spread)
+u32 run_test(const char *test_name, const char *isr_name, void *pra_isr, void (*test_function)(), u32 pages_limit, u32 allocation_spread)
 {
     idt_set_descriptor(14, pra_isr, 0x8e);
     pfa_set_allocation_limit(pages_limit);
@@ -22,7 +22,7 @@ uint32_t run_test(const char *test_name, const char *isr_name, void *pra_isr, vo
 
     io_printf(DEFAULT_STREAM, "%s | %s | Pages: %d | Spread: %d (%d KB)\n", test_name, isr_name, pages_limit, allocation_spread, (allocation_spread * 0x1000) / 1024);
     test_function();
-    uint32_t page_faults = paging_get_page_fault_count();
+    u32 page_faults = paging_get_page_fault_count();
     io_printf(DEFAULT_STREAM, "Page Faults: %d\n\n", page_faults);
     return page_faults;
 }

@@ -1,15 +1,15 @@
 #pragma once
 
-#include <stdint.h>
+#include <types.h>
 
 typedef struct
 {
-    uint32_t base_low;
-    uint32_t base_high;
-    uint32_t length_low;
-    uint32_t length_high;
-    uint32_t type;
-    uint32_t attributes;
+    u32 base_low;
+    u32 base_high;
+    u32 length_low;
+    u32 length_high;
+    u32 type;
+    u32 attributes;
 } memory_map_entry_t;
 
 extern memory_map_entry_t *memory_map;

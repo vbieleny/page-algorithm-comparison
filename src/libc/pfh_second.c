@@ -9,17 +9,17 @@ NO_CALLER_SAVED_REGISTERS static void send_page_to_back()
     page_queue_offer(victim_page);
 }
 
-void pfh_second_isr(interrupt_frame_t* frame, unsigned int error_code)
+void pfh_second_isr(interrupt_frame_t* frame, u32 error_code)
 {
-    uint32_t accessed_address = paging_read_cr2();
+    u32 accessed_address = paging_read_cr2();
     if (!pfa_is_allocation_limit_reached())
     {
         paging_make_page_present(accessed_address);
     }
     else
     {
-        uint32_t victim_virtual;
-        uint32_t *victim_pte;
+        u32 victim_virtual;
+        u32 *victim_pte;
         for (;;)
         {
             victim_virtual = page_queue_peek()->virtual_address;

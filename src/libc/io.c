@@ -59,27 +59,27 @@ void io_printf(io_stream stream, const char *format, ...)
     va_end(list);
 }
 
-void io_out_byte(uint16_t port, uint8_t value)
+void io_out_byte(u16 port, u8 value)
 {
     asm volatile("outb %1, %0" : : "a"(value), "Nd"(port));
 }
 
-void io_out_word(uint16_t port, uint16_t value)
+void io_out_word(u16 port, u16 value)
 {
     asm volatile("outw %1, %0" : : "a"(value), "Nd"(port));
 }
 
 
-uint8_t io_in_byte(uint16_t port)
+u8 io_in_byte(u16 port)
 {
-    uint8_t value;
+    u8 value;
     asm volatile("inb %0, %1" : "=a"(value) : "Nd"(port));
     return value;
 }
 
-uint16_t io_in_word(uint16_t port)
+u16 io_in_word(u16 port)
 {
-    uint16_t value;
+    u16 value;
     asm volatile("inw %0, %1" : "=a"(value) : "Nd"(port));
     return value;
 }

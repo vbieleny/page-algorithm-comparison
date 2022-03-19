@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdint.h>
+#include <types.h>
 
-uint32_t random_next();
-uint32_t random_between(uint32_t min, uint32_t max);
-void random_set_seed(uint32_t seed);
+u32 random_next();
+u32 random_between(u32 min, u32 max);
+void random_set_seed(u32 seed);

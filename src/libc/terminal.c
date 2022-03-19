@@ -9,17 +9,17 @@ static const size_t VGA_HEIGHT = 25;
 
 static size_t terminal_row;
 static size_t terminal_column;
-static uint8_t terminal_color;
-static uint16_t* terminal_buffer;
+static u8 terminal_color;
+static u16* terminal_buffer;
 
-static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg)
+static inline u8 vga_entry_color(enum vga_color fg, enum vga_color bg)
 {
 	return fg | bg << 4;
 }
 
-static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
+static inline u16 vga_entry(unsigned char uc, u8 color)
 {
-	return (uint16_t) uc | (uint16_t) color << 8;
+	return (u16) uc | (u16) color << 8;
 }
 
 void terminal_initialize()
@@ -27,7 +27,7 @@ void terminal_initialize()
 	terminal_row = 0;
 	terminal_column = 0;
 	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
-	terminal_buffer = (uint16_t*) VGA_MEMORY_ADDRESS;
+	terminal_buffer = (u16*) VGA_MEMORY_ADDRESS;
 	for (size_t y = 0; y < VGA_HEIGHT; y++)
     {
 		for (size_t x = 0; x < VGA_WIDTH; x++)
@@ -40,15 +40,15 @@ void terminal_initialize()
 
 void terminal_move_cursor(size_t x, size_t y)
 {
-	uint16_t pos = y * VGA_WIDTH + x;
+	u16 pos = y * VGA_WIDTH + x;
  
 	io_out_byte(0x3D4, 0x0F);
-	io_out_byte(0x3D5, (uint8_t) (pos & 0xFF));
+	io_out_byte(0x3D5, (u8) (pos & 0xFF));
 	io_out_byte(0x3D4, 0x0E);
-	io_out_byte(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
+	io_out_byte(0x3D5, (u8) ((pos >> 8) & 0xFF));
 }
 
-void terminal_setcolor(uint8_t color)
+void terminal_setcolor(u8 color)
 {
 	terminal_color = color;
 }
@@ -72,7 +72,7 @@ void terminal_newline(void)
     }
 }
 
-void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
+void terminal_putentryat(char c, u8 color, size_t x, size_t y)
 {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = vga_entry(c, color);

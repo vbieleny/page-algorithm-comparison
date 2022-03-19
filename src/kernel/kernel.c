@@ -10,6 +10,7 @@
 #include <serial.h>
 #include <kmalloc.h>
 #include <memory_map.h>
+#include <types.h>
 
 void test_sort();
 
@@ -17,10 +18,10 @@ void test_sort();
 #define HEAP_START 0x200000
 #define HEAP_SIZE ((IDENTITY_PAGES_COUNT) * 4096 - (HEAP_START))
 
-extern const uint32_t KERNEL_START;
-extern const uint32_t KERNEL_END;
+extern const u32 KERNEL_START;
+extern const u32 KERNEL_END;
 
-NORETURN INTERRUPT static void kernel_panic(interrupt_frame_t* frame, unsigned int error_code);
+NORETURN INTERRUPT static void kernel_panic(interrupt_frame_t* frame, u32 error_code);
 
 NORETURN NO_CALLER_SAVED_REGISTERS static void halt();
 
@@ -34,7 +35,7 @@ void kernel_main()
         halt();
     }
 
-    uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - ((uint32_t) (&KERNEL_START));
+    u32 kernel_size = ((u32) (&KERNEL_END)) - ((u32) (&KERNEL_START));
     io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n\n", kernel_size / 1024);
 
     memory_map_print();
@@ -59,7 +60,7 @@ void kernel_main()
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
 }
 
-static void kernel_panic(interrupt_frame_t *frame, unsigned int error_code)
+static void kernel_panic(interrupt_frame_t *frame, u32 error_code)
 {
     io_printf(DEFAULT_STREAM, "Kernel Panic (Error Code: 0x%x)\n", error_code);
     halt();
