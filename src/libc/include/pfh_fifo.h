@@ -1,6 +1,6 @@
 #pragma once
 
 #include <idt.h>
+#include <attrs.h>
 
-__attribute__((interrupt))
-void pfh_fifo_isr(interrupt_frame_t* frame, unsigned int error_code);
+INTERRUPT void pfh_fifo_isr(interrupt_frame_t* frame, unsigned int error_code);

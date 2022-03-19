@@ -3,6 +3,7 @@ OUTPUT_FORMAT(elf32-i386)
 SECTIONS
 {
     . = 1M;
+    KERNEL_START = .;
     .text : ALIGN(4k)
     {
         *(.text.kernel)

@@ -13,21 +13,17 @@
 
 void test_sort();
 
-#define IDENTITY_PAGES_COUNT 4096           // First 16 MB (4096 pages with 4 KB each)
-#define HEAP_START 0x200000                 // 2 MB
-#define HEAP_SIZE (0x1000000 - 0x200000)    // 14 MB (from 2 MB to 16 MB)
+#define IDENTITY_PAGES_COUNT 4096
+#define HEAP_START 0x200000
+#define HEAP_SIZE ((IDENTITY_PAGES_COUNT) * 4096 - (HEAP_START))
 
+extern const uint32_t KERNEL_START;
 extern const uint32_t KERNEL_END;
 
-__attribute__((noreturn))
-__attribute__((interrupt))
-static void kernel_panic(interrupt_frame_t* frame, unsigned int error_code);
+NORETURN INTERRUPT static void kernel_panic(interrupt_frame_t* frame, unsigned int error_code);
 
-__attribute__((noreturn))
-__attribute__((no_caller_saved_registers))
-static void halt();
+NORETURN NO_CALLER_SAVED_REGISTERS static void halt();
 
-__attribute__((unused))
 void kernel_main()
 {
     kernel_memory_init((void*) HEAP_START, HEAP_SIZE);
@@ -38,7 +34,7 @@ void kernel_main()
         halt();
     }
 
-    uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - 0x100000;
+    uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - ((uint32_t) (&KERNEL_START));
     io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n\n", kernel_size / 1024);
 
     memory_map_print();

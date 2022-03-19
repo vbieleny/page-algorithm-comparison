@@ -3,8 +3,7 @@
 #include <paging.h>
 #include <page_queue.h>
 
-__attribute__((no_caller_saved_registers))
-static void send_page_to_back()
+NO_CALLER_SAVED_REGISTERS static void send_page_to_back()
 {
     page_entry_t victim_page = page_queue_poll();
     page_queue_offer(victim_page);
@@ -27,7 +26,7 @@ void pfh_second_isr(interrupt_frame_t* frame, unsigned int error_code)
             victim_pte = memory_virtual_to_pte(victim_virtual);
             if (!(*victim_pte & PAGE_FLAG_ACCESSED))
                 break;
-            *victim_pte = *victim_pte & ~PAGE_FLAG_ACCESSED;
+            *victim_pte &= ~PAGE_FLAG_ACCESSED;
             paging_invalidate_page(victim_virtual);
             send_page_to_back();
         }

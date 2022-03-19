@@ -71,4 +71,4 @@ view: $(BUILD_DIR)/$(BINFILE)
 	ghex $<
 
 clean:
-	rm -rf qemuout.txt bochsout.txt bx_enh_dbg.ini $(BUILD_DIR)
+	-rm -rf qemuout.txt bochsout.txt bx_enh_dbg.ini $(BUILD_DIR)
