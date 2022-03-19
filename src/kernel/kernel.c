@@ -8,6 +8,7 @@
 #include <pfh_second.h>
 #include <test_runner.h>
 #include <serial.h>
+#include <ksystem.h>
 #include <kmalloc.h>
 #include <malloc.h>
 #include <memory_map.h>
@@ -22,10 +23,6 @@ void test_sort();
 
 extern const u32 KERNEL_START;
 extern const u32 KERNEL_END;
-
-NORETURN INTERRUPT static void kernel_panic(interrupt_frame_t* frame, u32 error_code);
-
-NORETURN NO_CALLER_SAVED_REGISTERS static void halt();
 
 void kernel_main()
 {
@@ -60,16 +57,4 @@ void kernel_main()
 
     run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 6, 8);
     run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
-}
-
-static void kernel_panic(interrupt_frame_t *frame, u32 error_code)
-{
-    io_printf(DEFAULT_STREAM, "Kernel Panic (Error Code: 0x%x)\n", error_code);
-    halt();
-}
-
-static void halt()
-{
-    for (;;)
-        asm volatile("hlt");
 }
