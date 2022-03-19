@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <random.h>
 #include <pfa.h>
+#include <kmalloc.h>
 
 typedef struct
 {
@@ -9,15 +10,23 @@ typedef struct
     size_t size;
 } memory_block_t;
 
-#define MAX_ALLOCATION_BLOCKS (1024 * 16)
+static const size_t DEFAULT_BLOCKS_SIZE = 1024;
 
 static u32 max_pages_to_allocate = 0;
 
-static memory_block_t used_blocks[MAX_ALLOCATION_BLOCKS];
+static memory_block_t *used_blocks;
 static size_t used_block_size = 0;
+static size_t total_block_size = 0;
 
+static void memory_reallocate_used_blocks(size_t size);
 static bool memory_is_used(memory_block_t block);
 static void memory_make_used(memory_block_t block);
+
+static void memory_reallocate_used_blocks(size_t size)
+{
+    used_blocks = kernel_memory_reallocate(used_blocks, size * sizeof(memory_block_t), 1);
+    total_block_size = size;
+}
 
 static bool memory_is_used(memory_block_t block)
 {
@@ -34,7 +43,15 @@ static bool memory_is_used(memory_block_t block)
 
 static void memory_make_used(memory_block_t block)
 {
+    if (used_block_size >= total_block_size)
+        memory_reallocate_used_blocks(total_block_size * 2);
     used_blocks[used_block_size++] = block;
+}
+
+void memory_init()
+{
+    used_blocks = kernel_memory_allocate(DEFAULT_BLOCKS_SIZE * sizeof(memory_block_t), 1);
+    total_block_size = DEFAULT_BLOCKS_SIZE;
 }
 
 void* memory_random_allocate(size_t size)
@@ -59,7 +76,7 @@ void memory_free_all()
     used_block_size = 0;
 }
 
-void set_max_pages_to_allocate(u32 max_pages)
+void memory_set_max_pages_to_allocate(u32 max_pages)
 {
     max_pages_to_allocate = max_pages;
 }

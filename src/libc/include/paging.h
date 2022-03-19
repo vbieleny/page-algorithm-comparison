@@ -4,9 +4,10 @@
 #include <stddef.h>
 #include <attrs.h>
 
-#define PAGE_FLAG_PRESENT 1
+#define PAGE_FLAG_PRESENT (1 << 0)
 #define PAGE_FLAG_READ_WRITE (1 << 1)
 #define PAGE_FLAG_ACCESSED (1 << 5)
+#define PAGE_FLAG_DIRTY (1 << 6)
 
 void paging_init(size_t identity_pages_count);
 void paging_reset();

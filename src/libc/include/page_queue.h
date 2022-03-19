@@ -17,4 +17,3 @@ NO_CALLER_SAVED_REGISTERS void page_queue_clear();
 NO_CALLER_SAVED_REGISTERS void page_queue_set_capacity(size_t capacity);
 NO_CALLER_SAVED_REGISTERS size_t page_queue_get_size();
 NO_CALLER_SAVED_REGISTERS bool page_queue_is_full();
-void page_queue_print();

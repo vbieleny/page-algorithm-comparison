@@ -16,7 +16,7 @@ u32 run_test(const char *test_name, const char *isr_name, void *pra_isr, void (*
     paging_reset_page_fault_counter();
     page_queue_clear();
     page_queue_set_capacity(pages_limit);
-    set_max_pages_to_allocate(allocation_spread);
+    memory_set_max_pages_to_allocate(allocation_spread);
     memory_free_all();
     random_set_seed(1);
 
