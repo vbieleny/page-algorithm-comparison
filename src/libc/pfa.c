@@ -1,89 +1,69 @@
 #include <pfa.h>
-#include <stdint.h>
-#include <stdbool.h>
+#include <kmalloc.h>
 
 typedef struct
 {
     void *address;
     bool is_used;
-} page_t;
+} pfa_page_t;
 
-#define MAX_PAGE_COUNT 512
-#define MAX_SWAP_PAGE_COUNT 1024
+static void *pfa_start_address;
+static size_t pfa_size_in_pages;
+static size_t pfa_allocation_limit;
+static pfa_page_t *pages_memory;
 
-static page_t pages[MAX_PAGE_COUNT];
-static page_t swap_pages[MAX_SWAP_PAGE_COUNT];
-
-static size_t page_count_limit;
-
-static void* pfa_allocate(page_t *pages_list, size_t size);
-
-// start_address must be page-aligned (4K blocks)
-void pfa_init(void *start_address, void *swap_start_address)
+void pfa_init(void *start_address, size_t size_in_pages)
 {
-    for (size_t i = 0; i < sizeof(pages) / sizeof(pages[0]); i++, start_address += 0x1000)
+    pfa_start_address = start_address;
+    pfa_size_in_pages = size_in_pages;
+    pages_memory = (pfa_page_t*) kernel_memory_allocate(pfa_size_in_pages * sizeof(pfa_page_t), 1);
+
+    for (size_t i = 0; i < pfa_size_in_pages; i++, start_address += 0x1000)
     {
-        pages[i].address = start_address;
-        pages[i].is_used = false;
-    }
-    for (size_t i = 0; i < sizeof(swap_pages) / sizeof(swap_pages[0]); i++, swap_start_address += 0x1000)
-    {
-        swap_pages[i].address = swap_start_address;
-        swap_pages[i].is_used = false;
+        pages_memory[i].address = start_address;
+        pages_memory[i].is_used = false;
     }
 }
 
-void pfa_set_page_count_limit(uint32_t pages_limit)
+void *pfa_allocate_page()
 {
-    page_count_limit = pages_limit;
-}
-
-void pfa_free_all()
-{
-    for (size_t i = 0; i < sizeof(pages) / sizeof(pages[0]); i++)
-        pages[i].is_used = false;
-    for (size_t i = 0; i < sizeof(swap_pages) / sizeof(swap_pages[0]); i++)
-        swap_pages[i].is_used = false;
-}
-
-void* pfa_page_allocate()
-{
-    return pfa_allocate(pages, page_count_limit);
-}
-
-void* pfa_swap_page_allocate()
-{
-    return pfa_allocate(swap_pages, sizeof(swap_pages) / sizeof(swap_pages[0]));
-}
-
-void pfa_mark_swap_free(void *swap_address)
-{
-    for (int i = 0; i < sizeof(swap_pages) / sizeof(swap_pages[0]); i++)
+    for (size_t i = 0; i < pfa_size_in_pages; i++)
     {
-        if (swap_pages[i].address == swap_address)
-            swap_pages[i].is_used = false;
-    }
-}
-
-static void* pfa_allocate(page_t *pages_list, size_t size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        if (!pages_list[i].is_used)
+        if (!pages_memory[i].is_used)
         {
-            pages_list[i].is_used = true;
-            return pages_list[i].address;
+            pages_memory[i].is_used = true;
+            return pages_memory[i].address;
         }
     }
     return NULL;
 }
 
-void* pfa_get_start_address()
+void pfa_free_all()
 {
-    return pages[0].address;
+    for (size_t i = 0; i < pfa_size_in_pages; i++)
+        pages_memory[i].is_used = false;
 }
 
-size_t pfa_get_swap_page_count()
+void pfa_set_allocation_limit(size_t limit)
 {
-    return MAX_SWAP_PAGE_COUNT;
+    pfa_allocation_limit = limit;
+}
+
+void* pfa_get_start_address()
+{
+    return pfa_start_address;
+}
+
+bool pfa_is_allocation_limit_reached()
+{
+    bool has_free_page = false;
+    for (size_t i = 0; i < pfa_allocation_limit; i++)
+    {
+        if (!pages_memory[i].is_used)
+        {
+            has_free_page = true;
+            break;
+        }
+    }
+    return !has_free_page;
 }

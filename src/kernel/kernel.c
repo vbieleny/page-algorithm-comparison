@@ -45,8 +45,7 @@ void kernel_main()
     io_printf(DEFAULT_STREAM, "\n");
 
     void *pages_start_address = (void*) (IDENTITY_PAGES_COUNT * 0x1000);
-    void *swap_pages_start_address = pages_start_address - (pfa_get_swap_page_count() * 0x1000);
-    pfa_init(pages_start_address, swap_pages_start_address);
+    pfa_init(pages_start_address, 16 * 1024);
     paging_init(IDENTITY_PAGES_COUNT);
 
     idt_set_descriptor(13, &kernel_panic, 0x8e);
