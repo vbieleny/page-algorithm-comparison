@@ -1,7 +1,7 @@
 #include <idt.h>
 #include <stddef.h>
 
-#define IDT_ENTRIES_COUNT 16
+#define IDT_ENTRIES_COUNT 256
 
 static const uint8_t KERNEL_CODE_SELECTOR = 0x08;
 
@@ -24,4 +24,9 @@ void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags)
     descriptor->attributes = flags;
     descriptor->isr_high = (uintptr_t) isr >> 16;
     descriptor->reserved = 0;
+}
+
+void interrupts_enable()
+{
+    asm volatile("sti");
 }

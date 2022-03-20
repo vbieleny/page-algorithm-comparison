@@ -63,13 +63,16 @@ $(BUILD_DIR):
 	mkdir -p $(dir $(OBJECTS))
 
 qemud: $(BUILD_DIR)/$(IMGFILE)
-	qemu-system-i386 -s -S -serial stdio -drive file=$<,format=raw,index=0,media=disk
+	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
 qemus: $(BUILD_DIR)/$(IMGFILE)
-	qemu-system-i386 -nographic -drive file=$<,format=raw,index=0,media=disk
+	qemu-system-i386 -icount 0 -nographic -drive file=$<,format=raw,index=0,media=disk
+
+qemuk: $(BUILD_DIR)/$(IMGFILE)
+	qemu-system-i386 -enable-kvm -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
 qemu: $(BUILD_DIR)/$(IMGFILE)
-	qemu-system-i386 -serial stdio -drive file=$<,format=raw,index=0,media=disk
+	qemu-system-i386 -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
 bochs: $(BUILD_DIR)/$(IMGFILE)
 	bochs -f bochsrc.txt -q

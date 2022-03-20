@@ -12,6 +12,8 @@
 #include <kmalloc.h>
 #include <malloc.h>
 #include <mmap.h>
+#include <pic.h>
+#include <timer.h>
 #include <stdint.h>
 
 void test_sort();
@@ -42,9 +44,18 @@ void kernel_main()
 
     pfa_initialize(PAGES_START_ADDRESS);
     paging_initialize(IDENTITY_PAGES_COUNT);
+    timer_initialize();
 
     idt_set_descriptor(13, &kernel_panic, 0x8e);
     idt_initialize();
+
+    pic_remap(0x20, 0x28);
+    irq_set_mask_all();
+    irq_clear_mask(IRQ_TIMER);
+
+    timer_set_divisor(TIMER_DIVISOR_991_HZ);
+
+    interrupts_enable();
 
     paging_enable();
 
