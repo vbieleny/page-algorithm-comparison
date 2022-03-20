@@ -33,6 +33,12 @@ page_entry_t* page_queue_peek()
     return &page_queue_memory[0];
 }
 
+void page_queue_send_to_back()
+{
+    page_entry_t victim_page = page_queue_poll();
+    page_queue_offer(victim_page);
+}
+
 void page_queue_clear()
 {
     for (size_t i = 0; i < page_queue_capacity; i++)
