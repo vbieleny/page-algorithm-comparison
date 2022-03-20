@@ -19,14 +19,14 @@ void test_sort()
     int numbers[16] = { 35, 2, 19, 17, 5, 7, 1, 53, 11, 9, 31, 16, 6, 27, 24, 99 };
     int numbers_count = sizeof(numbers) / sizeof(numbers[0]);
     
-    linked_list_t *root = (linked_list_t*) memory_random_allocate(sizeof(linked_list_t));
+    linked_list_t *root = (linked_list_t*) user_memory_random_allocate(sizeof(linked_list_t));
     linked_list_t *next = root;
     for (int i = 0; i < numbers_count; i++)
     {
         next->value = numbers[i];
         if (i == numbers_count - 1)
             break;
-        next->next = (linked_list_t*) memory_random_allocate(sizeof(linked_list_t));
+        next->next = (linked_list_t*) user_memory_random_allocate(sizeof(linked_list_t));
         next = next->next;
     }
 
@@ -44,7 +44,7 @@ void test_sort()
     for (int i = 0; i < numbers_count; i++, next = next->next)
     {
         const char *format = i == numbers_count - 1 ? "%d" : "%d ";
-        io_printf(DEFAULT_STREAM, format, next->value);
+        io_printf(format, next->value);
     }
-    io_printf(DEFAULT_STREAM, "\n");
+    io_printf("\n");
 }

@@ -1,4 +1,4 @@
-#include <page_queue.h>
+#include <pqueue.h>
 #include <io.h>
 #include <kmalloc.h>
 

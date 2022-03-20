@@ -3,7 +3,7 @@
 #include <serial.h>
 #include <string_utils.h>
 
-void io_putchar(io_stream stream, char c)
+void io_sputchar(io_stream stream, char c)
 {
     switch (stream)
     {
@@ -16,27 +16,56 @@ void io_putchar(io_stream stream, char c)
     }
 }
 
-void io_write(io_stream stream, const char *str, size_t length)
+void io_swrite(io_stream stream, const char *str, size_t length)
 {
     for (size_t i = 0; i < length; i++)
-        io_putchar(stream, str[i]);
+        io_sputchar(stream, str[i]);
 }
 
-void io_writestring(io_stream stream, const char *str)
+void io_swritestring(io_stream stream, const char *str)
 {
-    io_write(stream, str, string_length(str));
+    io_swrite(stream, str, string_length(str));
 }
 
-void io_printf(io_stream stream, const char *format, ...)
+void io_sprintf(io_stream stream, const char *format, ...)
+{
+    va_list arguments;
+    va_start(arguments, format);
+    io_vprintf(stream, format, arguments);
+    va_end(arguments);
+}
+
+void io_putchar(char c)
+{
+    io_sputchar(DEFAULT_STREAM, c);
+}
+
+void io_write(const char *str, size_t length)
+{
+    io_swrite(DEFAULT_STREAM, str, length);
+}
+
+void io_writestring(const char *str)
+{
+    io_swritestring(DEFAULT_STREAM, str);
+}
+
+void io_printf(const char *format, ...)
+{
+    va_list arguments;
+    va_start(arguments, format);
+    io_vprintf(DEFAULT_STREAM, format, arguments);
+    va_end(arguments);
+}
+
+void io_vprintf(io_stream stream, const char *format, va_list arguments)
 {
     char buffer[11];
-    va_list list;
-    va_start(list, format);
     while (*format)
     {
         if (*format != '%')
         {
-            io_putchar(stream, *format);
+            io_sputchar(stream, *format);
             format++;
             continue;
         }
@@ -44,42 +73,40 @@ void io_printf(io_stream stream, const char *format, ...)
         switch (*format)
         {
         case 's':
-            io_writestring(stream, va_arg(list, char *));
+            io_swritestring(stream, va_arg(arguments, char *));
             break;
         case 'd':
-            string_int_to_string(va_arg(list, int), buffer, 10);
-            io_writestring(stream, buffer);
+            int_to_string(va_arg(arguments, int), buffer, 10);
+            io_swritestring(stream, buffer);
             break;
         case 'x':
-            string_int_to_string(va_arg(list, int), buffer, 16);
-            io_writestring(stream, buffer);
+            int_to_string(va_arg(arguments, int), buffer, 16);
+            io_swritestring(stream, buffer);
         }
         format++;
     }
-    va_end(list);
 }
 
-void io_out_byte(u16 port, u8 value)
+void io_out_byte(uint16_t port, uint8_t value)
 {
     asm volatile("outb %1, %0" : : "a"(value), "Nd"(port));
 }
 
-void io_out_word(u16 port, u16 value)
+uint8_t io_in_byte(uint16_t port)
 {
-    asm volatile("outw %1, %0" : : "a"(value), "Nd"(port));
-}
-
-
-u8 io_in_byte(u16 port)
-{
-    u8 value;
+    uint8_t value;
     asm volatile("inb %0, %1" : "=a"(value) : "Nd"(port));
     return value;
 }
 
-u16 io_in_word(u16 port)
+void io_out_word(uint16_t port, uint16_t value)
 {
-    u16 value;
+    asm volatile("outw %1, %0" : : "a"(value), "Nd"(port));
+}
+
+uint16_t io_in_word(uint16_t port)
+{
+    uint16_t value;
     asm volatile("inw %0, %1" : "=a"(value) : "Nd"(port));
     return value;
 }

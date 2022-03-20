@@ -1,18 +1,18 @@
 #include <pfh_fifo.h>
 #include <pfa.h>
 #include <paging.h>
-#include <page_queue.h>
+#include <pqueue.h>
 
-void pfh_fifo_isr(interrupt_frame_t* frame, u32 error_code)
+void pfh_fifo_isr(interrupt_frame_t* frame, uint32_t error_code)
 {
-    u32 accessed_address = paging_read_cr2();
-    if (!pfa_is_allocation_limit_reached())
+    uint32_t accessed_address = paging_get_accessed_address();
+    if (!pfa_is_page_allocation_limit_reached())
     {
         paging_make_page_present(accessed_address);
     }
     else
     {
-        u32 victim_virtual = page_queue_peek()->virtual_address;
+        uint32_t victim_virtual = page_queue_peek()->virtual_address;
         paging_make_page_not_present(victim_virtual);
         paging_make_page_present(accessed_address);
         paging_invalidate_page(victim_virtual);

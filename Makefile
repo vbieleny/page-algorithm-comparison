@@ -22,8 +22,15 @@ ASMFLAGS   := -I $(SRC_DIR)/boot/include/ -f bin
 CFLAGS 	   := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(KERNELINC) -I$(LIBCINC)
 LFLAGS     := -g -T $(LINKER) -ffreestanding -nostdlib
 
+CFG_FILE   := config.mk
+
+.EXTRA_PREREQS := Makefile $(CFG_FILE)
 .PHONY: all qemud qemu bochs view clean
 .SILENT: qemus
+
+-include $(CFG_FILE)
+
+CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES)
 
 all: $(BUILD_DIR)/$(IMGFILE)
 

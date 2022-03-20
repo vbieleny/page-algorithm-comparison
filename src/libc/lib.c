@@ -1,8 +1,8 @@
 #include <lib.h>
 
-void memory_set(void *memory, u8 value, size_t length)
+void memory_set(void *memory, uint8_t value, size_t length)
 {
-    u8 *destination_memory = (u8*) memory;
+    uint8_t *destination_memory = (uint8_t*) memory;
     for (size_t i = 0; i < length; i++)
         destination_memory[i] = value;
 }

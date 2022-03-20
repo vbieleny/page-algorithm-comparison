@@ -6,13 +6,13 @@
 
 typedef struct
 {
-    u32 address;
+    uint32_t address;
     size_t size;
 } memory_block_t;
 
 static const size_t DEFAULT_BLOCKS_SIZE = 1024;
 
-static u32 max_pages_to_allocate = 0;
+static uint32_t memory_size_pages = 0;
 
 static memory_block_t *used_blocks;
 static size_t used_block_size = 0;
@@ -48,18 +48,18 @@ static void memory_make_used(memory_block_t block)
     used_blocks[used_block_size++] = block;
 }
 
-void memory_init()
+void user_memory_initialize()
 {
     used_blocks = kernel_memory_allocate(DEFAULT_BLOCKS_SIZE * sizeof(memory_block_t), 1);
     total_block_size = DEFAULT_BLOCKS_SIZE;
 }
 
-void* memory_random_allocate(size_t size)
+void* user_memory_random_allocate(size_t size)
 {
     uintptr_t start_address = (uintptr_t) pfa_get_start_address();
-    uintptr_t end_address = start_address + (0x1000 * max_pages_to_allocate);
+    uintptr_t end_address = start_address + (0x1000 * memory_size_pages);
     memory_block_t random_block = { .size = size };
-    u16 counter = 0;
+    uint16_t counter = 0;
     do
     {
         random_block.address = random_between(start_address, end_address);
@@ -71,12 +71,12 @@ void* memory_random_allocate(size_t size)
     return (void*) random_block.address;
 }
 
-void memory_free_all()
+void user_memory_free_all()
 {
     used_block_size = 0;
 }
 
-void memory_set_max_pages_to_allocate(u32 max_pages)
+void user_memory_set_memory_size(uint32_t max_pages)
 {
-    max_pages_to_allocate = max_pages;
+    memory_size_pages = max_pages;
 }

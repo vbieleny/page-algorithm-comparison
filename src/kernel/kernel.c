@@ -11,41 +11,40 @@
 #include <ksystem.h>
 #include <kmalloc.h>
 #include <malloc.h>
-#include <memory_map.h>
-#include <types.h>
+#include <mmap.h>
+#include <stdint.h>
 
 void test_sort();
 
-#define IDENTITY_PAGES_COUNT 4096
 #define HEAP_START 0x200000
 #define HEAP_SIZE ((IDENTITY_PAGES_COUNT) * 4096 - (HEAP_START))
 #define PAGES_START_ADDRESS ((void*) ((IDENTITY_PAGES_COUNT) * 0x1000))
 
-extern const u32 KERNEL_START;
-extern const u32 KERNEL_END;
+extern const uint32_t KERNEL_START;
+extern const uint32_t KERNEL_END;
 
 void kernel_main()
 {
-    kernel_memory_init((void*) HEAP_START, HEAP_SIZE);
-    memory_init();
+    kernel_memory_initialize((void*) HEAP_START, HEAP_SIZE);
+    user_memory_initialize();
     terminal_initialize();
-    if (!serial_init())
+    if (!serial_initialize())
     {
-        io_printf(DEFAULT_STREAM, "Cannot initialize serial port!\n");
+        io_sprintf(IO_TERMINAL, "Cannot initialize serial port!\n");
         halt();
     }
 
-    u32 kernel_size = ((u32) (&KERNEL_END)) - ((u32) (&KERNEL_START));
-    io_printf(DEFAULT_STREAM, "Kernel Size: %d KB\n\n", kernel_size / 1024);
+    uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - ((uint32_t) (&KERNEL_START));
+    io_printf("Kernel Size: %d KB\n\n", kernel_size / 1024);
 
     memory_map_print();
-    io_printf(DEFAULT_STREAM, "\n");
+    io_printf("\n");
 
-    pfa_init(PAGES_START_ADDRESS, 16 * 1024);
-    paging_init(IDENTITY_PAGES_COUNT);
+    pfa_initialize(PAGES_START_ADDRESS);
+    paging_initialize(IDENTITY_PAGES_COUNT);
 
     idt_set_descriptor(13, &kernel_panic, 0x8e);
-    idt_init();
+    idt_initialize();
 
     paging_enable();
 

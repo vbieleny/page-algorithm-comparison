@@ -1,52 +1,27 @@
 #include <pfa.h>
 #include <kmalloc.h>
-
-typedef struct
-{
-    void *address;
-    bool is_used;
-} pfa_page_t;
+#include <stdint.h>
 
 static void *pfa_start_address;
-static size_t pfa_size_in_pages;
+static void *pfa_next_page_to_allocate;
 static size_t pfa_allocation_limit;
-static pfa_page_t *pages_memory;
 
-void pfa_init(void *start_address, size_t size_in_pages)
+void pfa_initialize(void *start_address)
 {
     pfa_start_address = start_address;
-    pfa_size_in_pages = size_in_pages;
-    pages_memory = (pfa_page_t*) kernel_memory_allocate(pfa_size_in_pages * sizeof(pfa_page_t), 1);
-
-    for (size_t i = 0; i < pfa_size_in_pages; i++, start_address += 0x1000)
-    {
-        pages_memory[i].address = start_address;
-        pages_memory[i].is_used = false;
-    }
+    pfa_next_page_to_allocate = pfa_start_address;
 }
 
 void *pfa_allocate_page()
 {
-    for (size_t i = 0; i < pfa_size_in_pages; i++)
-    {
-        if (!pages_memory[i].is_used)
-        {
-            pages_memory[i].is_used = true;
-            return pages_memory[i].address;
-        }
-    }
-    return NULL;
+    void *allocated_page = pfa_next_page_to_allocate;
+    pfa_next_page_to_allocate += 0x1000;
+    return allocated_page;
 }
 
-void pfa_free_all()
+void pfa_free_all_pages()
 {
-    for (size_t i = 0; i < pfa_size_in_pages; i++)
-        pages_memory[i].is_used = false;
-}
-
-void pfa_set_allocation_limit(size_t limit)
-{
-    pfa_allocation_limit = limit;
+    pfa_next_page_to_allocate = pfa_start_address;
 }
 
 void* pfa_get_start_address()
@@ -54,16 +29,13 @@ void* pfa_get_start_address()
     return pfa_start_address;
 }
 
-bool pfa_is_allocation_limit_reached()
+void pfa_set_page_allocation_limit(size_t limit)
 {
-    bool has_free_page = false;
-    for (size_t i = 0; i < pfa_allocation_limit; i++)
-    {
-        if (!pages_memory[i].is_used)
-        {
-            has_free_page = true;
-            break;
-        }
-    }
-    return !has_free_page;
+    pfa_allocation_limit = limit;
+}
+
+bool pfa_is_page_allocation_limit_reached()
+{
+    size_t allocated_pages_memory_size = (size_t) ((uint8_t*) pfa_next_page_to_allocate - (uint8_t*) pfa_start_address);
+    return allocated_pages_memory_size / 0x1000 >= pfa_allocation_limit;
 }

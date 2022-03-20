@@ -2,7 +2,7 @@
 #include <io.h>
 #include <string_utils.h>
 
-bool serial_init()
+bool serial_initialize()
 {
     io_out_byte(PORT + 1, 0x00);    // Disable all interrupts
     io_out_byte(PORT + 3, 0x80);    // Enable DLAB (set baud rate divisor)
@@ -43,5 +43,5 @@ bool serial_is_transmit_empty()
 void serial_putchar(char c)
 {
     while (serial_is_transmit_empty() == 0);
-    io_out_byte(PORT,c);
+    io_out_byte(PORT, c);
 }

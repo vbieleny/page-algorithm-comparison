@@ -8,7 +8,7 @@ size_t string_length(const char *string)
 	return length;
 }
 
-char* string_int_to_string(s32 value, char *result, s32 base)
+char* int_to_string(int32_t value, char *result, int32_t base)
 {
     if (base < 2 || base > 36)
     {
@@ -17,7 +17,7 @@ char* string_int_to_string(s32 value, char *result, s32 base)
     }
 
     char *ptr = result, *ptr1 = result, tmp_char;
-    s32 tmp_value;
+    int32_t tmp_value;
 
     do
     {
