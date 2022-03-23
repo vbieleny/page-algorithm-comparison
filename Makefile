@@ -1,14 +1,11 @@
-BUILD_DIR  := build
-SRC_DIR    := src
-CDCONTENTS := $(BUILD_DIR)/cdcontents
-KERNELINC  := $(SRC_DIR)/kernel/include
-LIBCINC    := $(SRC_DIR)/libc/include
-MODULES    := kernel libc suite
-SOURCES    := $(wildcard $(addprefix src/, $(addsuffix /*.c, $(MODULES))))
-OBJECTS    := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SOURCES:$(SRC_DIR)/%=%))
-OBJDIRS    := $(patsubst %, $(BUILD_DIR)/%, $(MODULES))
-DEPS       := $(OBJECTS:.o=.d)
-LINKER     := $(SRC_DIR)/linker.ld
+BUILDDIR   := build
+SRCDIR     := src
+INCLUDEDIR := include
+CDCONTENTS := $(BUILDDIR)/cdcontents
+SRCS       := $(wildcard $(SRCDIR)/*.c)
+OBJS       := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCS:$(SRCDIR)/%=%))
+DEPS       := $(OBJS:.o=.d)
+LINKER     := $(SRCDIR)/linker.ld
 ELFFILE    := os.elf
 BINFILE    := os.bin
 IMGFILE    := os.img
@@ -18,67 +15,64 @@ ASM 	   := /usr/bin/nasm
 CC  	   := /usr/local/cross/bin/i686-elf-gcc
 OBJCOPY    := /usr/local/cross/bin/i686-elf-objcopy
 OCFLAGS    := -O binary
-ASMFLAGS   := -I $(SRC_DIR)/boot/include/ -f bin
-CFLAGS 	   := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(KERNELINC) -I$(LIBCINC)
-LFLAGS     := -g -T $(LINKER) -ffreestanding -nostdlib
+ASMFLAGS   := -I $(INCLUDEDIR)/ -f bin
+CFLAGS 	   := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
+LDFLAGS    := -g -T $(LINKER) -ffreestanding -nostdlib
 
-CFG_FILE   := config.mk
+CFGFILE    := config.mk
 
-.EXTRA_PREREQS := Makefile $(CFG_FILE)
-.PHONY: all qemud qemu bochs view clean
+.EXTRA_PREREQS := Makefile $(CFGFILE)
+.PHONY: all qemud qemus qemuk qemu bochs view clean
 .SILENT: qemus
 
--include $(CFG_FILE)
+-include $(CFGFILE)
 
 CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES)
 
-all: $(BUILD_DIR)/$(IMGFILE)
+all: $(BUILDDIR)/$(IMGFILE)
 
-$(BUILD_DIR)/$(ISOFILE): $(BUILD_DIR)/$(IMGFILE)
+$(BUILDDIR)/$(ISOFILE): $(BUILDDIR)/$(IMGFILE)
 	mkdir $(CDCONTENTS)
 	cp $< $(CDCONTENTS)/
 	mkisofs -o $@ -input-charset utf-8 -V PRAC -b $(notdir $<) $(CDCONTENTS)
 	rm -rf $(CDCONTENTS)
 
-$(BUILD_DIR)/$(IMGFILE): $(BUILD_DIR)/boot.bin $(BUILD_DIR)/$(BINFILE)
+$(BUILDDIR)/$(IMGFILE): $(BUILDDIR)/boot.bin $(BUILDDIR)/$(BINFILE)
 	cat $^ > $@
 	truncate -c -s 1440K $@
 
-$(BUILD_DIR)/$(BINFILE): $(BUILD_DIR)/$(ELFFILE)
-	$(OBJCOPY) $(OCFLAGS) $(BUILD_DIR)/$(ELFFILE) $(BUILD_DIR)/$(BINFILE)
+$(BUILDDIR)/$(BINFILE): $(BUILDDIR)/$(ELFFILE)
+	$(OBJCOPY) $(OCFLAGS) $(BUILDDIR)/$(ELFFILE) $(BUILDDIR)/$(BINFILE)
 
-$(BUILD_DIR)/$(ELFFILE): $(LINKER) $(OBJECTS)
-	$(CC) $(LFLAGS) $(OBJECTS) -o $@
+$(BUILDDIR)/$(ELFFILE): $(LINKER) $(OBJS)
+	$(CC) $(LDFLAGS) $(OBJS) -o $@
 
 -include $(DEPS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) -MM -MT $@ -MF $(patsubst %.o,%.d,$@) $<
-	$(CC) $(CFLAGS) -c $< -o $@
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/boot.bin: $(SRC_DIR)/boot/boot.asm | $(BUILD_DIR)
+$(BUILDDIR)/boot.bin: $(SRCDIR)/boot.asm | $(BUILDDIR)
 	$(ASM) $(ASMFLAGS) -o $@ $<
 
-$(BUILD_DIR):
-	mkdir -p $(dir $(OBJECTS))
+$(BUILDDIR):
+	mkdir -p $(sort $(dir $(OBJS)))
 
-qemud: $(BUILD_DIR)/$(IMGFILE)
+qemud: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
-qemus: $(BUILD_DIR)/$(IMGFILE)
+qemus: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -icount 0 -nographic -drive file=$<,format=raw,index=0,media=disk
 
-qemuk: $(BUILD_DIR)/$(IMGFILE)
+qemuk: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -enable-kvm -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
-qemu: $(BUILD_DIR)/$(IMGFILE)
+qemu: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
-bochs: $(BUILD_DIR)/$(IMGFILE)
+bochs: $(BUILDDIR)/$(IMGFILE)
 	bochs -f bochsrc.txt -q
 
-view: $(BUILD_DIR)/$(BINFILE)
-	ghex $<
-
 clean:
-	-rm -rf qemuout.txt bochsout.txt bx_enh_dbg.ini $(BUILD_DIR)
+	-rm -rf qemuout.txt bochsout.txt bx_enh_dbg.ini $(BUILDDIR)
