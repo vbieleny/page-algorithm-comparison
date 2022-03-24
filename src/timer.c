@@ -25,11 +25,3 @@ uint32_t milliseconds_from_boot()
 {
     return timer_counter;
 }
-
-inline uint64_t rdtsc()
-{
-    uint64_t ret;
-    asm volatile("lfence\t\n"
-                 "rdtsc\t\n" : "=A"(ret));
-    return ret;
-}

@@ -1,28 +1,32 @@
-BUILDDIR   := build
-SRCDIR     := src
-INCLUDEDIR := include
-CDCONTENTS := $(BUILDDIR)/cdcontents
-SRCS       := $(wildcard $(SRCDIR)/*.c)
-OBJS       := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCS:$(SRCDIR)/%=%))
-DEPS       := $(OBJS:.o=.d)
-LINKER     := $(SRCDIR)/linker.ld
-ELFFILE    := os.elf
-BINFILE    := os.bin
-IMGFILE    := os.img
-ISOFILE    := os.iso
+BUILDDIR        := build
+USERBUILDDIR    := build/user
+SRCDIR          := src
+INCLUDEDIR      := include
+TEMPLATEDIR     := .
+CDCONTENTS      := $(BUILDDIR)/cdcontents
+SRCS            := $(wildcard $(SRCDIR)/*.c)
+USERSRCS        := $(wildcard ../$(SRCDIR)/*.c)
+OBJS            := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCS:$(SRCDIR)/%=%))
+OBJS            += $(patsubst %.c, $(USERBUILDDIR)/%.o, $(USERSRCS:../$(SRCDIR)/%=%))
+DEPS            := $(OBJS:.o=.d)
+LINKER          := $(SRCDIR)/linker.ld
+ELFFILE         := os.elf
+BINFILE         := os.bin
+IMGFILE         := os.img
+ISOFILE         := os.iso
 
-ASM 	   := /usr/bin/nasm
-CC  	   := /usr/local/cross/bin/i686-elf-gcc
-OBJCOPY    := /usr/local/cross/bin/i686-elf-objcopy
-OCFLAGS    := -O binary
-ASMFLAGS   := -I $(INCLUDEDIR)/ -f bin
-CFLAGS 	   := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
-LDFLAGS    := -g -T $(LINKER) -ffreestanding -nostdlib
+ASM 	        := /usr/bin/nasm
+CC  	        := /usr/local/cross/bin/i686-elf-gcc
+OBJCOPY         := /usr/local/cross/bin/i686-elf-objcopy
+OCFLAGS         := -O binary
+ASMFLAGS        := -I $(INCLUDEDIR)/ -f bin
+CFLAGS 	        := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
+LDFLAGS         := -g -T $(LINKER) -ffreestanding -nostdlib
 
-CFGFILE    := config.mk
+CFGFILE         := config.mk
 
 .EXTRA_PREREQS := Makefile $(CFGFILE)
-.PHONY: all qemud qemus qemuk qemu bochs view clean
+.PHONY: all template qemud qemus qemuk qemu bochs view clean
 .SILENT: qemus
 
 -include $(CFGFILE)
@@ -49,6 +53,10 @@ $(BUILDDIR)/$(ELFFILE): $(LINKER) $(OBJS)
 
 -include $(DEPS)
 
+$(USERBUILDDIR)/%.o: ../$(SRCDIR)/%.c | $(BUILDDIR)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -58,6 +66,14 @@ $(BUILDDIR)/boot.bin: $(SRCDIR)/boot.asm | $(BUILDDIR)
 
 $(BUILDDIR):
 	mkdir -p $(sort $(dir $(OBJS)))
+
+template:
+	rm -rf $(TEMPLATEDIR)/.template
+	mkdir -p $(TEMPLATEDIR)/.template/.prac
+	cp -r src include Makefile bochsrc.txt $(TEMPLATEDIR)/.template/.prac/
+	cp -r suite $(TEMPLATEDIR)/.template/src
+	cp config.mk $(TEMPLATEDIR)/.template/
+	sed -i 's+CFGFILE\s*:=\s*config.mk+CFGFILE := ../config.mk+g' $(TEMPLATEDIR)/.template/.prac/Makefile
 
 qemud: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
@@ -75,4 +91,4 @@ bochs: $(BUILDDIR)/$(IMGFILE)
 	bochs -f bochsrc.txt -q
 
 clean:
-	-rm -rf qemuout.txt bochsout.txt bx_enh_dbg.ini $(BUILDDIR)
+	-rm -rf qemuout.txt bochsout.txt bx_enh_dbg.ini .template $(BUILDDIR)

@@ -11,4 +11,10 @@ INTERRUPT void timer_interrupt(interrupt_frame_t *frame);
 void timer_set_divisor(uint16_t divisor);
 uint32_t milliseconds_from_boot();
 
-ALWAYS_INLINE uint64_t rdtsc();
+ALWAYS_INLINE uint64_t rdtsc()
+{
+    uint64_t value;
+    asm volatile("lfence\t\n"
+                 "rdtsc\t\n" : "=A"(value));
+    return value;
+}

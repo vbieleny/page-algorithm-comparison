@@ -1,3 +1,6 @@
+#include <test_runner.h>
+#include <pfh_fifo.h>
+#include <pfh_second.h>
 #include <io.h>
 #include <malloc.h>
 
@@ -14,7 +17,7 @@ static void swap(int *a, int *b)
     *b = temp;
 }
 
-void test_sort()
+static void test_sort()
 {
     int numbers[16] = { 35, 2, 19, 17, 5, 7, 1, 53, 11, 9, 31, 16, 6, 27, 24, 99 };
     int numbers_count = sizeof(numbers) / sizeof(numbers[0]);
@@ -47,4 +50,10 @@ void test_sort()
         io_printf(format, next->value);
     }
     io_printf("\n");
+}
+
+void setup()
+{
+    run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 6, 8);
+    run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
 }

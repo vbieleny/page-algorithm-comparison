@@ -16,14 +16,14 @@
 #include <timer.h>
 #include <stdint.h>
 
-void test_sort();
-
 #define HEAP_START 0x200000
 #define HEAP_SIZE ((IDENTITY_PAGES_COUNT) * 4096 - (HEAP_START))
 #define PAGES_START_ADDRESS ((void*) ((IDENTITY_PAGES_COUNT) * 0x1000))
 
 extern const uint32_t KERNEL_START;
 extern const uint32_t KERNEL_END;
+
+extern void setup();
 
 void kernel_main()
 {
@@ -59,12 +59,5 @@ void kernel_main()
 
     paging_enable();
 
-    run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 2, 8);
-    run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 2, 8);
-
-    run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 4, 8);
-    run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 4, 8);
-
-    run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 6, 8);
-    run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
+    setup();
 }

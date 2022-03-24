@@ -565,3 +565,6 @@ qemuout.txt
 bochsout.txt
 bx_enh_dbg.ini
 *.lock
+
+# Template
+.template/
