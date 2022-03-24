@@ -8,12 +8,12 @@
 typedef enum
 {
     TABLE_GDT, TABLE_IDT, TABLE_LDT
-} descriptor_table_t;
+} descriptor_table_e;
 
 typedef struct
 {
     bool is_external;
-    descriptor_table_t table;
+    descriptor_table_e table;
     uint16_t index;
 } selector_error_code_t;
 

@@ -3,7 +3,7 @@
 #include <serial.h>
 #include <string_utils.h>
 
-void io_sputchar(io_stream stream, char c)
+void io_sputchar(io_stream_e stream, char c)
 {
     switch (stream)
     {
@@ -16,18 +16,18 @@ void io_sputchar(io_stream stream, char c)
     }
 }
 
-void io_swrite(io_stream stream, const char *str, size_t length)
+void io_swrite(io_stream_e stream, const char *str, size_t length)
 {
     for (size_t i = 0; i < length; i++)
         io_sputchar(stream, str[i]);
 }
 
-void io_swritestring(io_stream stream, const char *str)
+void io_swritestring(io_stream_e stream, const char *str)
 {
     io_swrite(stream, str, string_length(str));
 }
 
-void io_sprintf(io_stream stream, const char *format, ...)
+void io_sprintf(io_stream_e stream, const char *format, ...)
 {
     va_list arguments;
     va_start(arguments, format);
@@ -58,7 +58,7 @@ void io_printf(const char *format, ...)
     va_end(arguments);
 }
 
-void io_vprintf(io_stream stream, const char *format, va_list arguments)
+void io_vprintf(io_stream_e stream, const char *format, va_list arguments)
 {
     char buffer[11];
     while (*format)

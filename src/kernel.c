@@ -6,6 +6,7 @@
 #include <paging.h>
 #include <pfh_fifo.h>
 #include <pfh_second.h>
+#include <pra.h>
 #include <test_runner.h>
 #include <serial.h>
 #include <ksystem.h>
@@ -41,6 +42,9 @@ void kernel_main()
 
     memory_map_print();
     io_printf("\n");
+
+    register_page_replacement_algorithm(pra_fifo, &pfh_fifo_isr);
+    register_page_replacement_algorithm(pra_second_chance, &pfh_second_isr);
 
     pfa_initialize(PAGES_START_ADDRESS);
     paging_initialize(IDENTITY_PAGES_COUNT);

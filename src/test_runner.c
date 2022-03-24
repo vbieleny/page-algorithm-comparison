@@ -7,9 +7,9 @@
 #include <random.h>
 #include <io.h>
 
-uint32_t run_test(const char *test_name, const char *isr_name, void *pra_isr, void (*test_function)(), uint32_t pages_limit, uint32_t allocation_spread)
+uint32_t run_test(const char *test_name, const char *isr_name, page_replacement_algorithm_e pra, void (*test_function)(), uint32_t pages_limit, uint32_t allocation_spread)
 {
-    idt_set_descriptor(14, pra_isr, 0x8e);
+    idt_set_descriptor(14, get_page_replacement_function(pra), 0x8e);
     
     pfa_set_page_allocation_limit(pages_limit);
     pfa_free_all_pages();

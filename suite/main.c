@@ -1,4 +1,5 @@
 #include <test_runner.h>
+#include <pra.h>
 #include <pfh_fifo.h>
 #include <pfh_second.h>
 #include <io.h>
@@ -19,9 +20,9 @@ static void swap(int *a, int *b)
 
 static void test_sort()
 {
-    int numbers[16] = { 35, 2, 19, 17, 5, 7, 1, 53, 11, 9, 31, 16, 6, 27, 24, 99 };
+    int numbers[] = { 35, 2, 19, 17, 5, 7, 1, 53, 11, 9, 31, 16, 6, 27, 24, 99 };
     int numbers_count = sizeof(numbers) / sizeof(numbers[0]);
-    
+
     linked_list_t *root = (linked_list_t*) user_memory_random_allocate(sizeof(linked_list_t));
     linked_list_t *next = root;
     for (int i = 0; i < numbers_count; i++)
@@ -54,6 +55,6 @@ static void test_sort()
 
 void setup()
 {
-    run_test("Linked List Sort", "FIFO", &pfh_fifo_isr, &test_sort, 6, 8);
-    run_test("Linked List Sort", "Second Chance", &pfh_second_isr, &test_sort, 6, 8);
+    run_test("Linked List Sort", "FIFO", pra_fifo, &test_sort, 6, 8);
+    run_test("Linked List Sort", "Second Chance", pra_second_chance, &test_sort, 6, 8);
 }
