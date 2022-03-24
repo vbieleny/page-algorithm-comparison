@@ -53,7 +53,7 @@ void kernel_main()
     irq_set_mask_all();
     irq_clear_mask(IRQ_TIMER);
 
-    timer_set_divisor(TIMER_DIVISOR_991_HZ);
+    timer_set_divisor(TIMER_DIVISOR_1KHZ);
 
     interrupts_enable();
 
