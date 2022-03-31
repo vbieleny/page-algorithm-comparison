@@ -6,6 +6,8 @@ display_library: x, options="gui_debug"
 cpu: reset_on_triple_fault=0
 megs: 128
 
+clock: sync=realtime
+
 magic_break: enabled=1
 
 log: bochsout.txt

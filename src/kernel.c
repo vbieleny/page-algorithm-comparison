@@ -37,30 +37,19 @@ void kernel_main()
         halt();
     }
 
-    uint32_t kernel_size = ((uint32_t) (&KERNEL_END)) - ((uint32_t) (&KERNEL_START));
-    io_printf("Kernel Size: %d KB\n\n", kernel_size / 1024);
-
-    memory_map_print();
-    io_printf("\n");
-
     register_page_replacement_algorithm(pra_fifo, &pfh_fifo_isr);
     register_page_replacement_algorithm(pra_second_chance, &pfh_second_isr);
 
     pfa_initialize(PAGES_START_ADDRESS);
     paging_initialize(IDENTITY_PAGES_COUNT);
-    timer_initialize();
 
     idt_set_descriptor(13, &kernel_panic, 0x8e);
     idt_initialize();
 
     pic_remap(0x20, 0x28);
     irq_set_mask_all();
-    irq_clear_mask(IRQ_TIMER);
-
-    timer_set_divisor(TIMER_DIVISOR_1KHZ);
 
     interrupts_enable();
-
     paging_enable();
 
     setup();

@@ -5,7 +5,7 @@
             "name": "Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/build/os.elf",
+            "program": "${workspaceRoot}/.template/.prac/build/os.elf",
             "cwd": "${workspaceRoot}",
             "args": [],
             "MIMode": "gdb",

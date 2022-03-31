@@ -6,7 +6,7 @@
             "type": "shell",
             "isBackground": true,
             "linux": {
-                "command": "make qemud",
+                "command": "make template && make -s -j$(nproc) -C ./.template/.prac qemud",
                 "problemMatcher": {
                     "pattern": {
                         "regexp": ".*"

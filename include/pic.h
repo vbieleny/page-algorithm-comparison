@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <attrs.h>
 
 #define PIC1 0x20
 #define PIC2 0xa0
@@ -23,10 +24,10 @@
 #define ICW4_BUF_MASTER 0x0c
 #define ICW4_SFNM 0x10
 
-#define IRQ_TIMER 0
+#define IRQ0_TIMER 0
 
 void pic_remap(uint8_t offset1, uint8_t offset2);
-void pic_send_eoi(uint8_t irq);
+NO_CALLER_SAVED_REGISTERS void pic_send_eoi(uint8_t irq);
 void irq_set_mask(uint8_t irq_line);
 void irq_set_mask_all();
 void irq_clear_mask(uint8_t irq_line);
