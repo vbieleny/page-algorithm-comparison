@@ -2,7 +2,7 @@ BUILDDIR        := build
 USERBUILDDIR    := build/user
 SRCDIR          := src
 INCLUDEDIR      := include
-TEMPLATEDIR     := .
+TEMPLATEDIR     := .template
 CDCONTENTS      := $(BUILDDIR)/cdcontents
 SRCS            := $(wildcard $(SRCDIR)/*.c)
 USERSRCS        := $(wildcard ../$(SRCDIR)/*.c)
@@ -68,12 +68,12 @@ $(BUILDDIR):
 	mkdir -p $(sort $(dir $(OBJS)))
 
 template:
-	rm -rf $(TEMPLATEDIR)/.template
-	mkdir -p $(TEMPLATEDIR)/.template/.prac
-	cp -r src include Makefile bochsrc.txt $(TEMPLATEDIR)/.template/.prac/
-	cp -r suite $(TEMPLATEDIR)/.template/src
-	cp config.mk $(TEMPLATEDIR)/.template/
-	sed -i 's+CFGFILE\s*:=\s*config.mk+CFGFILE := ../config.mk+g' $(TEMPLATEDIR)/.template/.prac/Makefile
+	rm -rf $(TEMPLATEDIR)
+	mkdir -p $(TEMPLATEDIR)/.prac
+	cp -r src include Makefile bochsrc.txt $(TEMPLATEDIR)/.prac/
+	cp -r suite $(TEMPLATEDIR)/src
+	cp config.mk $(TEMPLATEDIR)/
+	sed -i 's+CFGFILE\s*:=\s*config.mk+CFGFILE := ../config.mk+g' $(TEMPLATEDIR)/.prac/Makefile
 
 qemud: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
