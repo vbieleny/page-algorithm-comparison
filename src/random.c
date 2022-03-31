@@ -21,3 +21,9 @@ void srand(uint32_t seed)
 {
     next = seed;
 }
+
+void prac_fill_random(int *array, size_t size, uint32_t min, uint32_t max)
+{
+    for (size_t i = 0; i < size; i++)
+        array[i] = rand_between(min, max);
+}

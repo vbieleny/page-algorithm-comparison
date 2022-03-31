@@ -4,6 +4,7 @@
 #include <pfh_second.h>
 #include <io.h>
 #include <malloc.h>
+#include <random.h>
 
 typedef struct linked_list
 {
@@ -20,8 +21,10 @@ static void swap(int *a, int *b)
 
 static void test_sort()
 {
-    int numbers[] = { 35, 2, 19, 17, 5, 7, 1, 53, 11, 9, 31, 16, 6, 27, 24, 99 };
+    int numbers[16];
     int numbers_count = sizeof(numbers) / sizeof(numbers[0]);
+
+    prac_fill_random(numbers, numbers_count, 0, 100);
 
     linked_list_t *root = (linked_list_t*) user_memory_random_allocate(sizeof(linked_list_t));
     linked_list_t *next = root;
