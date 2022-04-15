@@ -8,7 +8,7 @@ typedef struct interrupt_frame
     uint32_t eip;
     uint32_t cs;
     uint32_t eflags;
-} interrupt_frame_t;
+} PACKED interrupt_frame_t;
 
 typedef struct
 {

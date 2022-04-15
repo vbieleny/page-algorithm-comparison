@@ -2,5 +2,9 @@
     "files.associations": {
         "*.h": "c",
         "*.c": "c"
-    }
+    },
+    "C_Cpp.files.exclude": {
+        "**/.template": true
+    },
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
 }

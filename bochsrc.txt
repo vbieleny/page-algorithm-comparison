@@ -3,7 +3,7 @@ ata0-master: type=disk, path=build/os.img, mode=flat, cylinders=1, heads=8, spt=
 
 display_library: x, options="gui_debug"
 
-cpu: reset_on_triple_fault=0
+cpu: count=1, ips=1000000, reset_on_triple_fault=0
 megs: 128
 
 clock: sync=realtime

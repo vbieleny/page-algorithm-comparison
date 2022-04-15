@@ -29,7 +29,7 @@ void* pfa_get_start_address()
     return pfa_start_address;
 }
 
-void pfa_set_page_allocation_limit(size_t limit)
+void pfa_set_max_pages(size_t limit)
 {
     pfa_allocation_limit = limit;
 }

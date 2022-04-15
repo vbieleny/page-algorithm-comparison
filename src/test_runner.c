@@ -11,7 +11,7 @@ uint32_t run_test(const char *test_name, const char *isr_name, page_replacement_
 {
     idt_set_descriptor(14, get_page_replacement_function(pra), 0x8e);
 
-    pfa_set_page_allocation_limit(pages_limit);
+    pfa_set_max_pages(pages_limit);
     pfa_free_all_pages();
 
     paging_reset_to_default();
