@@ -23,6 +23,8 @@ ASMFLAGS        := -I $(INCLUDEDIR)/ -f bin
 CFLAGS 	        := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
 LDFLAGS         := -g -T $(LINKER) -ffreestanding -nostdlib
 
+DEFAULTSTREAM	:= IO_TERMINAL
+
 CFGFILE         := config.mk
 
 .EXTRA_PREREQS := Makefile $(CFGFILE)
@@ -31,7 +33,7 @@ CFGFILE         := config.mk
 
 -include $(CFGFILE)
 
-CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES)
+CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES) -DDEFAULT_STREAM=$(DEFAULTSTREAM)
 
 all: $(BUILDDIR)/$(IMGFILE)
 

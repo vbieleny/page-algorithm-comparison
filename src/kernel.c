@@ -38,8 +38,9 @@ void kernel_main()
         halt();
     }
 
-    smbios_init();
-    smbios_print_version();
+    // TODO: One option how to get CPU speed to compute time taken with rdtsc instruction
+    // smbios_init();
+    // smbios_print_version();
 
     register_page_replacement_algorithm(pra_fifo, &pfh_fifo_isr);
     register_page_replacement_algorithm(pra_second_chance, &pfh_second_isr);
@@ -56,5 +57,8 @@ void kernel_main()
     interrupts_enable();
     paging_enable();
 
-    // setup();
+    setup();
+
+    if (DEFAULT_STREAM == IO_SERIAL)
+        io_shutdown();
 }

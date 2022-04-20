@@ -9,7 +9,9 @@ typedef enum
     IO_TERMINAL, IO_SERIAL
 } io_stream_e;
 
+#ifndef DEFAULT_STREAM
 #define DEFAULT_STREAM IO_TERMINAL
+#endif
 
 void io_sputchar(io_stream_e stream, char c);
 void io_swrite(io_stream_e stream, const char *str, size_t length);
