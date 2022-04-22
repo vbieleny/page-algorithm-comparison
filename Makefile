@@ -25,7 +25,7 @@ LDFLAGS         := -g -T $(LINKER) -ffreestanding -nostdlib
 
 DEFAULTSTREAM	:= IO_TERMINAL
 
-CFGFILE         := config.mk
+CFGFILE         := prac.ini
 
 .EXTRA_PREREQS := Makefile $(CFGFILE)
 .PHONY: all template qemud qemus qemuk qemu bochs view clean
@@ -74,8 +74,8 @@ template:
 	mkdir -p $(TEMPLATEDIR)/.prac
 	cp -r src include Makefile bochsrc.txt $(TEMPLATEDIR)/.prac/
 	cp -r suite $(TEMPLATEDIR)/src
-	cp config.mk $(TEMPLATEDIR)/
-	sed -i 's+CFGFILE\s*:=\s*config.mk+CFGFILE := ../config.mk+g' $(TEMPLATEDIR)/.prac/Makefile
+	cp prac.ini $(TEMPLATEDIR)/
+	sed -i 's+CFGFILE\s*:=\s*prac.ini+CFGFILE := ../prac.ini+g' $(TEMPLATEDIR)/.prac/Makefile
 
 qemud: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
