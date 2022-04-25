@@ -15,7 +15,6 @@
 #include <mmap.h>
 #include <pic.h>
 #include <timer.h>
-#include <smbios.h>
 #include <stdint.h>
 
 #define HEAP_START 0x200000
@@ -37,10 +36,6 @@ void kernel_main()
         io_sprintf(IO_TERMINAL, "Cannot initialize serial port!\n");
         halt();
     }
-
-    // TODO: One option how to get CPU speed to compute time taken with rdtsc instruction
-    // smbios_init();
-    // smbios_print_version();
 
     register_page_replacement_algorithm(pra_fifo, "FIFO", &pfh_fifo_isr);
     register_page_replacement_algorithm(pra_second_chance, "Second Chance", &pfh_second_isr);
