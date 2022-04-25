@@ -3,6 +3,18 @@
 #include <serial.h>
 #include <string_utils.h>
 
+static io_stream_e current_stream = DEFAULT_STREAM;
+
+void io_set_stream(io_stream_e stream)
+{
+    current_stream = stream;
+}
+
+io_stream_e io_get_stream()
+{
+    return current_stream;
+}
+
 void io_sputchar(io_stream_e stream, char c)
 {
     switch (stream)
@@ -12,6 +24,9 @@ void io_sputchar(io_stream_e stream, char c)
         break;
     case IO_SERIAL:
         serial_putchar(c);
+        break;
+    case IO_NONE:
+        // Do nothing
         break;
     }
 }
@@ -37,24 +52,24 @@ void io_sprintf(io_stream_e stream, const char *format, ...)
 
 void io_putchar(char c)
 {
-    io_sputchar(DEFAULT_STREAM, c);
+    io_sputchar(current_stream, c);
 }
 
 void io_write(const char *str, size_t length)
 {
-    io_swrite(DEFAULT_STREAM, str, length);
+    io_swrite(current_stream, str, length);
 }
 
 void io_writestring(const char *str)
 {
-    io_swritestring(DEFAULT_STREAM, str);
+    io_swritestring(current_stream, str);
 }
 
 void io_printf(const char *format, ...)
 {
     va_list arguments;
     va_start(arguments, format);
-    io_vprintf(DEFAULT_STREAM, format, arguments);
+    io_vprintf(current_stream, format, arguments);
     va_end(arguments);
 }
 

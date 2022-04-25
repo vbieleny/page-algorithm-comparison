@@ -6,12 +6,15 @@
 
 typedef enum
 {
-    IO_TERMINAL, IO_SERIAL
+    IO_TERMINAL, IO_SERIAL, IO_NONE
 } io_stream_e;
 
 #ifndef DEFAULT_STREAM
 #define DEFAULT_STREAM IO_TERMINAL
 #endif
+
+void io_set_stream(io_stream_e stream);
+io_stream_e io_get_stream();
 
 void io_sputchar(io_stream_e stream, char c);
 void io_swrite(io_stream_e stream, const char *str, size_t length);

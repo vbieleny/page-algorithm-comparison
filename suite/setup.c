@@ -58,6 +58,33 @@ static void test_sort()
 
 void setup()
 {
-    run_test("Linked List Sort", "FIFO", pra_fifo, &test_sort, 6, 8);
-    run_test("Linked List Sort", "Second Chance", pra_second_chance, &test_sort, 6, 8);
+    test_execution_t executions[2];
+    executions[0].name = "Linked List Sort";
+    executions[0].callback = test_sort;
+    executions[1].name = "Another Sort";
+    executions[1].callback = test_sort;
+
+    page_replacement_algorithm_e algorithms[2];
+    algorithms[0] = pra_fifo;
+    algorithms[1] = pra_second_chance;
+
+    test_parameters_t parameters[2];
+    parameters[0].pages_limit = 6;
+    parameters[0].allocation_spread = 8;
+    parameters[0].seed = 1;
+    parameters[1].pages_limit = 7;
+    parameters[1].allocation_spread = 8;
+    parameters[1].seed = 1;
+
+    test_configuration_t configuration =
+    {
+        .tests = executions,
+        .tests_length = 2,
+        .algorithms = algorithms,
+        .algorithms_length = 2,
+        .parameters = parameters,
+        .parameters_length = 2
+    };
+
+    run_test_suite(configuration);
 }

@@ -42,8 +42,8 @@ void kernel_main()
     // smbios_init();
     // smbios_print_version();
 
-    register_page_replacement_algorithm(pra_fifo, &pfh_fifo_isr);
-    register_page_replacement_algorithm(pra_second_chance, &pfh_second_isr);
+    register_page_replacement_algorithm(pra_fifo, "FIFO", &pfh_fifo_isr);
+    register_page_replacement_algorithm(pra_second_chance, "Second Chance", &pfh_second_isr);
 
     pfa_initialize(PAGES_START_ADDRESS);
     paging_initialize(IDENTITY_PAGES_COUNT);

@@ -3,4 +3,29 @@
 #include <stdint.h>
 #include <pra.h>
 
-uint32_t run_test(const char *test_name, const char *isr_name, page_replacement_algorithm_e pra, void (*test_function)(), uint32_t pages_limit, uint32_t allocation_spread);
+typedef void (*test_execution_callback_t)();
+
+typedef struct
+{
+    test_execution_callback_t callback;
+    const char *name;
+} test_execution_t;
+
+typedef struct
+{
+    uint32_t pages_limit;
+    uint32_t allocation_spread;
+    uint32_t seed;
+} test_parameters_t;
+
+typedef struct
+{
+    test_execution_t *tests;
+    size_t tests_length;
+    page_replacement_algorithm_e *algorithms;
+    size_t algorithms_length;
+    test_parameters_t *parameters;
+    size_t parameters_length;
+} test_configuration_t;
+
+void run_test_suite(test_configuration_t configuration);

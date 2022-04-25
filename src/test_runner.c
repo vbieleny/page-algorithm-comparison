@@ -7,26 +7,88 @@
 #include <random.h>
 #include <io.h>
 
-uint32_t run_test(const char *test_name, const char *isr_name, page_replacement_algorithm_e pra, void (*test_function)(), uint32_t pages_limit, uint32_t allocation_spread)
+static void test_reset_to_initial(page_replacement_function_t algorithm, test_parameters_t parameters)
 {
-    idt_set_descriptor(14, get_page_replacement_function(pra), 0x8e);
+    idt_set_descriptor(14, algorithm, 0x8e);
 
-    pfa_set_max_pages(pages_limit);
+    pfa_set_max_pages(parameters.pages_limit);
     pfa_free_all_pages();
 
     paging_reset_to_default();
 
     page_queue_clear();
-    page_queue_set_capacity(pages_limit);
+    page_queue_set_capacity(parameters.pages_limit);
 
-    user_memory_set_memory_size(allocation_spread);
+    user_memory_set_memory_size(parameters.allocation_spread);
     user_memory_free_all();
 
-    srand(1);
+    srand(parameters.seed);
+}
 
-    io_printf("%s | %s | Pages: %d | Spread: %d (%d KB)\n", test_name, isr_name, pages_limit, allocation_spread, (allocation_spread * 0x1000) / 1024);
-    test_function();
-    uint32_t page_faults = paging_get_page_fault_count();
-    io_printf("Page Faults: %d\n\n", page_faults);
-    return page_faults;
+static void run_test_suite_parseable(test_configuration_t configuration)
+{
+    io_printf("I");
+    for (size_t k = 0; k < configuration.algorithms_length; k++)
+    {
+        page_replacement_algorithm_t algorithm = get_page_replacement_algorithm(configuration.algorithms[k]);
+        io_printf(";%s", algorithm.name);
+    }
+    io_printf("\n");
+    for (size_t i = 0; i < configuration.tests_length; i++)
+    {
+        test_execution_t execution = configuration.tests[i];
+        io_printf("T;%s\n", execution.name);
+        for (size_t j = 0; j < configuration.parameters_length; j++)
+        {
+            test_parameters_t parameters = configuration.parameters[j];
+            io_printf("V;%d/%d/%d", parameters.pages_limit, parameters.allocation_spread, parameters.seed);
+            for (size_t k = 0; k < configuration.algorithms_length; k++)
+            {
+                page_replacement_algorithm_t algorithm = get_page_replacement_algorithm(configuration.algorithms[k]);
+
+                test_reset_to_initial(algorithm.function, parameters);
+
+                io_stream_e previous_stream = io_get_stream();
+                io_set_stream(IO_NONE);
+                execution.callback();
+                io_set_stream(previous_stream);
+                
+                uint32_t page_faults = paging_get_page_fault_count();
+                io_printf(";%d", page_faults);
+            }
+            io_printf("\n");
+        }
+    }
+    io_printf("E\n");
+}
+
+static void run_test_suite_human_readable(test_configuration_t configuration)
+{
+    for (size_t i = 0; i < configuration.tests_length; i++)
+    {
+        test_execution_t execution = configuration.tests[i];
+        for (size_t j = 0; j < configuration.parameters_length; j++)
+        {
+            test_parameters_t parameters = configuration.parameters[j];
+            for (size_t k = 0; k < configuration.algorithms_length; k++)
+            {
+                page_replacement_algorithm_t algorithm = get_page_replacement_algorithm(configuration.algorithms[k]);
+
+                test_reset_to_initial(algorithm.function, parameters);
+
+                io_printf("%s | %s | %d | %d | %d\n", execution.name, algorithm.name, parameters.pages_limit, parameters.allocation_spread, parameters.seed);
+                execution.callback();
+                uint32_t page_faults = paging_get_page_fault_count();
+                io_printf("Page Faults: %d\n\n", page_faults);
+            }
+        }
+    }
+}
+
+void run_test_suite(test_configuration_t configuration)
+{
+    if (io_get_stream() == IO_SERIAL)
+        run_test_suite_parseable(configuration);
+    else
+        run_test_suite_human_readable(configuration);
 }

@@ -37,3 +37,11 @@ char* int_to_string(int32_t value, char *result, int32_t base)
     }
     return result;
 }
+
+char* strcpy(char *destination, const char *source)
+{
+    size_t length = string_length(source);
+    for (size_t i = 0; i < length; i++)
+        destination[i] = source[i];
+    return destination;
+}
