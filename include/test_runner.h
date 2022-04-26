@@ -5,6 +5,12 @@
 
 typedef void (*test_execution_callback_t)();
 
+typedef enum
+{
+    FORMAT_HUMAN_READABLE,
+    FORMAT_PARSEABLE
+} test_output_format_e;
+
 typedef struct
 {
     test_execution_callback_t callback;

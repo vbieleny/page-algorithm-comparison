@@ -23,17 +23,17 @@ ASMFLAGS        := -I $(INCLUDEDIR)/ -f bin
 CFLAGS 	        := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
 LDFLAGS         := -g -T $(LINKER) -ffreestanding -nostdlib
 
-DEFAULTSTREAM	:= IO_TERMINAL
+OUTPUTSTREAM	:= IO_TERMINAL
+OUTPUTFORMAT	:= FORMAT_HUMAN_READABLE
 
 CFGFILE         := prac.ini
 
 .EXTRA_PREREQS := Makefile $(CFGFILE)
-.PHONY: all template qemud qemus qemuk qemu bochs view clean
-.SILENT: qemus
+.PHONY: all template qemu-debug qemu-serial qemu-termina bochs view clean
 
 -include $(CFGFILE)
 
-CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES) -DDEFAULT_STREAM=$(DEFAULTSTREAM)
+CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES) -DDEFAULT_STREAM=$(OUTPUTSTREAM) -DDEFAULT_FORMAT=$(OUTPUTFORMAT)
 
 all: $(BUILDDIR)/$(IMGFILE)
 
@@ -77,17 +77,14 @@ template:
 	cp prac.ini $(TEMPLATEDIR)/
 	sed -i 's+CFGFILE\s*:=\s*prac.ini+CFGFILE := ../prac.ini+g' $(TEMPLATEDIR)/.prac/Makefile
 
-qemud: $(BUILDDIR)/$(IMGFILE)
+qemu-debug: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
-qemus: $(BUILDDIR)/$(IMGFILE)
-	qemu-system-i386 -icount 0 -nographic -drive file=$<,format=raw,index=0,media=disk
+qemu-serial: $(BUILDDIR)/$(IMGFILE)
+	qemu-system-i386 -icount 0 -display none -serial file:prac-output.out -drive file=$<,format=raw,index=0,media=disk
 
-qemuk: $(BUILDDIR)/$(IMGFILE)
-	qemu-system-i386 -enable-kvm -serial stdio -drive file=$<,format=raw,index=0,media=disk
-
-qemu: $(BUILDDIR)/$(IMGFILE)
-	qemu-system-i386 -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
+qemu-terminal: $(BUILDDIR)/$(IMGFILE)
+	qemu-system-i386 -icount 0 -drive file=$<,format=raw,index=0,media=disk
 
 bochs: $(BUILDDIR)/$(IMGFILE)
 	bochs -f bochsrc.txt -q

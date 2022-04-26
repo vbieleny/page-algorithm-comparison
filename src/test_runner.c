@@ -7,6 +7,10 @@
 #include <random.h>
 #include <io.h>
 
+#ifndef DEFAULT_FORMAT
+#define DEFAULT_FORMAT FORMAT_HUMAN_READABLE
+#endif
+
 static void test_reset_to_initial(page_replacement_function_t algorithm, test_parameters_t parameters)
 {
     idt_set_descriptor(14, algorithm, 0x8e);
@@ -87,7 +91,7 @@ static void run_test_suite_human_readable(test_configuration_t configuration)
 
 void run_test_suite(test_configuration_t configuration)
 {
-    if (io_get_stream() == IO_SERIAL)
+    if (DEFAULT_FORMAT == FORMAT_PARSEABLE)
         run_test_suite_parseable(configuration);
     else
         run_test_suite_human_readable(configuration);
