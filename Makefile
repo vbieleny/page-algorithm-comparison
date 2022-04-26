@@ -3,6 +3,7 @@ USERBUILDDIR    := build/user
 SRCDIR          := src
 INCLUDEDIR      := include
 TEMPLATEDIR     := .template
+COMPILERFLAGS	:= $(BUILDDIR)/compilerflags
 CDCONTENTS      := $(BUILDDIR)/cdcontents
 SRCS            := $(wildcard $(SRCDIR)/*.c)
 USERSRCS        := $(wildcard ../$(SRCDIR)/*.c)
@@ -16,8 +17,8 @@ IMGFILE         := os.img
 ISOFILE         := os.iso
 
 ASM 	        := /usr/bin/nasm
-CC  	        := /usr/local/cross/bin/i686-elf-gcc
-OBJCOPY         := /usr/local/cross/bin/i686-elf-objcopy
+CC  	        := ${HOME}/.prac/gcc-i686-elf-toolchain/bin/i686-elf-gcc
+OBJCOPY         := ${HOME}/.prac/gcc-i686-elf-toolchain/bin/i686-elf-objcopy
 OCFLAGS         := -O binary
 ASMFLAGS        := -I $(INCLUDEDIR)/ -f bin
 CFLAGS 	        := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
@@ -26,7 +27,7 @@ LDFLAGS         := -g -T $(LINKER) -ffreestanding -nostdlib
 CFGFILE         := prac.ini
 
 .EXTRA_PREREQS := Makefile $(CFGFILE)
-.PHONY: all template qemu-debug qemu-serial qemu-termina bochs view clean
+.PHONY: all template qemu-debug qemu-serial qemu-terminal qemu-file bochs clean force
 
 -include $(CFGFILE)
 
@@ -65,6 +66,11 @@ $(BUILDDIR)/boot.bin: $(SRCDIR)/boot.asm | $(BUILDDIR)
 
 $(BUILDDIR):
 	mkdir -p $(sort $(dir $(OBJS)))
+
+$(COMPILERFLAGS): force
+	echo '$(CFLAGS)' | md5sum - | cut -f1 -d' ' | cmp -s - $@ || echo '$(CFLAGS)' | md5sum - | cut -f1 -d' ' > $@
+
+$(OBJS): $(COMPILERFLAGS)
 
 template:
 	rm -rf $(TEMPLATEDIR)
