@@ -80,11 +80,14 @@ template:
 qemu-debug: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
-qemu-serial: $(BUILDDIR)/$(IMGFILE)
-	qemu-system-i386 -icount 0 -display none -serial file:prac-output.out -drive file=$<,format=raw,index=0,media=disk
-
 qemu-terminal: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -icount 0 -drive file=$<,format=raw,index=0,media=disk
+
+qemu-serial: $(BUILDDIR)/$(IMGFILE)
+	qemu-system-i386 -icount 0 -display none -serial stdio -drive file=$<,format=raw,index=0,media=disk
+
+qemu-file: $(BUILDDIR)/$(IMGFILE)
+	qemu-system-i386 -icount 0 -display none -serial file:prac-output.out -drive file=$<,format=raw,index=0,media=disk
 
 bochs: $(BUILDDIR)/$(IMGFILE)
 	bochs -f bochsrc.txt -q
