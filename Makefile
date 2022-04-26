@@ -23,9 +23,6 @@ ASMFLAGS        := -I $(INCLUDEDIR)/ -f bin
 CFLAGS 	        := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
 LDFLAGS         := -g -T $(LINKER) -ffreestanding -nostdlib
 
-OUTPUTSTREAM	:= IO_TERMINAL
-OUTPUTFORMAT	:= FORMAT_HUMAN_READABLE
-
 CFGFILE         := prac.ini
 
 .EXTRA_PREREQS := Makefile $(CFGFILE)
@@ -33,7 +30,7 @@ CFGFILE         := prac.ini
 
 -include $(CFGFILE)
 
-CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES) -DDEFAULT_STREAM=$(OUTPUTSTREAM) -DDEFAULT_FORMAT=$(OUTPUTFORMAT)
+CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES)
 
 all: $(BUILDDIR)/$(IMGFILE)
 
@@ -77,15 +74,19 @@ template:
 	cp prac.ini $(TEMPLATEDIR)/
 	sed -i 's+CFGFILE\s*:=\s*prac.ini+CFGFILE := ../prac.ini+g' $(TEMPLATEDIR)/.prac/Makefile
 
+qemu-debug: CFLAGS += -DDEFAULT_STREAM=IO_TERMINAL -DDEFAULT_FORMAT=FORMAT_HUMAN_READABLE
 qemu-debug: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -s -S -icount 0 -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
+qemu-terminal: CFLAGS += -DDEFAULT_STREAM=IO_TERMINAL -DDEFAULT_FORMAT=FORMAT_HUMAN_READABLE
 qemu-terminal: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -icount 0 -drive file=$<,format=raw,index=0,media=disk
 
+qemu-serial: CFLAGS += -DDEFAULT_STREAM=IO_SERIAL -DDEFAULT_FORMAT=FORMAT_HUMAN_READABLE
 qemu-serial: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -icount 0 -display none -serial stdio -drive file=$<,format=raw,index=0,media=disk
 
+qemu-file: CFLAGS += -DDEFAULT_STREAM=IO_SERIAL -DDEFAULT_FORMAT=FORMAT_PARSEABLE
 qemu-file: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -icount 0 -display none -serial file:prac-output.out -drive file=$<,format=raw,index=0,media=disk
 
