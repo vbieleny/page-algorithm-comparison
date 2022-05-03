@@ -35,6 +35,7 @@ CFLAGS += -DIDENTITY_PAGES_COUNT=$(CFG_IDENTITY_PAGES)
 
 all: $(BUILDDIR)/$(IMGFILE)
 
+$(BUILDDIR)/$(ISOFILE): CFLAGS += -DDEFAULT_STREAM=IO_TERMINAL -DDEFAULT_FORMAT=FORMAT_HUMAN_READABLE
 $(BUILDDIR)/$(ISOFILE): $(BUILDDIR)/$(IMGFILE)
 	mkdir $(CDCONTENTS)
 	cp $< $(CDCONTENTS)/
@@ -73,9 +74,8 @@ $(COMPILERFLAGS): force
 $(OBJS): $(COMPILERFLAGS)
 
 template:
-	rm -rf $(TEMPLATEDIR)
 	mkdir -p $(TEMPLATEDIR)/.prac
-	cp -r src include Makefile bochsrc.txt $(TEMPLATEDIR)/.prac/
+	cp -r src include Makefile bochsrc.txt bochsrc-iso.txt $(TEMPLATEDIR)/.prac/
 	cp -r suite $(TEMPLATEDIR)/src
 	cp prac.ini $(TEMPLATEDIR)/
 	sed -i 's+CFGFILE\s*:=\s*prac.ini+CFGFILE := ../prac.ini+g' $(TEMPLATEDIR)/.prac/Makefile
@@ -96,8 +96,12 @@ qemu-file: CFLAGS += -DDEFAULT_STREAM=IO_SERIAL -DDEFAULT_FORMAT=FORMAT_PARSEABL
 qemu-file: $(BUILDDIR)/$(IMGFILE)
 	qemu-system-i386 -icount 0 -display none -serial file:prac-output.out -drive file=$<,format=raw,index=0,media=disk
 
+bochs: CFLAGS += -DDEFAULT_STREAM=IO_TERMINAL -DDEFAULT_FORMAT=FORMAT_HUMAN_READABLE
 bochs: $(BUILDDIR)/$(IMGFILE)
 	bochs -f bochsrc.txt -q
 
+bochs-iso: $(BUILDDIR)/$(ISOFILE)
+	bochs -f bochsrc-iso.txt -q
+
 clean:
-	-rm -rf qemuout.txt bochsout.txt bx_enh_dbg.ini .template $(BUILDDIR)
+	-rm -rf qemuout.txt bochsout.txt bochsout-iso.txt bx_enh_dbg.ini .template $(BUILDDIR)

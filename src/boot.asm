@@ -8,10 +8,41 @@ jmp 0x0000:_main            ; Far jump to ensure that CS = 0x0000
 
 load_kernel_chunk:
     pushad                                  ; Store all general purpose registers to stack
+
+    ; C = LBA ÷ (HPC × SPT)
+    xor dx, dx
+    mov ax, [current_address]
+    mov cx, HEADS_PER_CYLINDER * SECTORS_PER_TRACK
+    div cx
+    mov [cylinder], al
+
+    ; H = (LBA ÷ SPT) mod HPC
+    xor dx, dx
+    mov ax, [current_address]
+    mov cx, SECTORS_PER_TRACK
+    div cx
+    xor dx, dx
+    mov cx, HEADS_PER_CYLINDER
+    div cx
+    mov [head], dl
+
+    ; S = (LBA mod SPT) + 1
+    xor dx, dx
+    mov ax, [current_address]
+    mov cx, SECTORS_PER_TRACK
+    div cx
+    inc dx
+    mov [sector], dl
     
-    mov ah, 0x42                            ; Extended Read Sectors From Drive
-    mov dl, [drive_index]                   ; Drive index (e.g. 1st HDD = 0x80)
-    mov si, dap                             ; Segment:Offset pointer to the DAP (Disk Address Packet)
+    mov ah, 0x02                            ; Read Sectors From Drive
+    mov al, LOAD_SIZE                       ; Sectors To Read Count
+    mov ch, byte [cylinder]                 ; Cylinder
+    mov cl, byte [sector]                   ; Sector
+    mov dh, byte [head]                     ; Head
+    mov dl, [drive_index]                   ; Drive
+    xor bx, bx
+    mov es, bx
+    mov bx, 0x7e00                          ; ES:BX - Buffer Address Pointer
     int 0x13                                ; Read sectors from boot drive
 
     mov ecx, LOAD_BYTES
@@ -19,7 +50,7 @@ load_kernel_chunk:
     mov edi, [load_address]
     rep a32 movsb                           ; Copy loaded sectors from temporary buffer to kernel target address
 
-    add dword [dap.start], LOAD_SIZE        ; Increase from what sector we will be reading next
+    add dword [current_address], LOAD_SIZE  ; Increase from what sector we will be reading next
     add dword [load_address], LOAD_BYTES    ; Increase where we will copy next sectors
 
     popad                                   ; Restore all general purpose registers from stack
@@ -43,7 +74,7 @@ _main:
 
     mov ax, 0x2401          ; Activate A20 gate
     int 0x15
-    
+
     cli                     ; Disable interrupts when loading GDT since interrupt could happen when CPU is in inconsistent state
     push ds                 ; Push data segemnt to stack for Unreal mode
     push es                 ; Push extra segment to stack for Unreal mode
@@ -118,22 +149,22 @@ bits 16                         ; Switch back to 16-bit mode (not necessary - ju
 KERNEL_SIZE equ 512             ; Kernel size in sectors
 KERNEL_ADDRESS equ 0x100000     ; Where will our kernel reside
 
-LOAD_SIZE equ 64                ; How many sectors to load with one INT13 call
+LOAD_SIZE equ 16                ; How many sectors to load with one INT13 call
 LOAD_BYTES equ LOAD_SIZE * 512  ; How many bytes will be loaded with one INT13 call
 
 MEMORY_MAP_COUNT equ 0x9000     ; Address of size of memory map entries
 
+HEADS_PER_CYLINDER equ 15       ; Default value of HPC for emulated floppy disks
+SECTORS_PER_TRACK equ 63        ; Default value of SPT for emulated floppy disks
+
+cylinder db 0                   ; Stores cylinder number for INT13 loading
+head db 0                       ; Stores head number for INT13 loading
+sector db 0                     ; Stores sector number for INT13 loading
+
+current_address dw 0x0001       ; Current LBA address that INT13 interrupt will load from
+
 drive_index db 0                ; Index of boot drive that this bootloader was loaded from
 load_address dd KERNEL_ADDRESS  ; Address where next chunk of kernel will be copied
-
-dap:                                ; Disk Address Packet
-        db 0x10                     ; Size of packet (0x10 or 0x18)
-        db 0x00                     ; Reserved (0)
-        dw LOAD_SIZE                ; Number of blocks to transfer (max 0x007F for Phoenix EDD)
-        dw 0x7e00                   ; Destination offset
-        dw 0x0000                   ; Destination segment
-.start  dd 0x0001                   ; Starting absolute block number
-        dd 0x0000                   ; Starting absolute block number
 
 align 16                                                                ; Align GDT as some CPUs like them aligned
 gdtr:

@@ -9,9 +9,11 @@ clear_screen:
 ; Inputs:
 ; AL - ASCII character to print
 print_char:
+    push bx
     mov ah, 0x0e            ; Teletype output
     xor bx, bx              ; BH = Page Number, BL = Color (only in graphic mode)
     int 0x10                ; Print character that is in AL register
+    pop bx
     ret
 
 ; Prints a new line (as CRLF) on teletype output
@@ -20,6 +22,30 @@ print_new_line:
     call print_char
     mov al, 10              ; Line feed
     call print_char
+    ret
+
+print_al:
+    push dx
+    push ax
+    push bx
+    mov dx, ax
+    
+    mov bx, dx
+    xor bh, bh
+    shr bl, 4
+    and bl, 0x0f
+    mov al, [hex_table + bx]
+    call print_char
+
+    mov bx, dx
+    xor bh, bh
+    and bl, 0x0f
+    mov al, [hex_table + bx]
+    call print_char
+
+    pop bx
+    pop ax
+    pop dx
     ret
 
 ; Prints null-terminated string to teletype output with BIOS interrupt 0x10
@@ -35,3 +61,5 @@ print_string:
     cmp byte [si], 0        ; Check if we are on null character (0)
     jne .L1                 ; If we are not, print next character
     ret
+
+hex_table: db "0123456789abcdef"
