@@ -88,7 +88,7 @@ void paging_make_page_present(uintptr_t virtual_address)
     if (!(*pde & PAGE_FLAG_PRESENT))
     {
         uint32_t *page_table = (uint32_t*) kernel_memory_allocate(1024 * sizeof(uint32_t), 0x1000);
-        memory_set(page_table, 0, 1024 * sizeof(uint32_t));
+        memset(page_table, 0, 1024 * sizeof(uint32_t));
         *pde = (uint32_t) page_table | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
     }
     uint32_t *pte = memory_virtual_to_pte(virtual_address);

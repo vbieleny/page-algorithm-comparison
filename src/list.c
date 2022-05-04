@@ -20,9 +20,9 @@ list_t* list_create()
 list_t* list_create_with_initial_size(size_t initial_size)
 {
     list_t *list = kernel_memory_allocate(sizeof(list_t), 1);
-    memory_set(list, 0, sizeof(list_t));
+    memset(list, 0, sizeof(list_t));
     list->items = kernel_memory_allocate(initial_size * sizeof(void*), 1);
-    memory_set(list->items, 0, initial_size * sizeof(void*));
+    memset(list->items, 0, initial_size * sizeof(void*));
     list->size = 0;
     list->capacity = initial_size;
     return list;

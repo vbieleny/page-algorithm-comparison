@@ -1,6 +1,6 @@
 #include <string_utils.h>
 
-size_t string_length(const char *string)
+size_t strlen(const char *string)
 {
 	size_t length = 0;
 	while (string[length])
@@ -8,7 +8,7 @@ size_t string_length(const char *string)
 	return length;
 }
 
-char* int_to_string(int32_t value, char *result, int32_t base)
+char* itoa(int32_t value, char *result, int32_t base)
 {
     if (base < 2 || base > 36)
     {
@@ -40,7 +40,7 @@ char* int_to_string(int32_t value, char *result, int32_t base)
 
 char* strcpy(char *destination, const char *source)
 {
-    size_t length = string_length(source);
+    size_t length = strlen(source);
     for (size_t i = 0; i < length; i++)
         destination[i] = source[i];
     return destination;

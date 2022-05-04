@@ -82,7 +82,7 @@ void* kernel_memory_reallocate(void *allocated_memory, size_t memory_new_size_by
     size_t allocated_size = *((size_t*) (allocated_address - sizeof(free_block_t)));
     uint8_t *new_allocated_memory = (uint8_t*) kernel_memory_allocate(memory_new_size_bytes, alignment);
     size_t new_size = allocated_size < memory_new_size_bytes ? allocated_size : memory_new_size_bytes;
-    memory_copy(new_allocated_memory, allocated_memory, new_size);
+    memcpy(new_allocated_memory, allocated_memory, new_size);
     kernel_memory_free(allocated_memory);
     return new_allocated_memory;
 }

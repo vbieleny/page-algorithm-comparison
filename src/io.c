@@ -39,7 +39,7 @@ void io_swrite(io_stream_e stream, const char *str, size_t length)
 
 void io_swritestring(io_stream_e stream, const char *str)
 {
-    io_swrite(stream, str, string_length(str));
+    io_swrite(stream, str, strlen(str));
 }
 
 void io_sprintf(io_stream_e stream, const char *format, ...)
@@ -91,11 +91,11 @@ void io_vprintf(io_stream_e stream, const char *format, va_list arguments)
             io_swritestring(stream, va_arg(arguments, char *));
             break;
         case 'd':
-            int_to_string(va_arg(arguments, int), buffer, 10);
+            itoa(va_arg(arguments, int), buffer, 10);
             io_swritestring(stream, buffer);
             break;
         case 'x':
-            int_to_string(va_arg(arguments, int), buffer, 16);
+            itoa(va_arg(arguments, int), buffer, 16);
             io_swritestring(stream, buffer);
         }
         format++;

@@ -23,7 +23,7 @@ void register_page_replacement_algorithm(size_t index, const char *name, page_re
     pra_size++;
     
     page_replacement_algorithm_t algorithm;
-    memory_set(&algorithm, 0, sizeof(page_replacement_algorithm_t));
+    memset(&algorithm, 0, sizeof(page_replacement_algorithm_t));
 
     strcpy(algorithm.name, name);
     algorithm.function = function;
