@@ -47,7 +47,7 @@ static void run_test_suite_parseable(test_configuration_t configuration)
         for (size_t j = 0; j < configuration.parameters_length; j++)
         {
             test_parameters_t parameters = configuration.parameters[j];
-            io_printf("V;%d/%d/%d", parameters.pages_limit, parameters.allocation_spread, parameters.seed);
+            io_printf("V;%lu/%lu/%lu", parameters.pages_limit, parameters.allocation_spread, parameters.seed);
             for (size_t k = 0; k < configuration.algorithms_length; k++)
             {
                 page_replacement_algorithm_t algorithm = get_page_replacement_algorithm(configuration.algorithms[k]);
@@ -62,12 +62,12 @@ static void run_test_suite_parseable(test_configuration_t configuration)
                 io_set_stream(previous_stream);
                 
                 uint32_t page_faults = paging_get_page_fault_count();
-                io_printf(";%d", page_faults);
+                io_printf(";%lu", page_faults);
 
                 uint64_t pra_time = page_replacement_algorithm_get_time_taken();
                 uint64_t total_time = end_timestamp - start_timestamp;
                 uint64_t overhead = (pra_time * 100ULL) / total_time;
-                io_printf(";%d", (uint32_t) overhead);
+                io_printf(";%lu", (uint32_t) overhead);
             }
             io_printf("\n");
         }
@@ -89,19 +89,19 @@ static void run_test_suite_human_readable(test_configuration_t configuration)
 
                 test_reset_to_initial(algorithm.function, parameters);
 
-                io_printf("%s | %s | %d | %d | %d\n", execution.name, algorithm.name, parameters.pages_limit, parameters.allocation_spread, parameters.seed);
+                io_printf("%s | %s | %lu | %lu | %lu\n", execution.name, algorithm.name, parameters.pages_limit, parameters.allocation_spread, parameters.seed);
                 
                 uint64_t start_timestamp = timestamp_scaled();
                 execution.callback();
                 uint64_t end_timestamp = timestamp_scaled();
 
                 uint32_t page_faults = paging_get_page_fault_count();
-                io_printf("Page Faults: %d\n", page_faults);
+                io_printf("Page Faults: %lu\n", page_faults);
 
                 uint64_t pra_time = page_replacement_algorithm_get_time_taken();
                 uint64_t total_time = end_timestamp - start_timestamp;
                 uint64_t overhead = (pra_time * 100ULL) / total_time;
-                io_printf("Overhead: %d%%\n\n", (uint32_t) overhead);
+                io_printf("Overhead: %lu%%\n\n", (uint32_t) overhead);
             }
         }
     }

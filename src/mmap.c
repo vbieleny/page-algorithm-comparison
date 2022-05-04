@@ -45,8 +45,8 @@ void memory_map_print()
                 type_str = "Unrecognized memory";
                 break;
         }
-        io_printf("0x%x - 0x%x (%d B): %s\n", entry.base_low, entry.base_low + entry.length_low, entry.length_low, type_str);
+        io_printf("0x%lx - 0x%lx (%lu B): %s\n", entry.base_low, entry.base_low + entry.length_low, entry.length_low, type_str);
     }
     uint32_t total_memory = (memory_map[count - 1].base_low + memory_map[count - 1].length_low) - memory_map[0].base_low;
-    io_printf("Total memory: %d MB\n", total_memory / 1024 / 1024);
+    io_printf("Total memory: %lu MB\n", total_memory / 1024 / 1024);
 }

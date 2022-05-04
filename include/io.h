@@ -24,9 +24,9 @@ void io_sprintf(io_stream_e stream, const char *format, ...);
 void io_putchar(char c);
 void io_write(const char *str, size_t length);
 void io_writestring(const char *str);
-void io_printf(const char *format, ...);
+__attribute__((format(printf, 1, 2))) int io_printf(const char *format, ...);
 
-void io_vprintf(io_stream_e stream, const char *format, va_list arguments);
+int io_vprintf(io_stream_e stream, const char *format, va_list arguments);
 
 void io_out_byte(uint16_t port, uint8_t value);
 uint8_t io_in_byte(uint16_t port);
