@@ -3,6 +3,7 @@
 #include <pfh_fifo.h>
 #include <pfh_second.h>
 #include <io.h>
+#include <lib.h>
 #include <malloc.h>
 #include <random.h>
 
@@ -21,8 +22,8 @@ static void swap(int *a, int *b)
 
 static void test_sort()
 {
-    int numbers[16];
-    int numbers_count = sizeof(numbers) / sizeof(numbers[0]);
+    int numbers[128];
+    int numbers_count = ARRAY_LEN(numbers);
 
     prac_fill_random(numbers, numbers_count, 0, 100);
 
@@ -48,21 +49,13 @@ static void test_sort()
     }
 
     next = root;
-    for (int i = 0; i < numbers_count; i++, next = next->next)
-    {
-        const char *format = i == numbers_count - 1 ? "%d" : "%d ";
-        io_printf(format, next->value);
-    }
-    io_printf("\n");
 }
 
 void setup()
 {
-    test_execution_t executions[2];
+    test_execution_t executions[1];
     executions[0].name = "Linked List Sort";
     executions[0].callback = test_sort;
-    executions[1].name = "Another Sort";
-    executions[1].callback = test_sort;
 
     page_replacement_algorithm_e algorithms[2];
     algorithms[0] = pra_fifo;
@@ -79,11 +72,11 @@ void setup()
     test_configuration_t configuration =
     {
         .tests = executions,
-        .tests_length = 2,
+        .tests_length = ARRAY_LEN(executions),
         .algorithms = algorithms,
-        .algorithms_length = 2,
+        .algorithms_length = ARRAY_LEN(algorithms),
         .parameters = parameters,
-        .parameters_length = 2
+        .parameters_length = ARRAY_LEN(parameters)
     };
 
     run_test_suite(configuration);

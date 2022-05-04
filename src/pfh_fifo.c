@@ -4,7 +4,7 @@
 #include <pqueue.h>
 #include <io.h>
 
-void pfh_fifo_isr(interrupt_frame_t* frame, uint32_t error_code)
+void pfh_fifo_isr(uint32_t error_code)
 {
     uint32_t accessed_address = paging_get_accessed_address();
     if (!pfa_is_page_allocation_limit_reached())

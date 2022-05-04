@@ -17,10 +17,10 @@ typedef struct
     uint16_t index;
 } selector_error_code_t;
 
-NORETURN INTERRUPT void kernel_panic(interrupt_frame_t* frame, uint32_t error_code);
-NORETURN NO_CALLER_SAVED_REGISTERS void halt();
+NORETURN void pra_kernel_panic_handler(uint32_t error_code);
+NORETURN void halt();
 
-NO_CALLER_SAVED_REGISTERS ALWAYS_INLINE selector_error_code_t parse_selector_error_code(uint32_t error_code)
+ALWAYS_INLINE selector_error_code_t parse_selector_error_code(uint32_t error_code)
 {
     selector_error_code_t selector_error_code;
     selector_error_code.is_external = error_code & 0b1;

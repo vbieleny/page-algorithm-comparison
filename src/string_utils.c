@@ -45,3 +45,15 @@ char* strcpy(char *destination, const char *source)
         destination[i] = source[i];
     return destination;
 }
+
+char *strcat(char *destination, const char *source)
+{
+    size_t destination_length = strlen(destination);
+    size_t i = 0;
+    while (source[i])
+    {
+        destination[destination_length + i] = source[i];
+        i++;
+    }
+    return destination;
+}

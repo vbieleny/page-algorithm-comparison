@@ -1,7 +1,7 @@
 #include <io.h>
 #include <ksystem.h>
 
-void kernel_panic(interrupt_frame_t *frame, uint32_t error_code)
+void pra_kernel_panic_handler(uint32_t error_code)
 {
     if (error_code)
     {
@@ -22,10 +22,16 @@ void kernel_panic(interrupt_frame_t *frame, uint32_t error_code)
                 format = "Unknown";
                 break;
         }
-        io_printf("Kernel Panic (External: %d, Table: %s, Index: %d)\n", selector_error_code.is_external, format, selector_error_code.index);
+        io_printf("\n============================================================");
+        io_printf("\nKERNEL PANIC (External: %d, Table: %s, Index: %d)\n", selector_error_code.is_external, format, selector_error_code.index);
+        io_printf("============================================================\n");
     }
     else
-        io_printf("Kernel Panic\n");
+    {
+        io_printf("\n============================================================\n");
+        io_printf("\nKERNEL PANIC\n");
+        io_printf("\n============================================================\n");
+    }
     halt();
 }
 

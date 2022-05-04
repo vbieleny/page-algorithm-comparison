@@ -27,7 +27,7 @@
 #define IRQ0_TIMER 0
 
 void pic_remap(uint8_t offset1, uint8_t offset2);
-NO_CALLER_SAVED_REGISTERS void pic_send_eoi(uint8_t irq);
+void pic_send_eoi(uint8_t irq);
 void irq_set_mask(uint8_t irq_line);
 void irq_set_mask_all();
 void irq_clear_mask(uint8_t irq_line);

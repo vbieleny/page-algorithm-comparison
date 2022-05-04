@@ -6,10 +6,10 @@ static volatile uint32_t timer_counter;
 
 void timer_initialize()
 {
-    idt_set_descriptor(32, &timer_interrupt, 0x8e);
+    idt_set_descriptor(32, &pra_timer_interrupt, 0x8e);
 }
 
-void timer_interrupt(interrupt_frame_t *frame)
+void pra_timer_interrupt()
 {
     timer_counter++;
     pic_send_eoi(0);

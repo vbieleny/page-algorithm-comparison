@@ -19,3 +19,8 @@ void* memcpy(void *destination, const void *source, size_t length)
                 : "memory");
     return destination;
 }
+
+int isdigit(int digit)
+{
+    return digit >= '0' && digit <= '9';
+}

@@ -25,6 +25,8 @@ extern const uint32_t KERNEL_START;
 extern const uint32_t KERNEL_END;
 
 extern void setup();
+extern void asm_kernel_panic_handler();
+extern void asm_page_fault_handler();
 
 void kernel_main()
 {
@@ -43,7 +45,8 @@ void kernel_main()
     pfa_initialize(PAGES_START_ADDRESS);
     paging_initialize(IDENTITY_PAGES_COUNT);
 
-    idt_set_descriptor(13, &kernel_panic, 0x8e);
+    idt_set_descriptor(13, &asm_kernel_panic_handler, 0x8e);
+    idt_set_descriptor(14, &asm_page_fault_handler, 0x8e);
     idt_initialize();
 
     pic_remap(0x20, 0x28);

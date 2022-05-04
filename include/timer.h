@@ -9,12 +9,20 @@
 void timer_initialize();
 void timer_set_divisor(uint16_t divisor);
 uint32_t milliseconds_from_boot();
-INTERRUPT void timer_interrupt(interrupt_frame_t *frame);
+void pra_timer_interrupt();
 
-ALWAYS_INLINE uint64_t rdtsc()
+ALWAYS_INLINE uint64_t timestamp()
 {
     uint64_t value;
     asm volatile("lfence\t\n"
                  "rdtsc\t\n" : "=A"(value));
     return value;
+}
+
+ALWAYS_INLINE uint64_t timestamp_scaled()
+{
+    uint64_t value;
+    asm volatile("lfence\t\n"
+                 "rdtsc\t\n" : "=A"(value));
+    return value / 100ULL;
 }

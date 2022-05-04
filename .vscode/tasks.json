@@ -6,7 +6,7 @@
             "type": "shell",
             "isBackground": true,
             "linux": {
-                "command": "make -s template && make -s -j$(nproc) -C ./.template/.prac qemu-debug DEFAULTSTREAM=IO_TERMINAL",
+                "command": "make -s clean && make -s template && make -s -j$(nproc) -C ./.template/.prac qemu-debug",
                 "problemMatcher": {
                     "pattern": {
                         "regexp": ".*"

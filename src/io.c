@@ -87,6 +87,9 @@ void io_vprintf(io_stream_e stream, const char *format, va_list arguments)
         format++;
         switch (*format)
         {
+        case 'c':
+            io_sputchar(stream, va_arg(arguments, int));
+            break;
         case 's':
             io_swritestring(stream, va_arg(arguments, char *));
             break;
@@ -97,6 +100,10 @@ void io_vprintf(io_stream_e stream, const char *format, va_list arguments)
         case 'x':
             itoa(va_arg(arguments, int), buffer, 16);
             io_swritestring(stream, buffer);
+            break;
+        case '%':
+            io_sputchar(stream, '%');
+            break;
         }
         format++;
     }

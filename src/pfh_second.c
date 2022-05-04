@@ -3,12 +3,12 @@
 #include <paging.h>
 #include <pqueue.h>
 
-NO_CALLER_SAVED_REGISTERS static void send_page_to_back()
+static void send_page_to_back()
 {
     page_queue_send_to_back();
 }
 
-void pfh_second_isr(interrupt_frame_t* frame, uint32_t error_code)
+void pfh_second_isr(uint32_t error_code)
 {
     uint32_t accessed_address = paging_get_accessed_address();
     if (!pfa_is_page_allocation_limit_reached())

@@ -9,6 +9,7 @@ SRCS            := $(wildcard $(SRCDIR)/*.c)
 USERSRCS        := $(wildcard ../$(SRCDIR)/*.c)
 OBJS            := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCS:$(SRCDIR)/%=%))
 OBJS            += $(patsubst %.c, $(USERBUILDDIR)/%.o, $(USERSRCS:../$(SRCDIR)/%=%))
+OBJS			+= $(BUILDDIR)/interrupts.o
 DEPS            := $(OBJS:.o=.d)
 LINKER          := $(SRCDIR)/linker.ld
 ELFFILE         := os.elf
@@ -21,8 +22,10 @@ CC  	        := ${HOME}/.prac/gcc-i686-elf-toolchain/bin/i686-elf-gcc
 OBJCOPY         := ${HOME}/.prac/gcc-i686-elf-toolchain/bin/i686-elf-objcopy
 OCFLAGS         := -O binary
 ASMFLAGS        := -I $(INCLUDEDIR)/ -f bin
-CFLAGS 	        := -g -std=gnu11 -Wall -ffreestanding -mgeneral-regs-only -masm=intel -m32 -I$(INCLUDEDIR)
+ASMELFFLAGS     := -I $(INCLUDEDIR)/ -f elf
+CFLAGS 	        := -g -std=gnu11 -Wall -ffreestanding -masm=intel -m32 -I$(INCLUDEDIR)
 LDFLAGS         := -g -T $(LINKER) -ffreestanding -nostdlib
+LIBS			:= -static-libgcc -lgcc
 
 CFGFILE         := prac.ini
 
@@ -50,7 +53,7 @@ $(BUILDDIR)/$(BINFILE): $(BUILDDIR)/$(ELFFILE)
 	$(OBJCOPY) $(OCFLAGS) $(BUILDDIR)/$(ELFFILE) $(BUILDDIR)/$(BINFILE)
 
 $(BUILDDIR)/$(ELFFILE): $(LINKER) $(OBJS)
-	$(CC) $(LDFLAGS) $(OBJS) -o $@
+	$(CC) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
 
 -include $(DEPS)
 
@@ -64,6 +67,9 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
 
 $(BUILDDIR)/boot.bin: $(SRCDIR)/boot.asm | $(BUILDDIR)
 	$(ASM) $(ASMFLAGS) -o $@ $<
+
+$(BUILDDIR)/interrupts.o: $(SRCDIR)/interrupts.asm | $(BUILDDIR)
+	$(ASM) $(ASMELFFLAGS) -o $@ $<
 
 $(BUILDDIR):
 	mkdir -p $(sort $(dir $(OBJS)))

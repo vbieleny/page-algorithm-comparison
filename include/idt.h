@@ -3,13 +3,6 @@
 #include <attrs.h>
 #include <stdint.h>
 
-typedef struct interrupt_frame
-{
-    uint32_t eip;
-    uint32_t cs;
-    uint32_t eflags;
-} PACKED interrupt_frame_t;
-
 typedef struct
 {
     uint16_t limit;

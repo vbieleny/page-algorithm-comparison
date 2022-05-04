@@ -3,4 +3,4 @@
 #include <idt.h>
 #include <attrs.h>
 
-INTERRUPT void pfh_fifo_isr(interrupt_frame_t* frame, uint32_t error_code);
+void pfh_fifo_isr(uint32_t error_code);
