@@ -1,12 +1,14 @@
 #pragma once
 
-#include <stdint.h>
-#include <stddef.h>
 #include <stdarg.h>
+#include <stddef.h>
+#include <stdint.h>
 
 typedef enum
 {
-    IO_TERMINAL, IO_SERIAL, IO_NONE
+    IO_TERMINAL,
+    IO_SERIAL,
+    IO_NONE
 } io_stream_e;
 
 #ifndef DEFAULT_STREAM

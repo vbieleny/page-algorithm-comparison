@@ -62,8 +62,11 @@ void page_replacement_algorithm_reset_time_taken()
 
 void pra_page_fault_handler(uint32_t error_code)
 {
+    page_fault_handler_result_t result;
+    memset(&result, 0, sizeof(result));
     uint64_t start_timestamp = timestamp_scaled();
-    pra_active_algorithm(error_code);
+    pra_active_algorithm(error_code, &result);
     uint64_t end_timestamp = timestamp_scaled();
     pra_time_taken += end_timestamp - start_timestamp;
+    paging_add_result_to_statistics(&result);
 }

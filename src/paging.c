@@ -6,8 +6,8 @@
 
 static uint32_t *page_directory;
 static uint32_t *identity_page_tables;
-static uint32_t page_fault_counter;
 static uint32_t identity_pages_count;
+static page_fault_statistics_t page_fault_statistics;
 
 void paging_initialize(size_t pages_count)
 {
@@ -25,7 +25,7 @@ void paging_reset_to_default()
 {
     paging_free_all_page_tables();
     paging_invalidate_all_pages();
-    paging_reset_page_fault_counter();
+    paging_reset_page_fault_statistics();
 }
 
 void paging_free_all_page_tables()
@@ -102,22 +102,44 @@ void paging_make_page_present(uintptr_t virtual_address)
 
 void paging_make_page_not_present(uintptr_t virtual_address)
 {
-    uint32_t *pte = memory_virtual_to_pte(virtual_address);
-    *pte &= ~PAGE_FLAG_PRESENT;
+    page_table_entry_t *pte = (page_table_entry_t*) memory_virtual_to_pte(virtual_address);
+    pte->present = 0;
     page_queue_poll();
 }
 
-void paging_increment_page_fault_counter()
+void paging_add_result_to_statistics(page_fault_handler_result_t *result)
 {
-    page_fault_counter++;
+    if (result->victim)
+    {
+        page_fault_statistics.hard_page_faults++;
+        if (result->pte.accessed)
+            page_fault_statistics.victim_accessed_count++;
+        if (result->pte.dirty)
+            page_fault_statistics.victim_dirty_count++;
+    }
+    else
+    {
+        page_fault_statistics.soft_page_faults++;
+    }
 }
 
-void paging_reset_page_fault_counter()
+void paging_reset_page_fault_statistics()
 {
-    page_fault_counter = 0;
+    memset(&page_fault_statistics, 0, sizeof(page_fault_statistics));
 }
 
-uint32_t paging_get_page_fault_count()
+page_fault_statistics_t paging_get_page_fault_statistics()
 {
-    return page_fault_counter;
+    return page_fault_statistics;
+}
+
+void page_fault_handler_result_fill(page_fault_handler_result_t *result, page_table_entry_t *victim_pte)
+{
+    result->victim = true;
+    memcpy(&result->pte, victim_pte, sizeof(page_table_entry_t));
+}
+
+uint32_t* page_table_entry_address(page_table_entry_t *pte)
+{
+    return (uint32_t*) (pte->address << 12);
 }

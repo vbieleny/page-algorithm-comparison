@@ -61,13 +61,13 @@ static void run_test_suite_parseable(test_configuration_t configuration)
                 uint64_t end_timestamp = timestamp_scaled();
                 io_set_stream(previous_stream);
                 
-                uint32_t page_faults = paging_get_page_fault_count();
-                io_printf(";%lu", page_faults);
+                page_fault_statistics_t stats = paging_get_page_fault_statistics();
+                io_printf(";%lu,%lu,%lu,%lu", stats.soft_page_faults, stats.hard_page_faults, stats.victim_accessed_count, stats.victim_dirty_count);
 
                 uint64_t pra_time = page_replacement_algorithm_get_time_taken();
                 uint64_t total_time = end_timestamp - start_timestamp;
                 uint64_t overhead = (pra_time * 100ULL) / total_time;
-                io_printf(";%lu", (uint32_t) overhead);
+                io_printf(",%lu", (uint32_t) overhead);
             }
             io_printf("\n");
         }
@@ -95,8 +95,10 @@ static void run_test_suite_human_readable(test_configuration_t configuration)
                 execution.callback();
                 uint64_t end_timestamp = timestamp_scaled();
 
-                uint32_t page_faults = paging_get_page_fault_count();
-                io_printf("Page Faults: %lu\n", page_faults);
+                page_fault_statistics_t stats = paging_get_page_fault_statistics();
+                io_printf("Page Faults (Soft/Hard): %lu/%lu\n", stats.soft_page_faults, stats.hard_page_faults);
+                io_printf("Accessed pages: %lu\n", stats.victim_accessed_count);
+                io_printf("Dirty pages: %lu\n", stats.victim_dirty_count);
 
                 uint64_t pra_time = page_replacement_algorithm_get_time_taken();
                 uint64_t total_time = end_timestamp - start_timestamp;

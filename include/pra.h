@@ -4,8 +4,9 @@
 #include <lib.h>
 #include <idt.h>
 #include <attrs.h>
+#include <paging.h>
 
-typedef void (*page_replacement_function_t)(uint32_t);
+typedef void (*page_replacement_function_t)(uint32_t, page_fault_handler_result_t*);
 
 typedef enum
 {
