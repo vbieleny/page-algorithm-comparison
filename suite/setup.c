@@ -47,8 +47,6 @@ static void test_sort()
                 swap(&(next->value), &(next->next->value));
         }
     }
-
-    next = root;
 }
 
 void setup()
