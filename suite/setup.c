@@ -1,4 +1,4 @@
-#include <test_runner.h>
+#include <suite_runner.h>
 #include <pra.h>
 #include <pfh_fifo.h>
 #include <pfh_second.h>
@@ -25,7 +25,7 @@ static void test_sort()
     int numbers[128];
     int numbers_count = ARRAY_LEN(numbers);
 
-    prac_fill_random(numbers, numbers_count, 0, 100);
+    pra_fill_random(numbers, numbers_count, 0, 100);
 
     linked_list_t *root = (linked_list_t*) user_memory_random_allocate(sizeof(linked_list_t));
     linked_list_t *next = root;

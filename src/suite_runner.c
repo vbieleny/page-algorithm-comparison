@@ -1,4 +1,4 @@
-#include <test_runner.h>
+#include <suite_runner.h>
 #include <idt.h>
 #include <pfa.h>
 #include <pqueue.h>
@@ -28,7 +28,7 @@ static void test_reset_to_initial(page_replacement_function_t algorithm, test_pa
     user_memory_set_memory_size(parameters.allocation_spread);
     user_memory_free_all();
 
-    srand(parameters.seed);
+    pra_srand(parameters.seed);
 }
 
 static void run_test_suite_parseable(test_configuration_t configuration)

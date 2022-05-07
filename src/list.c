@@ -20,12 +20,26 @@ list_t* list_create()
 list_t* list_create_with_initial_size(size_t initial_size)
 {
     list_t *list = kernel_memory_allocate(sizeof(list_t), 1);
-    memset(list, 0, sizeof(list_t));
+    pra_memset(list, 0, sizeof(list_t));
     list->items = kernel_memory_allocate(initial_size * sizeof(void*), 1);
-    memset(list->items, 0, initial_size * sizeof(void*));
+    pra_memset(list->items, 0, initial_size * sizeof(void*));
     list->size = 0;
     list->capacity = initial_size;
     return list;
+}
+
+size_t list_get_size(list_t *list)
+{
+    if (!list)
+        return 0;
+    return list->size;
+}
+
+size_t list_get_capacity(list_t *list)
+{
+    if (!list)
+        return 0;
+    return list->capacity;
 }
 
 void list_destroy(list_t *list)
@@ -49,6 +63,13 @@ bool list_set(list_t *list, size_t index, void *data)
     return true;
 }
 
+void* list_get(list_t *list, size_t index)
+{
+    if (list && index < list->size)
+        return list->items[index];
+    return NULL;
+}
+
 bool list_insert(list_t *list, size_t index, void *data)
 {
     if (index >= list->size)
@@ -56,7 +77,11 @@ bool list_insert(list_t *list, size_t index, void *data)
     if (list->size + 1 > list->capacity)
         list_grow(list, list->capacity * 2);
     for (size_t i = list->size - 1; i >= index; i--)
+    {
         list->items[i + 1] = list->items[i];
+        if (!i)
+            break;
+    }
     list->items[index] = data;
     list->size++;
     return true;
@@ -86,7 +111,7 @@ int list_index_of_by_comparison(list_t *list, void *data, list_compare_callback_
 {
     for (int i = 0; i < list->size; i++)
     {
-        if (list->items[i] == data && callback(data, list->items[i]))
+        if (callback(data, list->items[i]))
             return i;
     }
     return -1;

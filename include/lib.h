@@ -7,6 +7,6 @@
 
 typedef char prac_name_t[128];
 
-void memset(void *memory, uint8_t value, size_t length);
-void* memcpy(void *destination, const void *source, size_t length);
+void pra_memset(void *memory, uint8_t value, size_t length);
+void* pra_memcpy(void *destination, const void *source, size_t length);
 int isdigit(int digit);

@@ -30,7 +30,7 @@ LIBS			:= -static-libgcc -lgcc
 CFGFILE         := prac.ini
 
 .EXTRA_PREREQS := Makefile $(CFGFILE)
-.PHONY: all template qemu-debug qemu-serial qemu-terminal qemu-file bochs clean force
+.PHONY: all docs template qemu-debug qemu-terminal qemu-serial qemu-file bochs bochs-iso test test-build clean force
 
 -include $(CFGFILE)
 
@@ -58,12 +58,12 @@ $(BUILDDIR)/$(ELFFILE): $(LINKER) $(OBJS)
 -include $(DEPS)
 
 $(USERBUILDDIR)/%.o: ../$(SRCDIR)/%.c | $(BUILDDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILDDIR)/boot.bin: $(SRCDIR)/boot.asm | $(BUILDDIR)
 	$(ASM) $(ASMFLAGS) -o $@ $<
@@ -78,6 +78,9 @@ $(COMPILERFLAGS): force
 	echo '$(CFLAGS)' | md5sum - | cut -f1 -d' ' | cmp -s - $@ || echo '$(CFLAGS)' | md5sum - | cut -f1 -d' ' > $@
 
 $(OBJS): $(COMPILERFLAGS)
+
+docs: Doxyfile
+	doxygen $<
 
 template:
 	mkdir -p $(TEMPLATEDIR)/.prac
@@ -109,5 +112,12 @@ bochs: $(BUILDDIR)/$(IMGFILE)
 bochs-iso: $(BUILDDIR)/$(ISOFILE)
 	bochs -f bochsrc-iso.txt -q
 
+test:
+	$(MAKE) -C test $@
+
+test-build:
+	$(MAKE) -C test all
+
 clean:
-	-rm -rf qemuout.txt bochsout.txt bochsout-iso.txt bx_enh_dbg.ini .template $(BUILDDIR)
+	-rm -rf qemuout.txt bochsout.txt bochsout-iso.txt bx_enh_dbg.ini .template docs/html $(BUILDDIR)
+	$(MAKE) -C test $@

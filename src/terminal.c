@@ -55,7 +55,7 @@ void terminal_setcolor(uint8_t color)
 
 void terminal_scroll()
 {
-    memcpy(terminal_buffer, terminal_buffer + VGA_WIDTH, VGA_WIDTH * 2 * (VGA_HEIGHT - 1));
+    pra_memcpy(terminal_buffer, terminal_buffer + VGA_WIDTH, VGA_WIDTH * 2 * (VGA_HEIGHT - 1));
     for (size_t i = 0; i < VGA_WIDTH; i++)
     {
         terminal_putentryat(' ', terminal_color, i, VGA_HEIGHT - 1);

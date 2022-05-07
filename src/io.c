@@ -214,7 +214,7 @@ int io_vprintf(io_stream_e stream, const char *format, va_list list)
             }
             specifier = format[i];
 
-            memset(int_str_buffer, 0, 256);
+            pra_memset(int_str_buffer, 0, 256);
 
             int base = 10;
             if (specifier == 'o')

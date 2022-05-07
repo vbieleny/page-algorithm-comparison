@@ -1,6 +1,10 @@
 #pragma once
 
-#define pra_assert(message, test) do { if (!(test)) return message; } while (0)
-#define pra_run_test(test) do { char *message = test(); tests_run++; if (message) return message; } while (0)
+#include <stdio.h>
+#include <stdbool.h>
 
-extern int tests_run;
+#define PRA_STRINGIZE_DETAIL(x) #x
+#define PRA_STRINGIZE(x) PRA_STRINGIZE_DETAIL(x)
+#define PRA_ASSERT(test) do { if (!(test)) { printf("assert: %s:%d: %s: Assertion '%s' failed.\n", __FILE__, __LINE__, __func__, #test); return false; } } while (0)
+#define PRA_ASSERT_MESSAGE(message, test) do { if (!(test)) { printf("%s\n", (message)); return false; } } while (0)
+#define PRA_RUN_TEST(test) do { bool success = test(); printf("%s:%s\n", #test, success ? "PASS" : "FAIL"); if (!success) return false; } while (0)

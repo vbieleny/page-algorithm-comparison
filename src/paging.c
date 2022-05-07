@@ -88,7 +88,7 @@ void paging_make_page_present(uintptr_t virtual_address)
     if (!(*pde & PAGE_FLAG_PRESENT))
     {
         uint32_t *page_table = (uint32_t*) kernel_memory_allocate(1024 * sizeof(uint32_t), 0x1000);
-        memset(page_table, 0, 1024 * sizeof(uint32_t));
+        pra_memset(page_table, 0, 1024 * sizeof(uint32_t));
         *pde = (uint32_t) page_table | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
     }
     uint32_t *pte = memory_virtual_to_pte(virtual_address);
@@ -125,7 +125,7 @@ void paging_add_result_to_statistics(page_fault_handler_result_t *result)
 
 void paging_reset_page_fault_statistics()
 {
-    memset(&page_fault_statistics, 0, sizeof(page_fault_statistics));
+    pra_memset(&page_fault_statistics, 0, sizeof(page_fault_statistics));
 }
 
 page_fault_statistics_t paging_get_page_fault_statistics()
@@ -136,7 +136,7 @@ page_fault_statistics_t paging_get_page_fault_statistics()
 void page_fault_handler_result_fill(page_fault_handler_result_t *result, page_table_entry_t *victim_pte)
 {
     result->victim = true;
-    memcpy(&result->pte, victim_pte, sizeof(page_table_entry_t));
+    pra_memcpy(&result->pte, victim_pte, sizeof(page_table_entry_t));
 }
 
 uint32_t* page_table_entry_address(page_table_entry_t *pte)

@@ -27,7 +27,7 @@ void register_page_replacement_algorithm(size_t index, const char *name, page_re
     pra_size++;
     
     page_replacement_algorithm_t algorithm;
-    memset(&algorithm, 0, sizeof(page_replacement_algorithm_t));
+    pra_memset(&algorithm, 0, sizeof(page_replacement_algorithm_t));
 
     strcpy(algorithm.name, name);
     algorithm.function = function;
@@ -63,7 +63,7 @@ void page_replacement_algorithm_reset_time_taken()
 void pra_page_fault_handler(uint32_t error_code)
 {
     page_fault_handler_result_t result;
-    memset(&result, 0, sizeof(result));
+    pra_memset(&result, 0, sizeof(result));
     uint64_t start_timestamp = timestamp_scaled();
     pra_active_algorithm(error_code, &result);
     uint64_t end_timestamp = timestamp_scaled();

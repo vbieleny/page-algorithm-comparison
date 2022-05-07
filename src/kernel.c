@@ -7,7 +7,7 @@
 #include <pfh_fifo.h>
 #include <pfh_second.h>
 #include <pra.h>
-#include <test_runner.h>
+#include <suite_runner.h>
 #include <serial.h>
 #include <ksystem.h>
 #include <kmalloc.h>

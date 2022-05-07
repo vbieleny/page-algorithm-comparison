@@ -18,6 +18,13 @@
                     }
                 }
             }
+        },
+        {
+            "label": "Build Tests",
+            "type": "shell",
+            "linux": {
+                "command": "make -s test-build"
+            }
         }
     ]
 }

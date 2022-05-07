@@ -62,7 +62,7 @@ void* user_memory_random_allocate(size_t size)
     uint16_t counter = 0;
     do
     {
-        random_block.address = rand_between(start_address, end_address);
+        random_block.address = pra_rand_between(start_address, end_address);
         counter++;
         if (counter >= 1024)
             return NULL;

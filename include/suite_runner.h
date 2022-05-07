@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @brief This file provides functionality to run test suites and
+ * generate output that can be evaluated.
+*/
+
 #pragma once
 
 #include <stdint.h>
@@ -34,4 +40,11 @@ typedef struct
     size_t parameters_length;
 } test_configuration_t;
 
+/**
+ * @brief Run the test suite specified as parameter.
+ * 
+ * Runs all combinations for specified test programs, parameters and
+ * page replacement algorithms. The results will be written either to
+ * terminal or serial output, depending on the default format.
+ */
 void run_test_suite(test_configuration_t configuration);
