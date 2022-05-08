@@ -55,9 +55,10 @@ void setup()
     executions[0].name = "Linked List Sort";
     executions[0].callback = test_sort;
 
-    page_replacement_algorithm_e algorithms[2];
+    page_replacement_algorithm_e algorithms[3];
     algorithms[0] = pra_fifo;
     algorithms[1] = pra_second_chance;
+    algorithms[2] = pra_random;
 
     test_parameters_t parameters[2];
     parameters[0].pages_limit = 6;

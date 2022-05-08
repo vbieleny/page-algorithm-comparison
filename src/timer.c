@@ -2,28 +2,33 @@
 #include <pic.h>
 #include <timer.h>
 
-static volatile uint32_t timer_counter;
+static timer_callback_t timer_callback;
 
 void timer_initialize()
 {
-    idt_set_descriptor(32, &pra_timer_interrupt, 0x8e);
+    idt_set_descriptor(32, &asm_timer_interrupt, 0x8e);
 }
 
 void pra_timer_interrupt()
 {
-    timer_counter++;
+    if (timer_callback)
+        timer_callback();
     pic_send_eoi(0);
 }
 
 void timer_set_divisor(uint16_t divisor)
 {
-    // TODO: Disable interrupts while communicating with PIT
+    // bool interrupts_enabled = are_interrupts_enabled();
+    // set_interrupts_enabled(false);
+
     io_out_byte(0x43, 0x36);
     io_out_byte(0x40, divisor & 0xff);
     io_out_byte(0x40, divisor >> 8);
+
+    // set_interrupts_enabled(interrupts_enabled);
 }
 
-uint32_t milliseconds_from_boot()
+void timer_set_callback(timer_callback_t callback)
 {
-    return timer_counter;
+    timer_callback = callback;
 }

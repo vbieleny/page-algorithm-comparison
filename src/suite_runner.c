@@ -12,10 +12,12 @@
 #define DEFAULT_FORMAT FORMAT_HUMAN_READABLE
 #endif
 
-static void test_reset_to_initial(page_replacement_function_t algorithm, test_parameters_t parameters)
+static void test_reset_to_initial(page_replacement_algorithm_t algorithm, test_parameters_t parameters)
 {
-    page_replacement_algorithm_set_active(algorithm);
+    page_replacement_algorithm_set_active(algorithm.function);
     page_replacement_algorithm_reset_time_taken();
+    if (algorithm.init_function)
+        algorithm.init_function();
 
     pfa_set_max_pages(parameters.pages_limit);
     pfa_free_all_pages();
@@ -52,7 +54,7 @@ static void run_test_suite_parseable(test_configuration_t configuration)
             {
                 page_replacement_algorithm_t algorithm = get_page_replacement_algorithm(configuration.algorithms[k]);
 
-                test_reset_to_initial(algorithm.function, parameters);
+                test_reset_to_initial(algorithm, parameters);
 
                 io_stream_e previous_stream = io_get_stream();
                 io_set_stream(IO_NONE);
@@ -60,6 +62,9 @@ static void run_test_suite_parseable(test_configuration_t configuration)
                 execution.callback();
                 uint64_t end_timestamp = timestamp_scaled();
                 io_set_stream(previous_stream);
+
+                if (algorithm.destroy_function)
+                    algorithm.destroy_function();
                 
                 page_fault_statistics_t stats = paging_get_page_fault_statistics();
                 io_printf(";%lu,%lu,%lu,%lu", stats.soft_page_faults, stats.hard_page_faults, stats.victim_accessed_count, stats.victim_dirty_count);
@@ -87,13 +92,16 @@ static void run_test_suite_human_readable(test_configuration_t configuration)
             {
                 page_replacement_algorithm_t algorithm = get_page_replacement_algorithm(configuration.algorithms[k]);
 
-                test_reset_to_initial(algorithm.function, parameters);
+                test_reset_to_initial(algorithm, parameters);
 
                 io_printf("%s | %s | %lu | %lu | %lu\n", execution.name, algorithm.name, parameters.pages_limit, parameters.allocation_spread, parameters.seed);
                 
                 uint64_t start_timestamp = timestamp_scaled();
                 execution.callback();
                 uint64_t end_timestamp = timestamp_scaled();
+
+                if (algorithm.destroy_function)
+                    algorithm.destroy_function();
 
                 page_fault_statistics_t stats = paging_get_page_fault_statistics();
                 io_printf("Page Faults (Soft/Hard): %lu/%lu\n", stats.soft_page_faults, stats.hard_page_faults);

@@ -2,6 +2,7 @@
 
 #include <attrs.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef struct
 {
@@ -20,6 +21,6 @@ typedef struct
 
 void idt_initialize();
 void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags);
-void interrupts_enable();
-void nmi_enable();
-void nmi_disable();
+void set_interrupts_enabled(bool enable);
+bool are_interrupts_enabled();
+void nmi_set_enabled(bool enable);

@@ -29,19 +29,32 @@ void idt_set_descriptor(uint8_t vector, void *isr, uint8_t flags)
     descriptor->reserved = 0;
 }
 
-void interrupts_enable()
+void set_interrupts_enabled(bool enable)
 {
-    asm volatile("sti");
+    if (enable)
+        asm volatile("sti");
+    else
+        asm volatile("cli");
 }
 
-void nmi_enable()
+bool are_interrupts_enabled()
 {
-    io_out_byte(0x70, io_in_byte(0x70) & 0x7F);
-    io_in_byte(0x71);
+    unsigned long flags;
+    asm volatile("pushf\n\t"
+                 "pop %0" : "=g"(flags));
+    return flags & (1 << 9);
 }
 
-void nmi_disable()
+void nmi_set_enabled(bool enable)
 {
-    io_out_byte(0x70, io_in_byte(0x70) | 0x80);
-    io_in_byte(0x71);
+    if (enable)
+    {
+        io_out_byte(0x70, io_in_byte(0x70) & 0x7F);
+        io_in_byte(0x71);
+    }
+    else
+    {
+        io_out_byte(0x70, io_in_byte(0x70) | 0x80);
+        io_in_byte(0x71);
+    }
 }

@@ -12,7 +12,7 @@ static page_replacement_algorithm_t *pra_functions;
 static size_t pra_capacity;
 static size_t pra_size;
 
-void register_page_replacement_algorithm(size_t index, const char *name, page_replacement_function_t function)
+void register_page_replacement_algorithm(size_t index, const char *name, page_replacement_init_function_t init_function, page_replacement_destroy_function_t destroy_function, page_replacement_function_t function)
 {
     if (!pra_functions)
     {
@@ -30,6 +30,8 @@ void register_page_replacement_algorithm(size_t index, const char *name, page_re
     pra_memset(&algorithm, 0, sizeof(page_replacement_algorithm_t));
 
     strcpy(algorithm.name, name);
+    algorithm.init_function = init_function;
+    algorithm.destroy_function = destroy_function;
     algorithm.function = function;
 
     pra_functions[index] = algorithm;

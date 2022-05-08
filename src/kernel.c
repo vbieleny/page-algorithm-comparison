@@ -6,6 +6,7 @@
 #include <paging.h>
 #include <pfh_fifo.h>
 #include <pfh_second.h>
+#include "pfh_random.h"
 #include <pra.h>
 #include <suite_runner.h>
 #include <serial.h>
@@ -39,8 +40,9 @@ void kernel_main()
         halt();
     }
 
-    register_page_replacement_algorithm(pra_fifo, "FIFO", &pfh_fifo_isr);
-    register_page_replacement_algorithm(pra_second_chance, "Second Chance", &pfh_second_isr);
+    register_page_replacement_algorithm(pra_fifo, "FIFO", NULL, NULL, &pfh_fifo_isr);
+    register_page_replacement_algorithm(pra_second_chance, "Second Chance", NULL, NULL, &pfh_second_isr);
+    register_page_replacement_algorithm(pra_random, "Random", &pfh_random_init, &pfh_random_destroy, &pfh_random_isr);
 
     pfa_initialize(PAGES_START_ADDRESS);
     paging_initialize(IDENTITY_PAGES_COUNT);
@@ -49,10 +51,13 @@ void kernel_main()
     idt_set_descriptor(14, &asm_page_fault_handler, 0x8e);
     idt_initialize();
 
+    timer_initialize();
+
     pic_remap(0x20, 0x28);
     irq_set_mask_all();
+    irq_clear_mask(0);
 
-    interrupts_enable();
+    set_interrupts_enabled(true);
     paging_enable();
 
     setup();

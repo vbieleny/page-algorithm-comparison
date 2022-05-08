@@ -11,12 +11,17 @@ void pfh_fifo_isr(uint32_t error_code, page_fault_handler_result_t *result)
     if (!pfa_is_page_allocation_limit_reached())
     {
         paging_make_page_present(accessed_address);
+        page_entry_t page_entry = { accessed_address };
+        page_queue_offer(page_entry);
     }
     else
     {
         uintptr_t victim_virtual = page_queue_peek()->virtual_address;
         paging_make_page_not_present(victim_virtual);
+        page_queue_poll();
         paging_make_page_present(accessed_address);
+        page_entry_t page_entry = { accessed_address };
+        page_queue_offer(page_entry);
         paging_invalidate_page(victim_virtual);
         page_table_entry_t *victim_pte = (page_table_entry_t*) memory_virtual_to_pte(victim_virtual);
         page_fault_handler_result_fill(result, victim_pte);

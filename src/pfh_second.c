@@ -5,17 +5,14 @@
 #include <pqueue.h>
 #include <lib.h>
 
-static void send_page_to_back()
-{
-    page_queue_send_to_back();
-}
-
 void pfh_second_isr(uint32_t error_code, page_fault_handler_result_t *result)
 {
     uint32_t accessed_address = paging_get_accessed_address();
     if (!pfa_is_page_allocation_limit_reached())
     {
         paging_make_page_present(accessed_address);
+        page_entry_t page_entry = { accessed_address };
+        page_queue_offer(page_entry);
     }
     else
     {
@@ -29,12 +26,15 @@ void pfh_second_isr(uint32_t error_code, page_fault_handler_result_t *result)
                 break;
             victim_pte->accessed = 0;
             paging_invalidate_page(victim_virtual);
-            send_page_to_back();
+            page_queue_send_to_back();
         }
         page_fault_handler_result_fill(result, victim_pte);
         victim_pte->dirty = 0;
         paging_make_page_not_present(victim_virtual);
+        page_queue_poll();
         paging_make_page_present(accessed_address);
+        page_entry_t page_entry = { accessed_address };
+        page_queue_offer(page_entry);
         paging_invalidate_page(victim_virtual);
     }
 

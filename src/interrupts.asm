@@ -10,6 +10,3 @@ idt_entry pra_timer_interrupt, asm_timer_interrupt, fx_memory_timer_interrupt
 
 section .data
 align 16
-fx_memory_page_fault: times 512 db 0
-fx_memory_kernel_panic: times 512 db 0
-fx_memory_timer_interrupt: times 512 db 0

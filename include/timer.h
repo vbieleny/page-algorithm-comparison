@@ -6,9 +6,13 @@
 #define TIMER_FREQUENCY (3579545 / 3)
 #define TIMER_DIVISOR_1KHZ 1193
 
+typedef void (*timer_callback_t)();
+
+extern void asm_timer_interrupt();
+
 void timer_initialize();
 void timer_set_divisor(uint16_t divisor);
-uint32_t milliseconds_from_boot();
+void timer_set_callback(timer_callback_t callback);
 void pra_timer_interrupt();
 
 ALWAYS_INLINE uint64_t timestamp()

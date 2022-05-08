@@ -96,15 +96,12 @@ void paging_make_page_present(uintptr_t virtual_address)
         *pte |= (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
     else
         *pte = (uint32_t) pfa_allocate_page() | (PAGE_FLAG_READ_WRITE | PAGE_FLAG_PRESENT);
-    page_entry_t page_entry = { virtual_address };
-    page_queue_offer(page_entry);
 }
 
 void paging_make_page_not_present(uintptr_t virtual_address)
 {
     page_table_entry_t *pte = (page_table_entry_t*) memory_virtual_to_pte(virtual_address);
     pte->present = 0;
-    page_queue_poll();
 }
 
 void paging_add_result_to_statistics(page_fault_handler_result_t *result)
