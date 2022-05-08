@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "*.h": "c",
+        "*.c": "c",
+        "*.tcc": "c",
+        "memory": "c",
+        "memory_resource": "c",
+        "iosfwd": "c",
+        "new": "c",
+        "utility": "c",
+        "cstdlib": "c",
+        "algorithm": "c"
+    },
+    "C_Cpp.files.exclude": {
+        "**/.template": true
+    },
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+}

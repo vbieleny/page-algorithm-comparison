@@ -1,0 +1,49 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/.template/.prac/build/os.elf",
+            "cwd": "${workspaceRoot}",
+            "args": [],
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "text": "target remote localhost:1234"
+                },
+                {
+                    "text": "source ${workspaceFolder}/.gdbinit"
+                }
+            ],
+            "preLaunchTask": "Launch QEMU"
+        },
+        {
+            "name": "Debug (Test)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/test/build/list_test.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description":  "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build Tests"
+        },
+    ]
+}

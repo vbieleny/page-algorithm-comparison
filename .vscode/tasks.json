@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Launch QEMU",
+            "type": "shell",
+            "isBackground": true,
+            "linux": {
+                "command": "make -s clean && make -s template && make -s -j$(nproc) -C ./.template/.prac all && python3 run_qemu_debug.py .template/.prac/build/os.img",
+                "problemMatcher": {
+                    "pattern": {
+                        "regexp": ".*"
+                    },
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".*",
+                        "endsPattern": ".*"
+                    }
+                }
+            }
+        },
+        {
+            "label": "Build Tests",
+            "type": "shell",
+            "linux": {
+                "command": "make -s test-build"
+            }
+        }
+    ]
+}

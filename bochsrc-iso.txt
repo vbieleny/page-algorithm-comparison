@@ -1,0 +1,13 @@
+boot: cdrom
+ata0-slave: type=cdrom, path=build/os.iso, status=inserted
+
+display_library: x, options="gui_debug"
+
+cpu: count=1, ips=1000000, reset_on_triple_fault=0
+megs: 128
+
+clock: sync=realtime
+
+magic_break: enabled=1
+
+log: bochsout-iso.txt
