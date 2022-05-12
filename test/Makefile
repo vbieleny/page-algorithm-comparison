@@ -3,7 +3,7 @@ PATHR		:= build/results
 PATHI		:= ../include
 PATHT		:= .
 PATHS		:= ../src
-EXCS		:= kernel.c timer.c
+EXCS		:= pra_kernel.c pra_timer.c
 
 SRCT		:= $(wildcard $(PATHT)/*_test.c)
 OUTS		:= $(SRCT:$(PATHT)/%.c=%.out)

@@ -4,10 +4,10 @@
 #include <stdint.h>
 #include <string.h>
 #include "pra_unit.h"
-#include "kmalloc.h"
-#include "malloc.h"
-#include "pfa.h"
-#include "lib.h"
+#include "pra_kmalloc.h"
+#include "pra_malloc.h"
+#include "pra_pfa.h"
+#include "pra_lib.h"
 
 static uint8_t kernel_memory[1024 * 32];
 static uint8_t user_memory[1024 * 32];

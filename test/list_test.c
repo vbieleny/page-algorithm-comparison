@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <string.h>
 #include "pra_unit.h"
-#include "list.h"
-#include "kmalloc.h"
+#include "pra_list.h"
+#include "pra_kmalloc.h"
 
 typedef struct
 {

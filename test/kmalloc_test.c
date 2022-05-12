@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <string.h>
 #include "pra_unit.h"
-#include "kmalloc.h"
-#include "lib.h"
+#include "pra_kmalloc.h"
+#include "pra_lib.h"
 
 #define ASSERT_MEM_FREE do { PRA_ASSERT(kernel_memory_get_free_mem() == ARRAY_LEN(memory)); PRA_ASSERT(kernel_memory_get_free_blocks() == 1); } while (0)
 

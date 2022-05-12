@@ -3,8 +3,8 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "pra_unit.h"
-#include "pqueue.h"
-#include "kmalloc.h"
+#include "pra_pqueue.h"
+#include "pra_kmalloc.h"
 
 static const size_t DEFAULT_PAGE_QUEUE_CAPACITY = 4;
 
