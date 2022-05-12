@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Common error definitions and structures.
+ */
+
 #pragma once
 
 #include <stdint.h>

@@ -9,9 +9,9 @@ SRCS            := $(wildcard $(SRCDIR)/*.c)
 USERSRCS        := $(wildcard ../$(SRCDIR)/*.c)
 OBJS            := $(patsubst %.c, $(BUILDDIR)/%.o, $(SRCS:$(SRCDIR)/%=%))
 OBJS            += $(patsubst %.c, $(USERBUILDDIR)/%.o, $(USERSRCS:../$(SRCDIR)/%=%))
-OBJS			+= $(BUILDDIR)/interrupts.o
+OBJS			+= $(BUILDDIR)/pra_interrupts.o
 DEPS            := $(OBJS:.o=.d)
-LINKER          := $(SRCDIR)/linker.ld
+LINKER          := $(SRCDIR)/pra_linker.ld
 ELFFILE         := os.elf
 BINFILE         := os.bin
 IMGFILE         := os.img
@@ -45,7 +45,7 @@ $(BUILDDIR)/$(ISOFILE): $(BUILDDIR)/$(IMGFILE)
 	mkisofs -o $@ -input-charset utf-8 -V PRAC -b $(notdir $<) $(CDCONTENTS)
 	rm -rf $(CDCONTENTS)
 
-$(BUILDDIR)/$(IMGFILE): $(BUILDDIR)/boot.bin $(BUILDDIR)/$(BINFILE)
+$(BUILDDIR)/$(IMGFILE): $(BUILDDIR)/pra_boot.bin $(BUILDDIR)/$(BINFILE)
 	cat $^ > $@
 	truncate -c -s 1440K $@
 
@@ -65,10 +65,10 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
 	$(CC) $(CFLAGS) -MM -MT $@ -MF $(patsubst %.o, %.d, $@) $<
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILDDIR)/boot.bin: $(SRCDIR)/boot.asm | $(BUILDDIR)
+$(BUILDDIR)/pra_boot.bin: $(SRCDIR)/pra_boot.asm | $(BUILDDIR)
 	$(ASM) $(ASMFLAGS) -o $@ $<
 
-$(BUILDDIR)/interrupts.o: $(SRCDIR)/interrupts.asm | $(BUILDDIR)
+$(BUILDDIR)/pra_interrupts.o: $(SRCDIR)/pra_interrupts.asm | $(BUILDDIR)
 	$(ASM) $(ASMELFFLAGS) -o $@ $<
 
 $(BUILDDIR):

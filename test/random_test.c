@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include <string.h>
 #include "pra_unit.h"
-#include "random.h"
-#include "lib.h"
+#include "pra_random.h"
+#include "pra_lib.h"
 
 static bool test_random_basic()
 {
