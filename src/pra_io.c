@@ -547,9 +547,6 @@ uint16_t io_in_word(uint16_t port)
     return value;
 }
 
-/**
- * Wait a very small amount of time (1 to 4 microseconds, generally)
- */
 void io_wait()
 {
     io_out_byte(0x80, 0);

@@ -1,5 +1,17 @@
 var searchData=
 [
-  ['selector_5ferror_5fcode_5ft_23',['selector_error_code_t',['../structselector__error__code__t.html',1,'']]],
-  ['set_5finterrupts_5fenabled_24',['set_interrupts_enabled',['../pra__idt_8h.html#a2b42abcaf2ab999bd89256ca07e31f3b',1,'pra_idt.h']]]
+  ['page_5fentry_5ft_24',['page_entry_t',['../structpage__entry__t.html',1,'']]],
+  ['page_5ffault_5fhandler_5fresult_5ft_25',['page_fault_handler_result_t',['../structpage__fault__handler__result__t.html',1,'']]],
+  ['page_5ffault_5fstatistics_5ft_26',['page_fault_statistics_t',['../structpage__fault__statistics__t.html',1,'']]],
+  ['page_5freplacement_5falgorithm_5ft_27',['page_replacement_algorithm_t',['../structpage__replacement__algorithm__t.html',1,'']]],
+  ['pra_5fattrs_2eh_28',['pra_attrs.h',['../pra__attrs_8h.html',1,'']]],
+  ['pra_5fdebug_2eh_29',['pra_debug.h',['../pra__debug_8h.html',1,'']]],
+  ['pra_5fdebug_5fbochs_5fbreakpoint_30',['pra_debug_bochs_breakpoint',['../pra__debug_8h.html#a8a124ecbfad7a007a3010a0bbd970ca9',1,'pra_debug.h']]],
+  ['pra_5ferr_2eh_31',['pra_err.h',['../pra__err_8h.html',1,'']]],
+  ['pra_5fidt_2eh_32',['pra_idt.h',['../pra__idt_8h.html',1,'']]],
+  ['pra_5fio_2eh_33',['pra_io.h',['../pra__io_8h.html',1,'']]],
+  ['pra_5fkernel_2eh_34',['pra_kernel.h',['../pra__kernel_8h.html',1,'']]],
+  ['pra_5fkmalloc_2eh_35',['pra_kmalloc.h',['../pra__kmalloc_8h.html',1,'']]],
+  ['pra_5fpacked_36',['PRA_PACKED',['../structPRA__PACKED.html',1,'']]],
+  ['pra_5fsuite_2eh_37',['pra_suite.h',['../pra__suite_8h.html',1,'']]]
 ];

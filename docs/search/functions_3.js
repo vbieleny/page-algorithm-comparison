@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['pra_5fdebug_5fbochs_5fbreakpoint_53',['pra_debug_bochs_breakpoint',['../pra__debug_8h.html#a8a124ecbfad7a007a3010a0bbd970ca9',1,'pra_debug.h']]]
+  ['kernel_5fmain_83',['kernel_main',['../pra__kernel_8h.html#a06f56b538384a04d000e2dd3f4603a32',1,'pra_kernel.h']]],
+  ['kernel_5fmemory_5finitialize_84',['kernel_memory_initialize',['../pra__kmalloc_8h.html#a6a18d969d61fda1ec4d37b279512044d',1,'pra_kmalloc.h']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['run_5ftest_5fsuite_22',['run_test_suite',['../pra__suite_8h.html#a27c07f27ffa47886fb92db793d11e607',1,'pra_suite.h']]]
+  ['nmi_5fset_5fenabled_23',['nmi_set_enabled',['../pra__idt_8h.html#a76295c350912342f5f07dcadd3c89de1',1,'pra_idt.h']]]
 ];

@@ -23,6 +23,19 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Page Replacement Algorithm Comparison", "index.html", [
+    [ "User Manual", "md_README.html", [
+      [ "Dependencies", "md_README.html#autotoc_md1", null ],
+      [ "Usage", "md_README.html#autotoc_md2", [
+        [ "Creating a new project", "md_README.html#autotoc_md3", null ],
+        [ "Writing test programs and test suite", "md_README.html#autotoc_md4", null ],
+        [ "Writing a page replacement algorithm", "md_README.html#autotoc_md5", null ],
+        [ "Executing a project", "md_README.html#autotoc_md6", null ]
+      ] ],
+      [ "Using a VS Code extension", "md_README.html#autotoc_md7", null ],
+      [ "Tests", "md_README.html#autotoc_md8", null ],
+      [ "API Reference", "md_README.html#autotoc_md9", null ],
+      [ "License", "md_README.html#autotoc_md10", null ]
+    ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ]
