@@ -98,7 +98,7 @@ To use an "allocation spread" parameter in your test programs, use `void* user_m
 
 ### Writing a page replacement algorithm
 
-This framework already implements some page replacement algorithms that you can use. You can find a list of these algoritms in [API reference](). To write a new page replacement algorithms, you need to create and implement a function that will handle page faults. 
+This framework already implements some page replacement algorithms that you can use. You can find a list of these algoritms in [API reference](https://vbieleny.github.io/page-algorithm-comparison/pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb). To write a new page replacement algorithms, you need to create and implement a function that will handle page faults. 
 
 This function signature is defined like this:
 
