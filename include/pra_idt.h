@@ -25,7 +25,7 @@ typedef struct
 } PRA_PACKED idt_entry_t;
 
 /**
- * @brief Initializes IDT by loading the IDT via LIDT instruction. Must be use to for interrupts to work properly.
+ * @brief Initializes IDT by loading the IDT via LIDT instruction. Must be use to for interrupts to work properly. Called automatically by kernel.
  */
 void idt_initialize();
 

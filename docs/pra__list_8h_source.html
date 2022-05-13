@@ -101,44 +101,69 @@ $(document).ready(function(){initNavTree('pra__list_8h_source.html',''); initRes
 <div class="title">pra_list.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;pra_lib.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__kmalloc_8h.html">pra_kmalloc.h</a>&quot;</span></div>
+<a href="pra__list_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> INITIAL_LIST_SIZE = 32;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structlist__t.html">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">void</span> **items;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">size_t</span> size;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">size_t</span> capacity;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;} <a class="code" href="structlist__t.html">list_t</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">typedef</span> bool (*list_compare_callback_t)(<span class="keywordtype">void</span> *<span class="keyword">this</span>, <span class="keywordtype">void</span> *other);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<a class="code" href="structlist__t.html">list_t</a>* list_create();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="structlist__t.html">list_t</a>* list_create_with_initial_size(<span class="keywordtype">size_t</span> initial_size);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">size_t</span> list_get_size(<a class="code" href="structlist__t.html">list_t</a> *list);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">size_t</span> list_get_capacity(<a class="code" href="structlist__t.html">list_t</a> *list);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> list_destroy(<a class="code" href="structlist__t.html">list_t</a> *list);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> list_append(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">void</span> *data);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">bool</span> list_set(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index, <span class="keywordtype">void</span> *data);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span>* list_get(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">bool</span> list_insert(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index, <span class="keywordtype">void</span> *data);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">bool</span> list_remove(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">int</span> list_index_of(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">void</span> *data);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">int</span> list_index_of_by_comparison(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">void</span> *data, list_compare_callback_t callback);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__lib_8h.html">pra_lib.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__kmalloc_8h.html">pra_kmalloc.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> INITIAL_LIST_SIZE = 32;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structlist__t.html">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> **items;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">size_t</span> size;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">size_t</span> capacity;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <a class="code" href="structlist__t.html">list_t</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">typedef</span> bool (*list_compare_callback_t)(<span class="keywordtype">void</span> *<span class="keyword">this</span>, <span class="keywordtype">void</span> *other);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="structlist__t.html">list_t</a>* <a class="code" href="pra__list_8h.html#af609c5d27a13835d2ced6efb86c30881">list_create</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="structlist__t.html">list_t</a>* <a class="code" href="pra__list_8h.html#aac5bdc6fe98591832c759291c6cbb0c0">list_create_with_initial_size</a>(<span class="keywordtype">size_t</span> initial_size);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="pra__list_8h.html#a029b6ca030e85bcc18264f8f634d8788">list_get_size</a>(<a class="code" href="structlist__t.html">list_t</a> *list);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="pra__list_8h.html#a47c5f268c4a34868aaaa35748af80ba0">list_get_capacity</a>(<a class="code" href="structlist__t.html">list_t</a> *list);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__list_8h.html#af04149a6092f6c1960ffe1556fa0e612">list_destroy</a>(<a class="code" href="structlist__t.html">list_t</a> *list);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__list_8h.html#a4bc776f6cc53c3361386caca8623b405">list_append</a>(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">void</span> *data);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__list_8h.html#a0da2619ee4e9656ee093dd3280422304">list_set</a>(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index, <span class="keywordtype">void</span> *data);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span>* <a class="code" href="pra__list_8h.html#a1b6d1e2245a2c6c8a2c6e7ae33ef38c4">list_get</a>(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__list_8h.html#a11b0c6344057631e801d6aa3aeed28cf">list_insert</a>(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index, <span class="keywordtype">void</span> *data);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__list_8h.html#abdd1cd8e9e2b4067b625dedd5fd1149e">list_remove</a>(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">size_t</span> index);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">int</span> <a class="code" href="pra__list_8h.html#a7a70840ab4d66013bb7e4da2c2302252">list_index_of</a>(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">void</span> *data);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">int</span> <a class="code" href="pra__list_8h.html#ad410def269ae6686ad64e0264527eda7">list_index_of_by_comparison</a>(<a class="code" href="structlist__t.html">list_t</a> *list, <span class="keywordtype">void</span> *data, list_compare_callback_t callback);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__list_8h_html_af609c5d27a13835d2ced6efb86c30881"><div class="ttname"><a href="pra__list_8h.html#af609c5d27a13835d2ced6efb86c30881">list_create</a></div><div class="ttdeci">list_t * list_create()</div><div class="ttdoc">Creates a new list with default initial size.</div></div>
+<div class="ttc" id="apra__list_8h_html_a11b0c6344057631e801d6aa3aeed28cf"><div class="ttname"><a href="pra__list_8h.html#a11b0c6344057631e801d6aa3aeed28cf">list_insert</a></div><div class="ttdeci">bool list_insert(list_t *list, size_t index, void *data)</div><div class="ttdoc">Inserts the element into the list at a specified position.</div></div>
+<div class="ttc" id="apra__list_8h_html_a0da2619ee4e9656ee093dd3280422304"><div class="ttname"><a href="pra__list_8h.html#a0da2619ee4e9656ee093dd3280422304">list_set</a></div><div class="ttdeci">bool list_set(list_t *list, size_t index, void *data)</div><div class="ttdoc">Replaces the element in the list at a specified position.</div></div>
+<div class="ttc" id="apra__list_8h_html_a1b6d1e2245a2c6c8a2c6e7ae33ef38c4"><div class="ttname"><a href="pra__list_8h.html#a1b6d1e2245a2c6c8a2c6e7ae33ef38c4">list_get</a></div><div class="ttdeci">void * list_get(list_t *list, size_t index)</div><div class="ttdoc">Returns the element in the list at a specified position.</div></div>
 <div class="ttc" id="apra__kmalloc_8h_html"><div class="ttname"><a href="pra__kmalloc_8h.html">pra_kmalloc.h</a></div><div class="ttdoc">Functionality of a kernel memory allocator used for kernel code.</div></div>
-<div class="ttc" id="astructlist__t_html"><div class="ttname"><a href="structlist__t.html">list_t</a></div><div class="ttdef"><b>Definition:</b> pra_list.h:10</div></div>
+<div class="ttc" id="apra__list_8h_html_a7a70840ab4d66013bb7e4da2c2302252"><div class="ttname"><a href="pra__list_8h.html#a7a70840ab4d66013bb7e4da2c2302252">list_index_of</a></div><div class="ttdeci">int list_index_of(list_t *list, void *data)</div><div class="ttdoc">Find an element in the list and returns its index.</div></div>
+<div class="ttc" id="apra__list_8h_html_abdd1cd8e9e2b4067b625dedd5fd1149e"><div class="ttname"><a href="pra__list_8h.html#abdd1cd8e9e2b4067b625dedd5fd1149e">list_remove</a></div><div class="ttdeci">bool list_remove(list_t *list, size_t index)</div><div class="ttdoc">Removes the element from a specified position.</div></div>
+<div class="ttc" id="astructlist__t_html"><div class="ttname"><a href="structlist__t.html">list_t</a></div><div class="ttdef"><b>Definition:</b> pra_list.h:15</div></div>
+<div class="ttc" id="apra__list_8h_html_a47c5f268c4a34868aaaa35748af80ba0"><div class="ttname"><a href="pra__list_8h.html#a47c5f268c4a34868aaaa35748af80ba0">list_get_capacity</a></div><div class="ttdeci">size_t list_get_capacity(list_t *list)</div><div class="ttdoc">Returns the current remaining available space in the list.</div></div>
+<div class="ttc" id="apra__list_8h_html_ad410def269ae6686ad64e0264527eda7"><div class="ttname"><a href="pra__list_8h.html#ad410def269ae6686ad64e0264527eda7">list_index_of_by_comparison</a></div><div class="ttdeci">int list_index_of_by_comparison(list_t *list, void *data, list_compare_callback_t callback)</div><div class="ttdoc">Find an element in the list by using custom comparison function and returns its index.</div></div>
+<div class="ttc" id="apra__list_8h_html_aac5bdc6fe98591832c759291c6cbb0c0"><div class="ttname"><a href="pra__list_8h.html#aac5bdc6fe98591832c759291c6cbb0c0">list_create_with_initial_size</a></div><div class="ttdeci">list_t * list_create_with_initial_size(size_t initial_size)</div><div class="ttdoc">Creates a new list with specified initial size.</div></div>
+<div class="ttc" id="apra__list_8h_html_af04149a6092f6c1960ffe1556fa0e612"><div class="ttname"><a href="pra__list_8h.html#af04149a6092f6c1960ffe1556fa0e612">list_destroy</a></div><div class="ttdeci">void list_destroy(list_t *list)</div><div class="ttdoc">Destroys the created list and frees all allocated memory.</div></div>
+<div class="ttc" id="apra__list_8h_html_a029b6ca030e85bcc18264f8f634d8788"><div class="ttname"><a href="pra__list_8h.html#a029b6ca030e85bcc18264f8f634d8788">list_get_size</a></div><div class="ttdeci">size_t list_get_size(list_t *list)</div><div class="ttdoc">Returns the number of elements in the list.</div></div>
+<div class="ttc" id="apra__list_8h_html_a4bc776f6cc53c3361386caca8623b405"><div class="ttname"><a href="pra__list_8h.html#a4bc776f6cc53c3361386caca8623b405">list_append</a></div><div class="ttdeci">void list_append(list_t *list, void *data)</div><div class="ttdoc">Appends element to the list. If the list if full, it reallocates the list to make a new space.</div></div>
+<div class="ttc" id="apra__lib_8h_html"><div class="ttname"><a href="pra__lib_8h.html">pra_lib.h</a></div><div class="ttdoc">Standard library functions implementation.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_list.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__list_8h.html">pra_list.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

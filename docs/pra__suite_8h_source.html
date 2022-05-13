@@ -105,46 +105,50 @@ $(document).ready(function(){initNavTree('pra__suite_8h_source.html',''); initRe
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;pra_pfh.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__pfh_8h.html">pra_pfh.h</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">typedef</span> void (*test_execution_callback_t)();</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    FORMAT_HUMAN_READABLE,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    FORMAT_PARSEABLE</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} test_output_format_e;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structtest__execution__t.html">   20</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="pra__suite_8h.html#aa5fe7dd94cd5da4ddfe7ec8f773cf83a">   15</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="pra__suite_8h.html#aa5fe7dd94cd5da4ddfe7ec8f773cf83a">test_execution_callback_t</a>)();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="pra__suite_8h.html#ad06c4a97aad4cd6f46fb1f8446c8640b">   20</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    test_execution_callback_t callback;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *name;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <a class="code" href="structtest__execution__t.html">test_execution_t</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    FORMAT_HUMAN_READABLE,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    FORMAT_PARSEABLE</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <a class="code" href="pra__suite_8h.html#ad06c4a97aad4cd6f46fb1f8446c8640b">test_output_format_e</a>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structtest__parameters__t.html">   26</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    uint32_t pages_limit;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    uint32_t allocation_spread;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    uint32_t seed;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <a class="code" href="structtest__parameters__t.html">test_parameters_t</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structtest__configuration__t.html">   33</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="structtest__execution__t.html">test_execution_t</a> *tests;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">size_t</span> tests_length;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    page_replacement_algorithm_e *algorithms;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">size_t</span> algorithms_length;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="structtest__parameters__t.html">test_parameters_t</a> *parameters;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">size_t</span> parameters_length;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <a class="code" href="structtest__configuration__t.html">test_configuration_t</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__suite_8h.html#a27c07f27ffa47886fb92db793d11e607">run_test_suite</a>(<a class="code" href="structtest__configuration__t.html">test_configuration_t</a> configuration);</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structtest__execution__t.html">   31</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="pra__suite_8h.html#aa5fe7dd94cd5da4ddfe7ec8f773cf83a">test_execution_callback_t</a> callback;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *name;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;} <a class="code" href="structtest__execution__t.html">test_execution_t</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structtest__parameters__t.html">   43</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    uint32_t pages_limit;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    uint32_t allocation_spread;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    uint32_t seed;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;} <a class="code" href="structtest__parameters__t.html">test_parameters_t</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structtest__configuration__t.html">   59</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="structtest__execution__t.html">test_execution_t</a> *tests;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">size_t</span> tests_length;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">page_replacement_algorithm_e</a> *algorithms;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">size_t</span> algorithms_length;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="structtest__parameters__t.html">test_parameters_t</a> *parameters;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">size_t</span> parameters_length;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;} <a class="code" href="structtest__configuration__t.html">test_configuration_t</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__suite_8h.html#a27c07f27ffa47886fb92db793d11e607">run_test_suite</a>(<a class="code" href="structtest__configuration__t.html">test_configuration_t</a> configuration);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__pfh_8h_html_a1b5e8e701f1a8b607fc9c380c391b4cb"><div class="ttname"><a href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">page_replacement_algorithm_e</a></div><div class="ttdeci">page_replacement_algorithm_e</div><div class="ttdoc">Enum containing a list of all built-in page replacement algorithms.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:32</div></div>
+<div class="ttc" id="apra__pfh_8h_html"><div class="ttname"><a href="pra__pfh_8h.html">pra_pfh.h</a></div><div class="ttdoc">Provides page fault handling functionality, registering new PFH and selecting active ones.</div></div>
 <div class="ttc" id="apra__suite_8h_html_a27c07f27ffa47886fb92db793d11e607"><div class="ttname"><a href="pra__suite_8h.html#a27c07f27ffa47886fb92db793d11e607">run_test_suite</a></div><div class="ttdeci">void run_test_suite(test_configuration_t configuration)</div><div class="ttdoc">Run the test suite specified as parameter.</div></div>
-<div class="ttc" id="astructtest__configuration__t_html"><div class="ttname"><a href="structtest__configuration__t.html">test_configuration_t</a></div><div class="ttdef"><b>Definition:</b> pra_suite.h:33</div></div>
-<div class="ttc" id="astructtest__parameters__t_html"><div class="ttname"><a href="structtest__parameters__t.html">test_parameters_t</a></div><div class="ttdef"><b>Definition:</b> pra_suite.h:26</div></div>
-<div class="ttc" id="astructtest__execution__t_html"><div class="ttname"><a href="structtest__execution__t.html">test_execution_t</a></div><div class="ttdef"><b>Definition:</b> pra_suite.h:20</div></div>
+<div class="ttc" id="astructtest__configuration__t_html"><div class="ttname"><a href="structtest__configuration__t.html">test_configuration_t</a></div><div class="ttdoc">A strucuture defining the test suite configuration.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:59</div></div>
+<div class="ttc" id="apra__suite_8h_html_aa5fe7dd94cd5da4ddfe7ec8f773cf83a"><div class="ttname"><a href="pra__suite_8h.html#aa5fe7dd94cd5da4ddfe7ec8f773cf83a">test_execution_callback_t</a></div><div class="ttdeci">void(* test_execution_callback_t)()</div><div class="ttdoc">Function for the test program implementation.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:15</div></div>
+<div class="ttc" id="apra__suite_8h_html_ad06c4a97aad4cd6f46fb1f8446c8640b"><div class="ttname"><a href="pra__suite_8h.html#ad06c4a97aad4cd6f46fb1f8446c8640b">test_output_format_e</a></div><div class="ttdeci">test_output_format_e</div><div class="ttdoc">Which test output format to use. This is set automatically and should not be changed.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:20</div></div>
+<div class="ttc" id="astructtest__parameters__t_html"><div class="ttname"><a href="structtest__parameters__t.html">test_parameters_t</a></div><div class="ttdoc">A structure defining the parameters for the test run.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:43</div></div>
+<div class="ttc" id="astructtest__execution__t_html"><div class="ttname"><a href="structtest__execution__t.html">test_execution_t</a></div><div class="ttdoc">A structure defining the test program.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:31</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

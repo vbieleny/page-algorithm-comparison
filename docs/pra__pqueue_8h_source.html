@@ -101,34 +101,50 @@ $(document).ready(function(){initNavTree('pra__pqueue_8h_source.html',''); initR
 <div class="title">pra_pqueue.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
+<a href="pra__pqueue_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structpage__entry__t.html">    8</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    uintptr_t virtual_address;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;} <a class="code" href="structpage__entry__t.html">page_entry_t</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">bool</span> page_queue_offer(<a class="code" href="structpage__entry__t.html">page_entry_t</a> page);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<a class="code" href="structpage__entry__t.html">page_entry_t</a> page_queue_poll();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<a class="code" href="structpage__entry__t.html">page_entry_t</a>* page_queue_peek();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> page_queue_send_to_back();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span> page_queue_clear();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> page_queue_set_capacity(<span class="keywordtype">size_t</span> capacity);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">size_t</span> page_queue_get_size();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">bool</span> page_queue_is_full();</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structpage__entry__t.html">   16</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    uintptr_t virtual_address;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <a class="code" href="structpage__entry__t.html">page_entry_t</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__pqueue_8h.html#a124f0cd7e1907a8f86b08e95a0cc3e85">page_queue_offer</a>(<a class="code" href="structpage__entry__t.html">page_entry_t</a> page);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="structpage__entry__t.html">page_entry_t</a> <a class="code" href="pra__pqueue_8h.html#ad08f7a367019c98ca936ba0099e62310">page_queue_poll</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<a class="code" href="structpage__entry__t.html">page_entry_t</a>* <a class="code" href="pra__pqueue_8h.html#a97391fe11522a3d748495cd4f7cc1452">page_queue_peek</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pqueue_8h.html#a27447cda5ac73629e036efdecdfccdb1">page_queue_send_to_back</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pqueue_8h.html#acea00ae75f9f546a352886b14b34f04c">page_queue_clear</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pqueue_8h.html#aee1998f4f40613965ced5aca8a95ef7f">page_queue_set_capacity</a>(<span class="keywordtype">size_t</span> capacity);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="pra__pqueue_8h.html#ac17af3dea7dc0d506c7babd4aa502bd5">page_queue_get_size</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__pqueue_8h.html#a03f3bebe5a62ed5ed698375702aaf160">page_queue_is_full</a>();</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="apra__attrs_8h_html"><div class="ttname"><a href="pra__attrs_8h.html">pra_attrs.h</a></div><div class="ttdoc">Macro definitions for commonly used attributes.</div></div>
-<div class="ttc" id="astructpage__entry__t_html"><div class="ttname"><a href="structpage__entry__t.html">page_entry_t</a></div><div class="ttdef"><b>Definition:</b> pra_pqueue.h:8</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_acea00ae75f9f546a352886b14b34f04c"><div class="ttname"><a href="pra__pqueue_8h.html#acea00ae75f9f546a352886b14b34f04c">page_queue_clear</a></div><div class="ttdeci">void page_queue_clear()</div><div class="ttdoc">Removes all elements from the queue.</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_aee1998f4f40613965ced5aca8a95ef7f"><div class="ttname"><a href="pra__pqueue_8h.html#aee1998f4f40613965ced5aca8a95ef7f">page_queue_set_capacity</a></div><div class="ttdeci">void page_queue_set_capacity(size_t capacity)</div><div class="ttdoc">Sets the capacity of the queue. When the queue is full, it won't allow adding new elements.</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_a124f0cd7e1907a8f86b08e95a0cc3e85"><div class="ttname"><a href="pra__pqueue_8h.html#a124f0cd7e1907a8f86b08e95a0cc3e85">page_queue_offer</a></div><div class="ttdeci">bool page_queue_offer(page_entry_t page)</div><div class="ttdoc">Offers the page entry element to the back of the queue.</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_a03f3bebe5a62ed5ed698375702aaf160"><div class="ttname"><a href="pra__pqueue_8h.html#a03f3bebe5a62ed5ed698375702aaf160">page_queue_is_full</a></div><div class="ttdeci">bool page_queue_is_full()</div><div class="ttdoc">Returns whether the queue has reached its capacity and is full.</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_a97391fe11522a3d748495cd4f7cc1452"><div class="ttname"><a href="pra__pqueue_8h.html#a97391fe11522a3d748495cd4f7cc1452">page_queue_peek</a></div><div class="ttdeci">page_entry_t * page_queue_peek()</div><div class="ttdoc">Returns the element at the front of the queue without removing it.</div></div>
+<div class="ttc" id="astructpage__entry__t_html"><div class="ttname"><a href="structpage__entry__t.html">page_entry_t</a></div><div class="ttdoc">A structure containing virtual address that caused the page fault.</div><div class="ttdef"><b>Definition:</b> pra_pqueue.h:16</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_ad08f7a367019c98ca936ba0099e62310"><div class="ttname"><a href="pra__pqueue_8h.html#ad08f7a367019c98ca936ba0099e62310">page_queue_poll</a></div><div class="ttdeci">page_entry_t page_queue_poll()</div><div class="ttdoc">Returns the element at the front of the queue and removes it.</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_a27447cda5ac73629e036efdecdfccdb1"><div class="ttname"><a href="pra__pqueue_8h.html#a27447cda5ac73629e036efdecdfccdb1">page_queue_send_to_back</a></div><div class="ttdeci">void page_queue_send_to_back()</div><div class="ttdoc">Sends the element at the front of the queue to the back of the queue.</div></div>
+<div class="ttc" id="apra__pqueue_8h_html_ac17af3dea7dc0d506c7babd4aa502bd5"><div class="ttname"><a href="pra__pqueue_8h.html#ac17af3dea7dc0d506c7babd4aa502bd5">page_queue_get_size</a></div><div class="ttdeci">size_t page_queue_get_size()</div><div class="ttdoc">Returns how many elements are in the queue.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_pqueue.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__pqueue_8h.html">pra_pqueue.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

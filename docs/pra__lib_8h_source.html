@@ -101,24 +101,30 @@ $(document).ready(function(){initNavTree('pra__lib_8h_source.html',''); initResi
 <div class="title">pra_lib.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define ARRAY_LEN(array) (sizeof((array)) / sizeof((array)[0]))</span></div>
+<a href="pra__lib_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">char</span> prac_name_t[128];</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">void</span> pra_memset(<span class="keywordtype">void</span> *memory, uint8_t value, <span class="keywordtype">size_t</span> length);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">void</span>* pra_memcpy(<span class="keywordtype">void</span> *destination, <span class="keyword">const</span> <span class="keywordtype">void</span> *source, <span class="keywordtype">size_t</span> length);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">int</span> pra_isdigit(<span class="keywordtype">int</span> digit);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="pra__lib_8h.html#a44c876c78e2fc722c001dfc1a36b638f">   14</a></span>&#160;<span class="preprocessor">#define ARRAY_LEN(array) (sizeof((array)) / sizeof((array)[0]))</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">char</span> prac_name_t[128];</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__lib_8h.html#a4674688bdd10612f34d1f5ef4d71a79e">pra_memset</a>(<span class="keywordtype">void</span> *memory, uint8_t value, <span class="keywordtype">size_t</span> length);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span>* <a class="code" href="pra__lib_8h.html#aaded49d1ee1dd648346ce417de7f5089">pra_memcpy</a>(<span class="keywordtype">void</span> *destination, <span class="keyword">const</span> <span class="keywordtype">void</span> *source, <span class="keywordtype">size_t</span> length);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">int</span> <a class="code" href="pra__lib_8h.html#ae55b683d4deba2063689d9c0fff0808a">pra_isdigit</a>(<span class="keywordtype">int</span> digit);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__lib_8h_html_aaded49d1ee1dd648346ce417de7f5089"><div class="ttname"><a href="pra__lib_8h.html#aaded49d1ee1dd648346ce417de7f5089">pra_memcpy</a></div><div class="ttdeci">void * pra_memcpy(void *destination, const void *source, size_t length)</div><div class="ttdoc">Copies certain amount of memory from one address to another.</div></div>
+<div class="ttc" id="apra__lib_8h_html_a4674688bdd10612f34d1f5ef4d71a79e"><div class="ttname"><a href="pra__lib_8h.html#a4674688bdd10612f34d1f5ef4d71a79e">pra_memset</a></div><div class="ttdeci">void pra_memset(void *memory, uint8_t value, size_t length)</div><div class="ttdoc">Fill memory of certain length with specified value.</div></div>
+<div class="ttc" id="apra__lib_8h_html_ae55b683d4deba2063689d9c0fff0808a"><div class="ttname"><a href="pra__lib_8h.html#ae55b683d4deba2063689d9c0fff0808a">pra_isdigit</a></div><div class="ttdeci">int pra_isdigit(int digit)</div><div class="ttdoc">Checks whether a character is a digit.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_lib.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__lib_8h.html">pra_lib.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

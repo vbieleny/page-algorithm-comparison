@@ -1,10 +1,13 @@
 var indexSectionsWithContent =
 {
-  0: "_aiklnprstu",
+  0: "_aghiklmnprstuv",
   1: "lpst",
   2: "p",
-  3: "_aiknprs",
-  4: "u"
+  3: "_aghiklmnprstu",
+  4: "pt",
+  5: "ptv",
+  6: "apt",
+  7: "u"
 };
 
 var indexSectionNames =
@@ -13,7 +16,10 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "pages"
+  4: "typedefs",
+  5: "enums",
+  6: "defines",
+  7: "pages"
 };
 
 var indexSectionLabels =
@@ -22,6 +28,9 @@ var indexSectionLabels =
   1: "Data Structures",
   2: "Files",
   3: "Functions",
-  4: "Pages"
+  4: "Typedefs",
+  5: "Enumerations",
+  6: "Macros",
+  7: "Pages"
 };
 

@@ -8,11 +8,11 @@ digraph "include/pra_suite.h"
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="stdint.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="pra_pfh.h",height=0.2,width=0.4,color="black",URL="$pra__pfh_8h_source.html",tooltip=" "];
+  Node3 [label="pra_pfh.h",height=0.2,width=0.4,color="black",URL="$pra__pfh_8h.html",tooltip="Provides page fault handling functionality, registering new PFH and selecting active ones."];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="stddef.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="pra_lib.h",height=0.2,width=0.4,color="black",URL="$pra__lib_8h_source.html",tooltip=" "];
+  Node5 [label="pra_lib.h",height=0.2,width=0.4,color="black",URL="$pra__lib_8h.html",tooltip="Standard library functions implementation."];
   Node5 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -24,7 +24,7 @@ digraph "include/pra_suite.h"
   Node8 [label="stdbool.h",height=0.2,width=0.4,color="grey75",tooltip=" "];
   Node3 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="pra_paging.h",height=0.2,width=0.4,color="black",URL="$pra__paging_8h_source.html",tooltip=" "];
+  Node9 [label="pra_paging.h",height=0.2,width=0.4,color="black",URL="$pra__paging_8h.html",tooltip="Handles paging related functionality, such as allocation or invalidation of pages."];
   Node9 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node9 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node9 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

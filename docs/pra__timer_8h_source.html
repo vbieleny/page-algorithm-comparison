@@ -101,45 +101,55 @@ $(document).ready(function(){initNavTree('pra__timer_8h_source.html',''); initRe
 <div class="title">pra_timer.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__idt_8h.html">pra_idt.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define TIMER_FREQUENCY (3579545 / 3)</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define TIMER_DIVISOR_1KHZ 1193</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">typedef</span> void (*timer_callback_t)();</div>
+<a href="pra__timer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__idt_8h.html">pra_idt.h</a>&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> asm_timer_interrupt();</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> timer_initialize();</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> timer_set_divisor(uint16_t divisor);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> timer_set_callback(timer_callback_t callback);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> pra_timer_interrupt();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;PRA_ALWAYS_INLINE uint64_t timestamp()</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    uint64_t value;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;lfence\t\n&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                 <span class="stringliteral">&quot;rdtsc\t\n&quot;</span> : <span class="stringliteral">&quot;=A&quot;</span>(value));</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="pra__timer_8h.html#a150e4f9c8426a49d5153393b6612ef9e">   14</a></span>&#160;<span class="preprocessor">#define TIMER_FREQUENCY (3579545 / 3)</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="pra__timer_8h.html#aa2b675dc68a5eb1683ad4dd67825a117">   19</a></span>&#160;<span class="preprocessor">#define TIMER_DIVISOR_1KHZ 1193</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="pra__timer_8h.html#a83effb2de3d93d37825bb84a27faa588">   24</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="pra__timer_8h.html#a83effb2de3d93d37825bb84a27faa588">timer_callback_t</a>)();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;PRA_ALWAYS_INLINE uint64_t timestamp_scaled()</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    uint64_t value;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;lfence\t\n&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                 <span class="stringliteral">&quot;rdtsc\t\n&quot;</span> : <span class="stringliteral">&quot;=A&quot;</span>(value));</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> value / 100ULL;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__timer_8h.html#a4073b8d097c739a20325fd82df2c2cc3">timer_initialize</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__timer_8h.html#af7862ed3117904b74cc9325435b75468">timer_set_divisor</a>(uint16_t divisor);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__timer_8h.html#afee518b2d59d94d140ee391c5f87f66b">timer_set_callback</a>(<a class="code" href="pra__timer_8h.html#a83effb2de3d93d37825bb84a27faa588">timer_callback_t</a> callback);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__timer_8h.html#af01d1a24345acb41c5b9d419766d5451">pra_timer_interrupt</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="pra__timer_8h.html#a21b0c3806a14ce5780d5d1ab0dddb9a6">   54</a></span>&#160;PRA_ALWAYS_INLINE uint64_t <a class="code" href="pra__timer_8h.html#a21b0c3806a14ce5780d5d1ab0dddb9a6">timestamp</a>()</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    uint64_t value;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;lfence\t\n&quot;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                 <span class="stringliteral">&quot;rdtsc\t\n&quot;</span> : <span class="stringliteral">&quot;=A&quot;</span>(value));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="pra__timer_8h.html#a0feb37c2c4dc3eea7fd2513e82e43a8f">   66</a></span>&#160;PRA_ALWAYS_INLINE uint64_t <a class="code" href="pra__timer_8h.html#a0feb37c2c4dc3eea7fd2513e82e43a8f">timestamp_scaled</a>()</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    uint64_t value;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;lfence\t\n&quot;</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                 <span class="stringliteral">&quot;rdtsc\t\n&quot;</span> : <span class="stringliteral">&quot;=A&quot;</span>(value));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> value / 100ULL;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__timer_8h_html_a4073b8d097c739a20325fd82df2c2cc3"><div class="ttname"><a href="pra__timer_8h.html#a4073b8d097c739a20325fd82df2c2cc3">timer_initialize</a></div><div class="ttdeci">void timer_initialize()</div><div class="ttdoc">Initializes the timer functionality. Should be called only once.</div></div>
+<div class="ttc" id="apra__timer_8h_html_a83effb2de3d93d37825bb84a27faa588"><div class="ttname"><a href="pra__timer_8h.html#a83effb2de3d93d37825bb84a27faa588">timer_callback_t</a></div><div class="ttdeci">void(* timer_callback_t)()</div><div class="ttdoc">Function that get called when timer interupt occurs.</div><div class="ttdef"><b>Definition:</b> pra_timer.h:24</div></div>
+<div class="ttc" id="apra__timer_8h_html_a0feb37c2c4dc3eea7fd2513e82e43a8f"><div class="ttname"><a href="pra__timer_8h.html#a0feb37c2c4dc3eea7fd2513e82e43a8f">timestamp_scaled</a></div><div class="ttdeci">PRA_ALWAYS_INLINE uint64_t timestamp_scaled()</div><div class="ttdoc">Returns the current scaled timestamp. The returned value is number of instructions executed overall d...</div><div class="ttdef"><b>Definition:</b> pra_timer.h:66</div></div>
 <div class="ttc" id="apra__idt_8h_html"><div class="ttname"><a href="pra__idt_8h.html">pra_idt.h</a></div><div class="ttdoc">Contains IDT and interrupts initialization and management.</div></div>
+<div class="ttc" id="apra__timer_8h_html_af7862ed3117904b74cc9325435b75468"><div class="ttname"><a href="pra__timer_8h.html#af7862ed3117904b74cc9325435b75468">timer_set_divisor</a></div><div class="ttdeci">void timer_set_divisor(uint16_t divisor)</div><div class="ttdoc">Sets the frequency divisor for the hardware timer. The base frequency will be divided by the divisor ...</div></div>
+<div class="ttc" id="apra__timer_8h_html_af01d1a24345acb41c5b9d419766d5451"><div class="ttname"><a href="pra__timer_8h.html#af01d1a24345acb41c5b9d419766d5451">pra_timer_interrupt</a></div><div class="ttdeci">void pra_timer_interrupt()</div><div class="ttdoc">General timer interrupt handler that will call the set callback and send an EOI to the PIC....</div></div>
+<div class="ttc" id="apra__timer_8h_html_a21b0c3806a14ce5780d5d1ab0dddb9a6"><div class="ttname"><a href="pra__timer_8h.html#a21b0c3806a14ce5780d5d1ab0dddb9a6">timestamp</a></div><div class="ttdeci">PRA_ALWAYS_INLINE uint64_t timestamp()</div><div class="ttdoc">Returns the current timestamp. The returned value is number of instructions executed overall.</div><div class="ttdef"><b>Definition:</b> pra_timer.h:54</div></div>
+<div class="ttc" id="apra__timer_8h_html_afee518b2d59d94d140ee391c5f87f66b"><div class="ttname"><a href="pra__timer_8h.html#afee518b2d59d94d140ee391c5f87f66b">timer_set_callback</a></div><div class="ttdeci">void timer_set_callback(timer_callback_t callback)</div><div class="ttdoc">Sets the timer callback that will be executed when a timer interrupt occurs.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_timer.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__timer_8h.html">pra_timer.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

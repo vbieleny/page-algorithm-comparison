@@ -101,23 +101,33 @@ $(document).ready(function(){initNavTree('pra__serial_8h_source.html',''); initR
 <div class="title">pra_serial.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define PORT 0x3f8          // COM1</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">bool</span> serial_initialize();</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">bool</span> serial_received();</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">char</span> serial_read();</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">bool</span> serial_is_transmit_empty();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">void</span> serial_putchar(<span class="keywordtype">char</span> c);</div>
+<a href="pra__serial_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="pra__serial_8h.html#a614217d263be1fb1a5f76e2ff7be19a2">   13</a></span>&#160;<span class="preprocessor">#define PORT 0x3f8</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__serial_8h.html#aefcce650937cfdf3447ede589038b040">serial_initialize</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__serial_8h.html#a3fce9f65f126ce7d0bed2d8c3d12b540">serial_received</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">char</span> <a class="code" href="pra__serial_8h.html#a9550eb3c0ddbc19918d07ed87ed43c66">serial_read</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__serial_8h.html#ae3b91fd92ef6140c6c1724f4db6285be">serial_is_transmit_empty</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__serial_8h.html#a0333c2e4145743107889f992fbb1df4c">serial_putchar</a>(<span class="keywordtype">char</span> c);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__serial_8h_html_a3fce9f65f126ce7d0bed2d8c3d12b540"><div class="ttname"><a href="pra__serial_8h.html#a3fce9f65f126ce7d0bed2d8c3d12b540">serial_received</a></div><div class="ttdeci">bool serial_received()</div><div class="ttdoc">Returns whether we received a byte from serial port.</div></div>
+<div class="ttc" id="apra__serial_8h_html_a9550eb3c0ddbc19918d07ed87ed43c66"><div class="ttname"><a href="pra__serial_8h.html#a9550eb3c0ddbc19918d07ed87ed43c66">serial_read</a></div><div class="ttdeci">char serial_read()</div><div class="ttdoc">Returns the received byte from a serial port. If there is no byte, it waits until it received one.</div></div>
+<div class="ttc" id="apra__serial_8h_html_aefcce650937cfdf3447ede589038b040"><div class="ttname"><a href="pra__serial_8h.html#aefcce650937cfdf3447ede589038b040">serial_initialize</a></div><div class="ttdeci">bool serial_initialize()</div><div class="ttdoc">Initializes the serial communication and tests the connection to the serial port.</div></div>
+<div class="ttc" id="apra__serial_8h_html_ae3b91fd92ef6140c6c1724f4db6285be"><div class="ttname"><a href="pra__serial_8h.html#ae3b91fd92ef6140c6c1724f4db6285be">serial_is_transmit_empty</a></div><div class="ttdeci">bool serial_is_transmit_empty()</div><div class="ttdoc">Check whether the transmit it empty and can send data to serial port.</div></div>
+<div class="ttc" id="apra__serial_8h_html_a0333c2e4145743107889f992fbb1df4c"><div class="ttname"><a href="pra__serial_8h.html#a0333c2e4145743107889f992fbb1df4c">serial_putchar</a></div><div class="ttdeci">void serial_putchar(char c)</div><div class="ttdoc">Writes a character to the serial port. Waits until the transmit is empty if necessary.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_serial.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__serial_8h.html">pra_serial.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

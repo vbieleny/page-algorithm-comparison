@@ -101,25 +101,37 @@ $(document).ready(function(){initNavTree('pra__pfa_8h_source.html',''); initResi
 <div class="title">pra_pfa.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> pfa_initialize(<span class="keywordtype">void</span> *start_address);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">void</span> *pfa_allocate_page();</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> pfa_free_all_pages();</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">void</span>* pfa_get_start_address();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">void</span> pfa_set_max_pages(<span class="keywordtype">size_t</span> limit);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">bool</span> pfa_is_page_allocation_limit_reached();</div>
+<a href="pra__pfa_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfa_8h.html#a7b403aa4315902701a0f25c307b86148">pfa_initialize</a>(<span class="keywordtype">void</span> *start_address);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> *<a class="code" href="pra__pfa_8h.html#af4048dca08931c16d454a32961514c38">pfa_allocate_page</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfa_8h.html#a49feaf8a9d9402ca3b278dbf53ff1c12">pfa_free_all_pages</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span>* <a class="code" href="pra__pfa_8h.html#ab611081303903a3c3ba9a5e27e7bdfd2">pfa_get_start_address</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfa_8h.html#a178796c937b7bc6108e42d4d1a810886">pfa_set_max_pages</a>(<span class="keywordtype">size_t</span> limit);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="pra__pfa_8h.html#ad197069019d8425a316eb7ed68a67477">pfa_is_page_allocation_limit_reached</a>();</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="apra__attrs_8h_html"><div class="ttname"><a href="pra__attrs_8h.html">pra_attrs.h</a></div><div class="ttdoc">Macro definitions for commonly used attributes.</div></div>
+<div class="ttc" id="apra__pfa_8h_html_a7b403aa4315902701a0f25c307b86148"><div class="ttname"><a href="pra__pfa_8h.html#a7b403aa4315902701a0f25c307b86148">pfa_initialize</a></div><div class="ttdeci">void pfa_initialize(void *start_address)</div><div class="ttdoc">Initializes PFA (page frame allocator) to specified start address from which it will allocate pages.</div></div>
+<div class="ttc" id="apra__pfa_8h_html_ab611081303903a3c3ba9a5e27e7bdfd2"><div class="ttname"><a href="pra__pfa_8h.html#ab611081303903a3c3ba9a5e27e7bdfd2">pfa_get_start_address</a></div><div class="ttdeci">void * pfa_get_start_address()</div><div class="ttdoc">Returns start address of the PFA (page frame allocator) from which it allocates pages.</div></div>
+<div class="ttc" id="apra__pfa_8h_html_a178796c937b7bc6108e42d4d1a810886"><div class="ttname"><a href="pra__pfa_8h.html#a178796c937b7bc6108e42d4d1a810886">pfa_set_max_pages</a></div><div class="ttdeci">void pfa_set_max_pages(size_t limit)</div><div class="ttdoc">Sets the maximum allocation limit for pages.</div></div>
+<div class="ttc" id="apra__pfa_8h_html_af4048dca08931c16d454a32961514c38"><div class="ttname"><a href="pra__pfa_8h.html#af4048dca08931c16d454a32961514c38">pfa_allocate_page</a></div><div class="ttdeci">void * pfa_allocate_page()</div><div class="ttdoc">Allocates a new page in order. Will return new page event if limit was reached. If you want to respec...</div></div>
+<div class="ttc" id="apra__pfa_8h_html_ad197069019d8425a316eb7ed68a67477"><div class="ttname"><a href="pra__pfa_8h.html#ad197069019d8425a316eb7ed68a67477">pfa_is_page_allocation_limit_reached</a></div><div class="ttdeci">bool pfa_is_page_allocation_limit_reached()</div><div class="ttdoc">Checks whether the allocation limit is reached.</div></div>
+<div class="ttc" id="apra__pfa_8h_html_a49feaf8a9d9402ca3b278dbf53ff1c12"><div class="ttname"><a href="pra__pfa_8h.html#a49feaf8a9d9402ca3b278dbf53ff1c12">pfa_free_all_pages</a></div><div class="ttdeci">void pfa_free_all_pages()</div><div class="ttdoc">Frees all previously allocated pages.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_pfa.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__pfa_8h.html">pra_pfa.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

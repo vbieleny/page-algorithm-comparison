@@ -101,23 +101,33 @@ $(document).ready(function(){initNavTree('pra__string_8h_source.html',''); initR
 <div class="title">pra_string.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">size_t</span> pra_strlen(<span class="keyword">const</span> <span class="keywordtype">char</span> *str);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">char</span>* pra_strcpy(<span class="keywordtype">char</span> *destination, <span class="keyword">const</span> <span class="keywordtype">char</span> *source);</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">char</span>* pra_strcat(<span class="keywordtype">char</span> *destination, <span class="keyword">const</span> <span class="keywordtype">char</span> *source);</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">char</span>* pra_itoa(int32_t value, <span class="keywordtype">char</span> *result, int32_t base);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">char</span>* pra_itoa_advanced(intmax_t i, <span class="keywordtype">char</span> b[], <span class="keywordtype">int</span> base, <span class="keywordtype">bool</span> plus_sign_if_needed, <span class="keywordtype">bool</span> space_sign_if_needed, <span class="keywordtype">int</span> padding_no, <span class="keywordtype">bool</span> justify, <span class="keywordtype">bool</span> zero_pad);</div>
+<a href="pra__string_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="pra__string_8h.html#a70bad376191a5616508818bcfe18dda7">pra_strlen</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *str);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="pra__string_8h.html#a309a6d3a59fb2d049b72fe4b8d559f3c">pra_strcpy</a>(<span class="keywordtype">char</span> *destination, <span class="keyword">const</span> <span class="keywordtype">char</span> *source);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="pra__string_8h.html#a66f25f3a98b33af596ad320d7d1d164c">pra_strcat</a>(<span class="keywordtype">char</span> *destination, <span class="keyword">const</span> <span class="keywordtype">char</span> *source);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="pra__string_8h.html#ad13697c0565f25ebab0669d99d6fb8b7">pra_itoa</a>(int32_t value, <span class="keywordtype">char</span> *result, int32_t base);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="pra__string_8h.html#ae4fb9f2b297c514c5b76ed25d1dc3e5b">pra_itoa_advanced</a>(intmax_t i, <span class="keywordtype">char</span> b[], <span class="keywordtype">int</span> base, <span class="keywordtype">bool</span> plus_sign_if_needed, <span class="keywordtype">bool</span> space_sign_if_needed, <span class="keywordtype">int</span> padding_no, <span class="keywordtype">bool</span> justify, <span class="keywordtype">bool</span> zero_pad);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__string_8h_html_a66f25f3a98b33af596ad320d7d1d164c"><div class="ttname"><a href="pra__string_8h.html#a66f25f3a98b33af596ad320d7d1d164c">pra_strcat</a></div><div class="ttdeci">char * pra_strcat(char *destination, const char *source)</div><div class="ttdoc">Concatenates the source and destination string and stores it it the destination string.</div></div>
+<div class="ttc" id="apra__string_8h_html_ae4fb9f2b297c514c5b76ed25d1dc3e5b"><div class="ttname"><a href="pra__string_8h.html#ae4fb9f2b297c514c5b76ed25d1dc3e5b">pra_itoa_advanced</a></div><div class="ttdeci">char * pra_itoa_advanced(intmax_t i, char b[], int base, bool plus_sign_if_needed, bool space_sign_if_needed, int padding_no, bool justify, bool zero_pad)</div><div class="ttdoc">Advanced conversion from a number to a string. Used in printf implementation.</div></div>
+<div class="ttc" id="apra__string_8h_html_a70bad376191a5616508818bcfe18dda7"><div class="ttname"><a href="pra__string_8h.html#a70bad376191a5616508818bcfe18dda7">pra_strlen</a></div><div class="ttdeci">size_t pra_strlen(const char *str)</div><div class="ttdoc">Returns the length of the string without the null terminating character.</div></div>
+<div class="ttc" id="apra__string_8h_html_ad13697c0565f25ebab0669d99d6fb8b7"><div class="ttname"><a href="pra__string_8h.html#ad13697c0565f25ebab0669d99d6fb8b7">pra_itoa</a></div><div class="ttdeci">char * pra_itoa(int32_t value, char *result, int32_t base)</div><div class="ttdoc">Converts a number to a string.</div></div>
+<div class="ttc" id="apra__string_8h_html_a309a6d3a59fb2d049b72fe4b8d559f3c"><div class="ttname"><a href="pra__string_8h.html#a309a6d3a59fb2d049b72fe4b8d559f3c">pra_strcpy</a></div><div class="ttdeci">char * pra_strcpy(char *destination, const char *source)</div><div class="ttdoc">Copies the string from from source to destination.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_string.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__string_8h.html">pra_string.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

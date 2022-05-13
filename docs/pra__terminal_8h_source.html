@@ -101,42 +101,53 @@ $(document).ready(function(){initNavTree('pra__terminal_8h_source.html',''); ini
 <div class="title">pra_terminal.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">enum</span> vga_color {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    VGA_COLOR_BLACK = 0,</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    VGA_COLOR_BLUE = 1,</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    VGA_COLOR_GREEN = 2,</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    VGA_COLOR_CYAN = 3,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    VGA_COLOR_RED = 4,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    VGA_COLOR_MAGENTA = 5,</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    VGA_COLOR_BROWN = 6,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    VGA_COLOR_LIGHT_GREY = 7,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    VGA_COLOR_DARK_GREY = 8,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    VGA_COLOR_LIGHT_BLUE = 9,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    VGA_COLOR_LIGHT_GREEN = 10,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    VGA_COLOR_LIGHT_CYAN = 11,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    VGA_COLOR_LIGHT_RED = 12,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    VGA_COLOR_LIGHT_MAGENTA = 13,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    VGA_COLOR_LIGHT_BROWN = 14,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    VGA_COLOR_WHITE = 15,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> terminal_initialize();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> terminal_move_cursor(<span class="keywordtype">size_t</span> x, <span class="keywordtype">size_t</span> y);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> terminal_setcolor(uint8_t color);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> terminal_putentryat(<span class="keywordtype">char</span> c, uint8_t color, <span class="keywordtype">size_t</span> x, <span class="keywordtype">size_t</span> y);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> terminal_putchar(<span class="keywordtype">char</span> c);</div>
+<a href="pra__terminal_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="pra__terminal_8h.html#af7aeda894a9a4933ee3f9a40c6202b00">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    VGA_COLOR_BLACK = 0,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    VGA_COLOR_BLUE = 1,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    VGA_COLOR_GREEN = 2,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    VGA_COLOR_CYAN = 3,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    VGA_COLOR_RED = 4,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    VGA_COLOR_MAGENTA = 5,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    VGA_COLOR_BROWN = 6,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    VGA_COLOR_LIGHT_GREY = 7,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    VGA_COLOR_DARK_GREY = 8,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    VGA_COLOR_LIGHT_BLUE = 9,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    VGA_COLOR_LIGHT_GREEN = 10,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    VGA_COLOR_LIGHT_CYAN = 11,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    VGA_COLOR_LIGHT_RED = 12,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    VGA_COLOR_LIGHT_MAGENTA = 13,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    VGA_COLOR_LIGHT_BROWN = 14,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    VGA_COLOR_WHITE = 15,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <a class="code" href="pra__terminal_8h.html#af7aeda894a9a4933ee3f9a40c6202b00">vga_color_e</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__terminal_8h.html#afe0aea39aa0900026a6e571921ca19ff">terminal_initialize</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__terminal_8h.html#a42a8b2e9243708f1954275270dd61163">terminal_move_cursor</a>(<span class="keywordtype">size_t</span> x, <span class="keywordtype">size_t</span> y);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__terminal_8h.html#a1d0c38c1fb48053bea2c7f60cbd3ccb9">terminal_setcolor</a>(uint8_t color);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__terminal_8h.html#a739860b23b857cf3fc0294ce79c3a896">terminal_putentryat</a>(<span class="keywordtype">char</span> c, uint8_t color, <span class="keywordtype">size_t</span> x, <span class="keywordtype">size_t</span> y);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__terminal_8h.html#a0e77ef8710654966af44f69becffcd80">terminal_putchar</a>(<span class="keywordtype">char</span> c);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__terminal_8h_html_a0e77ef8710654966af44f69becffcd80"><div class="ttname"><a href="pra__terminal_8h.html#a0e77ef8710654966af44f69becffcd80">terminal_putchar</a></div><div class="ttdeci">void terminal_putchar(char c)</div><div class="ttdoc">Puts the character with active color at the current cursor position.</div></div>
+<div class="ttc" id="apra__terminal_8h_html_afe0aea39aa0900026a6e571921ca19ff"><div class="ttname"><a href="pra__terminal_8h.html#afe0aea39aa0900026a6e571921ca19ff">terminal_initialize</a></div><div class="ttdeci">void terminal_initialize()</div><div class="ttdoc">Initializes the terminal and clears the screen. This is called automatically by kernel.</div></div>
+<div class="ttc" id="apra__terminal_8h_html_a739860b23b857cf3fc0294ce79c3a896"><div class="ttname"><a href="pra__terminal_8h.html#a739860b23b857cf3fc0294ce79c3a896">terminal_putentryat</a></div><div class="ttdeci">void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)</div><div class="ttdoc">Puts the character with a specified color at a specified position.</div></div>
+<div class="ttc" id="apra__terminal_8h_html_a1d0c38c1fb48053bea2c7f60cbd3ccb9"><div class="ttname"><a href="pra__terminal_8h.html#a1d0c38c1fb48053bea2c7f60cbd3ccb9">terminal_setcolor</a></div><div class="ttdeci">void terminal_setcolor(uint8_t color)</div><div class="ttdoc">Sets set active color that will be used to print characters.</div></div>
+<div class="ttc" id="apra__terminal_8h_html_af7aeda894a9a4933ee3f9a40c6202b00"><div class="ttname"><a href="pra__terminal_8h.html#af7aeda894a9a4933ee3f9a40c6202b00">vga_color_e</a></div><div class="ttdeci">vga_color_e</div><div class="ttdoc">Enum specifying colors that can be used by the VGA.</div><div class="ttdef"><b>Definition:</b> pra_terminal.h:15</div></div>
+<div class="ttc" id="apra__terminal_8h_html_a42a8b2e9243708f1954275270dd61163"><div class="ttname"><a href="pra__terminal_8h.html#a42a8b2e9243708f1954275270dd61163">terminal_move_cursor</a></div><div class="ttdeci">void terminal_move_cursor(size_t x, size_t y)</div><div class="ttdoc">Moves cursor at a specified position.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_terminal.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__terminal_8h.html">pra_terminal.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('pra__suite_8h.html',''); initResizable
 <p>This file provides functionality to run test suites and generate output that can be evaluated.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &quot;pra_pfh.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="pra__pfh_8h_source.html">pra_pfh.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for pra_suite.h:</div>
 <div class="dyncontent">
@@ -123,23 +123,28 @@ Include dependency graph for pra_suite.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtest__execution__t.html">test_execution_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure defining the test program.  <a href="structtest__execution__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtest__parameters__t.html">test_parameters_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure defining the parameters for the test run.  <a href="structtest__parameters__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtest__configuration__t.html">test_configuration_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A strucuture defining the test suite configuration.  <a href="structtest__configuration__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:aa5fe7dd94cd5da4ddfe7ec8f773cf83a"><td class="memItemLeft" align="right" valign="top"><a id="aa5fe7dd94cd5da4ddfe7ec8f773cf83a"></a>
-typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>test_execution_callback_t</b>) ()</td></tr>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__suite_8h.html#aa5fe7dd94cd5da4ddfe7ec8f773cf83a">test_execution_callback_t</a>) ()</td></tr>
+<tr class="memdesc:aa5fe7dd94cd5da4ddfe7ec8f773cf83a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for the test program implementation. <br /></td></tr>
 <tr class="separator:aa5fe7dd94cd5da4ddfe7ec8f773cf83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ad06c4a97aad4cd6f46fb1f8446c8640b"><td class="memItemLeft" align="right" valign="top"><a id="ad06c4a97aad4cd6f46fb1f8446c8640b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>test_output_format_e</b> { <b>FORMAT_HUMAN_READABLE</b>, 
+<tr class="memitem:ad06c4a97aad4cd6f46fb1f8446c8640b"><td class="memItemLeft" align="right" valign="top"><a id="ad06c4a97aad4cd6f46fb1f8446c8640b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__suite_8h.html#ad06c4a97aad4cd6f46fb1f8446c8640b">test_output_format_e</a> { <b>FORMAT_HUMAN_READABLE</b>, 
 <b>FORMAT_PARSEABLE</b>
  }</td></tr>
+<tr class="memdesc:ad06c4a97aad4cd6f46fb1f8446c8640b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which test output format to use. This is set automatically and should not be changed. <br /></td></tr>
 <tr class="separator:ad06c4a97aad4cd6f46fb1f8446c8640b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -168,7 +173,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run the test suite specified as parameter. </p>
-<p>Runs all combinations for specified test programs, parameters and page replacement algorithms. The results will be written either to terminal or serial output, depending on the default format. </p>
+<p>Runs all combinations for specified test programs, parameters and page replacement algorithms. The results will be written either to terminal or serial output, depending on the default format.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">configuration</td><td>the test suite configuration to run </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

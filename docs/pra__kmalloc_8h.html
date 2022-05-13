@@ -127,28 +127,152 @@ Functions</h2></td></tr>
 <tr class="memitem:a6a18d969d61fda1ec4d37b279512044d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__kmalloc_8h.html#a6a18d969d61fda1ec4d37b279512044d">kernel_memory_initialize</a> (void *memory_start, size_t memory_size_bytes)</td></tr>
 <tr class="memdesc:a6a18d969d61fda1ec4d37b279512044d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a kernel memory allocator by providing a free memory block.  <a href="pra__kmalloc_8h.html#a6a18d969d61fda1ec4d37b279512044d">More...</a><br /></td></tr>
 <tr class="separator:a6a18d969d61fda1ec4d37b279512044d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc21e15c5f657ac193d63b4915d158eb"><td class="memItemLeft" align="right" valign="top"><a id="abc21e15c5f657ac193d63b4915d158eb"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>kernel_memory_allocate</b> (size_t bytes, size_t alignment)</td></tr>
+<tr class="memitem:abc21e15c5f657ac193d63b4915d158eb"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__kmalloc_8h.html#abc21e15c5f657ac193d63b4915d158eb">kernel_memory_allocate</a> (size_t bytes, size_t alignment)</td></tr>
+<tr class="memdesc:abc21e15c5f657ac193d63b4915d158eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates a certain amount of memory with specified alignment.  <a href="pra__kmalloc_8h.html#abc21e15c5f657ac193d63b4915d158eb">More...</a><br /></td></tr>
 <tr class="separator:abc21e15c5f657ac193d63b4915d158eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7783f6341d286ea1e964cbaeefab5b38"><td class="memItemLeft" align="right" valign="top"><a id="a7783f6341d286ea1e964cbaeefab5b38"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>kernel_memory_reallocate</b> (void *allocated_memory, size_t memory_new_size_bytes, size_t alignment)</td></tr>
+<tr class="memitem:a7783f6341d286ea1e964cbaeefab5b38"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__kmalloc_8h.html#a7783f6341d286ea1e964cbaeefab5b38">kernel_memory_reallocate</a> (void *allocated_memory, size_t memory_new_size_bytes, size_t alignment)</td></tr>
+<tr class="memdesc:a7783f6341d286ea1e964cbaeefab5b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reallocates already allocated memory, effectivly changing its size.  <a href="pra__kmalloc_8h.html#a7783f6341d286ea1e964cbaeefab5b38">More...</a><br /></td></tr>
 <tr class="separator:a7783f6341d286ea1e964cbaeefab5b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37a0938e197ef7053ef98ddde0e024f7"><td class="memItemLeft" align="right" valign="top"><a id="a37a0938e197ef7053ef98ddde0e024f7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>kernel_memory_free</b> (void *allocated_memory)</td></tr>
+<tr class="memitem:a37a0938e197ef7053ef98ddde0e024f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__kmalloc_8h.html#a37a0938e197ef7053ef98ddde0e024f7">kernel_memory_free</a> (void *allocated_memory)</td></tr>
+<tr class="memdesc:a37a0938e197ef7053ef98ddde0e024f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees allocated memory.  <a href="pra__kmalloc_8h.html#a37a0938e197ef7053ef98ddde0e024f7">More...</a><br /></td></tr>
 <tr class="separator:a37a0938e197ef7053ef98ddde0e024f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3964cad24862aa810122f43ec242dc17"><td class="memItemLeft" align="right" valign="top"><a id="a3964cad24862aa810122f43ec242dc17"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kernel_memory_get_free_mem</b> ()</td></tr>
+<tr class="memitem:a3964cad24862aa810122f43ec242dc17"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__kmalloc_8h.html#a3964cad24862aa810122f43ec242dc17">kernel_memory_get_free_mem</a> ()</td></tr>
+<tr class="memdesc:a3964cad24862aa810122f43ec242dc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how many free bytes are available in the kernel allocator.  <a href="pra__kmalloc_8h.html#a3964cad24862aa810122f43ec242dc17">More...</a><br /></td></tr>
 <tr class="separator:a3964cad24862aa810122f43ec242dc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93b04e95b894697848361e19e9331a1c"><td class="memItemLeft" align="right" valign="top"><a id="a93b04e95b894697848361e19e9331a1c"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kernel_memory_get_free_blocks</b> ()</td></tr>
+<tr class="memitem:a93b04e95b894697848361e19e9331a1c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__kmalloc_8h.html#a93b04e95b894697848361e19e9331a1c">kernel_memory_get_free_blocks</a> ()</td></tr>
+<tr class="memdesc:a93b04e95b894697848361e19e9331a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how many free blocks are available in the kernel allocator.  <a href="pra__kmalloc_8h.html#a93b04e95b894697848361e19e9331a1c">More...</a><br /></td></tr>
 <tr class="separator:a93b04e95b894697848361e19e9331a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2919e1837f83c4096eb774ea6545f3fb"><td class="memItemLeft" align="right" valign="top"><a id="a2919e1837f83c4096eb774ea6545f3fb"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kernel_memory_get_block_size</b> ()</td></tr>
+<tr class="memitem:a2919e1837f83c4096eb774ea6545f3fb"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__kmalloc_8h.html#a2919e1837f83c4096eb774ea6545f3fb">kernel_memory_get_block_size</a> ()</td></tr>
+<tr class="memdesc:a2919e1837f83c4096eb774ea6545f3fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns size of free block structure in which block information is stored.  <a href="pra__kmalloc_8h.html#a2919e1837f83c4096eb774ea6545f3fb">More...</a><br /></td></tr>
 <tr class="separator:a2919e1837f83c4096eb774ea6545f3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functionality of a kernel memory allocator used for kernel code. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="abc21e15c5f657ac193d63b4915d158eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc21e15c5f657ac193d63b4915d158eb">&#9670;&nbsp;</a></span>kernel_memory_allocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* kernel_memory_allocate </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocates a certain amount of memory with specified alignment. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bytes</td><td>how many bytes to allocate </td></tr>
+    <tr><td class="paramname">alignment</td><td>the alignment of allocated memory </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>allocated memory </dd></dl>
+
+</div>
+</div>
+<a id="a37a0938e197ef7053ef98ddde0e024f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37a0938e197ef7053ef98ddde0e024f7">&#9670;&nbsp;</a></span>kernel_memory_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void kernel_memory_free </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>allocated_memory</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Frees allocated memory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">allocated_memory</td><td>existing allocated memory </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2919e1837f83c4096eb774ea6545f3fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2919e1837f83c4096eb774ea6545f3fb">&#9670;&nbsp;</a></span>kernel_memory_get_block_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t kernel_memory_get_block_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns size of free block structure in which block information is stored. </p>
+<dl class="section return"><dt>Returns</dt><dd>size of free block structure </dd></dl>
+
+</div>
+</div>
+<a id="a93b04e95b894697848361e19e9331a1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b04e95b894697848361e19e9331a1c">&#9670;&nbsp;</a></span>kernel_memory_get_free_blocks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t kernel_memory_get_free_blocks </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns how many free blocks are available in the kernel allocator. </p>
+<dl class="section return"><dt>Returns</dt><dd>number of free blocks </dd></dl>
+
+</div>
+</div>
+<a id="a3964cad24862aa810122f43ec242dc17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3964cad24862aa810122f43ec242dc17">&#9670;&nbsp;</a></span>kernel_memory_get_free_mem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t kernel_memory_get_free_mem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns how many free bytes are available in the kernel allocator. </p>
+<dl class="section return"><dt>Returns</dt><dd>free memory in bytes </dd></dl>
+
+</div>
+</div>
 <a id="a6a18d969d61fda1ec4d37b279512044d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a18d969d61fda1ec4d37b279512044d">&#9670;&nbsp;</a></span>kernel_memory_initialize()</h2>
 
@@ -183,6 +307,51 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kernel_memory_get_b
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a7783f6341d286ea1e964cbaeefab5b38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7783f6341d286ea1e964cbaeefab5b38">&#9670;&nbsp;</a></span>kernel_memory_reallocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* kernel_memory_reallocate </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>allocated_memory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>memory_new_size_bytes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reallocates already allocated memory, effectivly changing its size. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">allocated_memory</td><td>existing allocated memory </td></tr>
+    <tr><td class="paramname">memory_new_size_bytes</td><td>new size of allocated memory </td></tr>
+    <tr><td class="paramname">alignment</td><td>the alignment of new allocated memory </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>new allocated memory </dd></dl>
 
 </div>
 </div>

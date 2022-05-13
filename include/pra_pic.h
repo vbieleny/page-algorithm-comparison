@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief PIC (programmable interrupt controller) handling and IRQ (interrupt request) masking.
+ */
+
 #pragma once
 
 #include <stdint.h>
@@ -26,8 +31,33 @@
 
 #define IRQ0_TIMER 0
 
+/**
+ * @brief Remaps the PIC IRQs to specified offsets.
+ * This is used mostly to remap the hardware interrupts that are by default
+ * overlapping with exceptions.
+ * @param offset1 where to put first 8 interrupts
+ * @param offset2 where to put second 8 interrupts
+ */
 void pic_remap(uint8_t offset1, uint8_t offset2);
+
+/**
+ * @brief Send an EOI (end-of-interrupt) to the PIC. Used in IRQs that require EOI to be able to handle next interrupt.
+ */
 void pic_send_eoi(uint8_t irq);
+
+/**
+ * @brief Sets the mask for a specified IRQ. This disables the IRQ from sending interrupts.
+ * @param irq_line which IRQ to disable
+ */
 void irq_set_mask(uint8_t irq_line);
+
+/**
+ * @brief Sets the mask for all interrupts. Use if you want to disable all hardware interrupts.
+ */
 void irq_set_mask_all();
+
+/**
+ * @brief Clears the mask for a specified IRQ. This allows the IRQ to send interrupts.
+ * @param irq_line which IRQ to enable
+ */
 void irq_clear_mask(uint8_t irq_line);

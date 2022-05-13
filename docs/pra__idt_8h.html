@@ -128,15 +128,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPRA__PACKED.html">PRA_PACKED</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defined structure of a PTE (page table entry) for easier usage.  <a href="structPRA__PACKED.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPRA__PACKED.html">PRA_PACKED</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defined structure of a PTE (page table entry) for easier usage.  <a href="structPRA__PACKED.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5ee7b8d1a65b89a8bfbc709c58d376d8"><td class="memItemLeft" align="right" valign="top"><a id="a5ee7b8d1a65b89a8bfbc709c58d376d8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__idt_8h.html#a5ee7b8d1a65b89a8bfbc709c58d376d8">idt_initialize</a> ()</td></tr>
-<tr class="memdesc:a5ee7b8d1a65b89a8bfbc709c58d376d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes IDT by loading the IDT via LIDT instruction. Must be use to for interrupts to work properly. <br /></td></tr>
+<tr class="memdesc:a5ee7b8d1a65b89a8bfbc709c58d376d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes IDT by loading the IDT via LIDT instruction. Must be use to for interrupts to work properly. Called automatically by kernel. <br /></td></tr>
 <tr class="separator:a5ee7b8d1a65b89a8bfbc709c58d376d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afee5973da14677e6be5c4d10fed7d8d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pra__idt_8h.html#afee5973da14677e6be5c4d10fed7d8d5">idt_set_descriptor</a> (uint8_t vector, void *isr, uint8_t flags)</td></tr>
 <tr class="memdesc:afee5973da14677e6be5c4d10fed7d8d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets interrupt descriptor to handle specified interrupt via ISR.  <a href="pra__idt_8h.html#afee5973da14677e6be5c4d10fed7d8d5">More...</a><br /></td></tr>

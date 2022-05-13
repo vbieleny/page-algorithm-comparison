@@ -101,24 +101,31 @@ $(document).ready(function(){initNavTree('pra__pfh__random_8h_source.html',''); 
 <div class="title">pra_pfh_random.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__idt_8h.html">pra_idt.h</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;pra_paging.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> pfh_random_init();</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">void</span> pfh_random_destroy();</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> pfh_random_isr(uint32_t error_code, <a class="code" href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a> *result);</div>
+<a href="pra__pfh__random_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__idt_8h.html">pra_idt.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__paging_8h.html">pra_paging.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfh__random_8h.html#a8e4b98262125ceec2361b0853b41c713">pfh_random_init</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfh__random_8h.html#a0e108d1354b045b0f45c33a489bcb303">pfh_random_destroy</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfh__random_8h.html#a017ba104ea7749fbf25ef62e5f7f6e98">pfh_random_isr</a>(uint32_t error_code, <a class="code" href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a> *result);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="apra__attrs_8h_html"><div class="ttname"><a href="pra__attrs_8h.html">pra_attrs.h</a></div><div class="ttdoc">Macro definitions for commonly used attributes.</div></div>
-<div class="ttc" id="astructpage__fault__handler__result__t_html"><div class="ttname"><a href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a></div><div class="ttdef"><b>Definition:</b> pra_paging.h:28</div></div>
+<div class="ttc" id="astructpage__fault__handler__result__t_html"><div class="ttname"><a href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a></div><div class="ttdoc">Results for a single page fault.</div><div class="ttdef"><b>Definition:</b> pra_paging.h:39</div></div>
+<div class="ttc" id="apra__paging_8h_html"><div class="ttname"><a href="pra__paging_8h.html">pra_paging.h</a></div><div class="ttdoc">Handles paging related functionality, such as allocation or invalidation of pages.</div></div>
+<div class="ttc" id="apra__pfh__random_8h_html_a0e108d1354b045b0f45c33a489bcb303"><div class="ttname"><a href="pra__pfh__random_8h.html#a0e108d1354b045b0f45c33a489bcb303">pfh_random_destroy</a></div><div class="ttdeci">void pfh_random_destroy()</div><div class="ttdoc">Destroy function for a page fault handler.</div></div>
 <div class="ttc" id="apra__idt_8h_html"><div class="ttname"><a href="pra__idt_8h.html">pra_idt.h</a></div><div class="ttdoc">Contains IDT and interrupts initialization and management.</div></div>
+<div class="ttc" id="apra__pfh__random_8h_html_a8e4b98262125ceec2361b0853b41c713"><div class="ttname"><a href="pra__pfh__random_8h.html#a8e4b98262125ceec2361b0853b41c713">pfh_random_init</a></div><div class="ttdeci">void pfh_random_init()</div><div class="ttdoc">Initialization function for a page fault handler.</div></div>
+<div class="ttc" id="apra__pfh__random_8h_html_a017ba104ea7749fbf25ef62e5f7f6e98"><div class="ttname"><a href="pra__pfh__random_8h.html#a017ba104ea7749fbf25ef62e5f7f6e98">pfh_random_isr</a></div><div class="ttdeci">void pfh_random_isr(uint32_t error_code, page_fault_handler_result_t *result)</div><div class="ttdoc">Page fault handler for Random algorithm.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_pfh_random.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__pfh__random_8h.html">pra_pfh_random.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

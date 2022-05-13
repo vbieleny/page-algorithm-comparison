@@ -101,52 +101,73 @@ $(document).ready(function(){initNavTree('pra__pfh_8h_source.html',''); initResi
 <div class="title">pra_pfh.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;pra_lib.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__idt_8h.html">pra_idt.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;pra_paging.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">typedef</span> void (*page_replacement_init_function_t)();</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">typedef</span> void (*page_replacement_destroy_function_t)();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">typedef</span> void (*page_replacement_function_t)(uint32_t, <a class="code" href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a>*);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    pra_fifo,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    pra_second_chance,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    pra_random,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    pra_last_entry</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} page_replacement_algorithm_e;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structpage__replacement__algorithm__t.html">   21</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    prac_name_t name;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    page_replacement_init_function_t init_function;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    page_replacement_destroy_function_t destroy_function;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    page_replacement_function_t <span class="keyword">function</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <a class="code" href="structpage__replacement__algorithm__t.html">page_replacement_algorithm_t</a>;</div>
+<a href="pra__pfh_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__lib_8h.html">pra_lib.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__idt_8h.html">pra_idt.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__attrs_8h.html">pra_attrs.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pra__paging_8h.html">pra_paging.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="pra__pfh_8h.html#a8786c2f80554f79dca5722ad85dabb24">   17</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="pra__pfh_8h.html#a8786c2f80554f79dca5722ad85dabb24">page_replacement_init_function_t</a>)();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="pra__pfh_8h.html#a1174e95ab53c8921d073473052ef1aae">   22</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="pra__pfh_8h.html#a1174e95ab53c8921d073473052ef1aae">page_replacement_destroy_function_t</a>)();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">   27</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a>)(uint32_t, <a class="code" href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a>*);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> register_page_replacement_algorithm(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> <span class="keywordtype">char</span> *name, page_replacement_init_function_t init_function, page_replacement_destroy_function_t destroy_function, page_replacement_function_t <span class="keyword">function</span>);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<a class="code" href="structpage__replacement__algorithm__t.html">page_replacement_algorithm_t</a> get_page_replacement_algorithm(page_replacement_algorithm_e pra);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span> page_replacement_algorithm_set_active(page_replacement_function_t algorithm);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;page_replacement_function_t page_replacement_algorithm_get_active();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;uint64_t page_replacement_algorithm_get_time_taken();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> page_replacement_algorithm_reset_time_taken();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> pra_page_fault_handler(uint32_t error_code);</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">   32</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    pra_fifo,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    pra_second_chance,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    pra_random,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    pra_last_entry</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <a class="code" href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">page_replacement_algorithm_e</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structpage__replacement__algorithm__t.html">   43</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    prac_name_t name;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="pra__pfh_8h.html#a8786c2f80554f79dca5722ad85dabb24">page_replacement_init_function_t</a> init_function;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="pra__pfh_8h.html#a1174e95ab53c8921d073473052ef1aae">page_replacement_destroy_function_t</a> destroy_function;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a> <span class="keyword">function</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <a class="code" href="structpage__replacement__algorithm__t.html">page_replacement_algorithm_t</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfh_8h.html#a62284157508606884f66d4eaa0ce3273">register_page_replacement_algorithm</a>(<span class="keywordtype">size_t</span> index, <span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="pra__pfh_8h.html#a8786c2f80554f79dca5722ad85dabb24">page_replacement_init_function_t</a> init_function, <a class="code" href="pra__pfh_8h.html#a1174e95ab53c8921d073473052ef1aae">page_replacement_destroy_function_t</a> destroy_function, <a class="code" href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a> <span class="keyword">function</span>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<a class="code" href="structpage__replacement__algorithm__t.html">page_replacement_algorithm_t</a> <a class="code" href="pra__pfh_8h.html#af7aba97d069d82fe00ffb00eda29f5d5">get_page_replacement_algorithm</a>(<a class="code" href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">page_replacement_algorithm_e</a> pra);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfh_8h.html#a6f65d4816b0e75fa3bda21f911d3d27d">page_replacement_algorithm_set_active</a>(<a class="code" href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a> algorithm);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<a class="code" href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a> <a class="code" href="pra__pfh_8h.html#a80738ebeb1e9cfafdba39d7f38e6d199">page_replacement_algorithm_get_active</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;uint64_t <a class="code" href="pra__pfh_8h.html#a33db2847f78f87f3c7955a2ad005df2e">page_replacement_algorithm_get_time_taken</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfh_8h.html#a6d3e27d55bb7039f05bd85c0319ea51a">page_replacement_algorithm_reset_time_taken</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">void</span> <a class="code" href="pra__pfh_8h.html#aa9be3042304edb2ed4eaa7b6ccbf63d8">pra_page_fault_handler</a>(uint32_t error_code);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__pfh_8h_html_a1b5e8e701f1a8b607fc9c380c391b4cb"><div class="ttname"><a href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">page_replacement_algorithm_e</a></div><div class="ttdeci">page_replacement_algorithm_e</div><div class="ttdoc">Enum containing a list of all built-in page replacement algorithms.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:32</div></div>
+<div class="ttc" id="apra__pfh_8h_html_a62284157508606884f66d4eaa0ce3273"><div class="ttname"><a href="pra__pfh_8h.html#a62284157508606884f66d4eaa0ce3273">register_page_replacement_algorithm</a></div><div class="ttdeci">void register_page_replacement_algorithm(size_t index, const char *name, page_replacement_init_function_t init_function, page_replacement_destroy_function_t destroy_function, page_replacement_function_t function)</div><div class="ttdoc">Registers a new custom page replacement algorithm.</div></div>
 <div class="ttc" id="apra__attrs_8h_html"><div class="ttname"><a href="pra__attrs_8h.html">pra_attrs.h</a></div><div class="ttdoc">Macro definitions for commonly used attributes.</div></div>
-<div class="ttc" id="astructpage__fault__handler__result__t_html"><div class="ttname"><a href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a></div><div class="ttdef"><b>Definition:</b> pra_paging.h:28</div></div>
-<div class="ttc" id="astructpage__replacement__algorithm__t_html"><div class="ttname"><a href="structpage__replacement__algorithm__t.html">page_replacement_algorithm_t</a></div><div class="ttdef"><b>Definition:</b> pra_pfh.h:21</div></div>
+<div class="ttc" id="apra__pfh_8h_html_a33db2847f78f87f3c7955a2ad005df2e"><div class="ttname"><a href="pra__pfh_8h.html#a33db2847f78f87f3c7955a2ad005df2e">page_replacement_algorithm_get_time_taken</a></div><div class="ttdeci">uint64_t page_replacement_algorithm_get_time_taken()</div><div class="ttdoc">Returns the total time taken by page fault handler from the last reset. Used for measuring algorithm ...</div></div>
+<div class="ttc" id="apra__pfh_8h_html_aa9be3042304edb2ed4eaa7b6ccbf63d8"><div class="ttname"><a href="pra__pfh_8h.html#aa9be3042304edb2ed4eaa7b6ccbf63d8">pra_page_fault_handler</a></div><div class="ttdeci">void pra_page_fault_handler(uint32_t error_code)</div><div class="ttdoc">General page fault handler that will get called from when a page fault occurs. It will call active pa...</div></div>
+<div class="ttc" id="astructpage__fault__handler__result__t_html"><div class="ttname"><a href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a></div><div class="ttdoc">Results for a single page fault.</div><div class="ttdef"><b>Definition:</b> pra_paging.h:39</div></div>
+<div class="ttc" id="apra__pfh_8h_html_a6d3e27d55bb7039f05bd85c0319ea51a"><div class="ttname"><a href="pra__pfh_8h.html#a6d3e27d55bb7039f05bd85c0319ea51a">page_replacement_algorithm_reset_time_taken</a></div><div class="ttdeci">void page_replacement_algorithm_reset_time_taken()</div><div class="ttdoc">Resets the total time taken by page fault handler to 0. This is called automatically for each testing...</div></div>
+<div class="ttc" id="apra__pfh_8h_html_af7aba97d069d82fe00ffb00eda29f5d5"><div class="ttname"><a href="pra__pfh_8h.html#af7aba97d069d82fe00ffb00eda29f5d5">get_page_replacement_algorithm</a></div><div class="ttdeci">page_replacement_algorithm_t get_page_replacement_algorithm(page_replacement_algorithm_e pra)</div><div class="ttdoc">Gets the page replacement algorithm definition.</div></div>
+<div class="ttc" id="apra__paging_8h_html"><div class="ttname"><a href="pra__paging_8h.html">pra_paging.h</a></div><div class="ttdoc">Handles paging related functionality, such as allocation or invalidation of pages.</div></div>
+<div class="ttc" id="astructpage__replacement__algorithm__t_html"><div class="ttname"><a href="structpage__replacement__algorithm__t.html">page_replacement_algorithm_t</a></div><div class="ttdoc">Structure defining a page replacement algorithm.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:43</div></div>
 <div class="ttc" id="apra__idt_8h_html"><div class="ttname"><a href="pra__idt_8h.html">pra_idt.h</a></div><div class="ttdoc">Contains IDT and interrupts initialization and management.</div></div>
+<div class="ttc" id="apra__pfh_8h_html_a6f65d4816b0e75fa3bda21f911d3d27d"><div class="ttname"><a href="pra__pfh_8h.html#a6f65d4816b0e75fa3bda21f911d3d27d">page_replacement_algorithm_set_active</a></div><div class="ttdeci">void page_replacement_algorithm_set_active(page_replacement_function_t algorithm)</div><div class="ttdoc">Sets specified page replacement algorithm as active. This means that it will be used when a page faul...</div></div>
+<div class="ttc" id="apra__pfh_8h_html_abceb497dd5e30f4226a1947fa2d24744"><div class="ttname"><a href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a></div><div class="ttdeci">void(* page_replacement_function_t)(uint32_t, page_fault_handler_result_t *)</div><div class="ttdoc">Page fault handler for custom page replacement algorithm.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:27</div></div>
+<div class="ttc" id="apra__pfh_8h_html_a1174e95ab53c8921d073473052ef1aae"><div class="ttname"><a href="pra__pfh_8h.html#a1174e95ab53c8921d073473052ef1aae">page_replacement_destroy_function_t</a></div><div class="ttdeci">void(* page_replacement_destroy_function_t)()</div><div class="ttdoc">Destroy function for a page fault handler.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:22</div></div>
+<div class="ttc" id="apra__pfh_8h_html_a8786c2f80554f79dca5722ad85dabb24"><div class="ttname"><a href="pra__pfh_8h.html#a8786c2f80554f79dca5722ad85dabb24">page_replacement_init_function_t</a></div><div class="ttdeci">void(* page_replacement_init_function_t)()</div><div class="ttdoc">Initialization function for a page fault handler.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:17</div></div>
+<div class="ttc" id="apra__pfh_8h_html_a80738ebeb1e9cfafdba39d7f38e6d199"><div class="ttname"><a href="pra__pfh_8h.html#a80738ebeb1e9cfafdba39d7f38e6d199">page_replacement_algorithm_get_active</a></div><div class="ttdeci">page_replacement_function_t page_replacement_algorithm_get_active()</div><div class="ttdoc">Returns the currently active page replacement algorithm.</div></div>
+<div class="ttc" id="apra__lib_8h_html"><div class="ttname"><a href="pra__lib_8h.html">pra_lib.h</a></div><div class="ttdoc">Standard library functions implementation.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>pra_pfh.h</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="pra__pfh_8h.html">pra_pfh.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

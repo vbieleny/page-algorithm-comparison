@@ -1,0 +1,26 @@
+var pra__paging_8h =
+[
+    [ "PRA_PACKED", "structPRA__PACKED.html", "structPRA__PACKED" ],
+    [ "page_fault_handler_result_t", "structpage__fault__handler__result__t.html", "structpage__fault__handler__result__t" ],
+    [ "page_fault_statistics_t", "structpage__fault__statistics__t.html", "structpage__fault__statistics__t" ],
+    [ "PAGE_FLAG_ACCESSED", "pra__paging_8h.html#a6036bbfce0e1bc954ab20b54005f6bf4", null ],
+    [ "PAGE_FLAG_DIRTY", "pra__paging_8h.html#adfd53e01b3ebaf66ced8be16605a4178", null ],
+    [ "PAGE_FLAG_PRESENT", "pra__paging_8h.html#a7e060884d6323cacbb220b9731e310d7", null ],
+    [ "PAGE_FLAG_READ_WRITE", "pra__paging_8h.html#a44367e72a021d69b041158006445f6fc", null ],
+    [ "memory_virtual_to_pde", "pra__paging_8h.html#aa1fb4cb9457e9b94190ece6852c1e9d2", null ],
+    [ "memory_virtual_to_pte", "pra__paging_8h.html#a32558528cb0cb65729fe40bd0dcb4c6a", null ],
+    [ "page_fault_handler_result_fill", "pra__paging_8h.html#acf961c8e5c60f9e5ffd72632c70e230d", null ],
+    [ "page_table_entry_address", "pra__paging_8h.html#ab24beb89b15c38c1cc0fb70c7297fb97", null ],
+    [ "paging_add_result_to_statistics", "pra__paging_8h.html#a4e043ae0959408cdd6158b637894d294", null ],
+    [ "paging_enable", "pra__paging_8h.html#ad6d520f99ef8596febe3285e50e79880", null ],
+    [ "paging_free_all_page_tables", "pra__paging_8h.html#ad3084ccad68b1c0f730ecba878c4cd3e", null ],
+    [ "paging_get_accessed_address", "pra__paging_8h.html#a5990c320d7198e830b3d33226e66c9e5", null ],
+    [ "paging_get_page_fault_statistics", "pra__paging_8h.html#aa0f1d418951f80032d30228362e6aa86", null ],
+    [ "paging_initialize", "pra__paging_8h.html#a39dd1496aba4e94723f7269ff86b6969", null ],
+    [ "paging_invalidate_all_pages", "pra__paging_8h.html#a12692767ee55443f4795112e4624e4a0", null ],
+    [ "paging_invalidate_page", "pra__paging_8h.html#a3bcb1a995294392ea6932a9fcd1cf987", null ],
+    [ "paging_make_page_not_present", "pra__paging_8h.html#ad270ec81b6cd6d8ffe1b5a4843dedc62", null ],
+    [ "paging_make_page_present", "pra__paging_8h.html#aa9c22b036a782ee822d4c02fdc7b6008", null ],
+    [ "paging_reset_page_fault_statistics", "pra__paging_8h.html#ab9885450026396c9a161f7493f9ce503", null ],
+    [ "paging_reset_to_default", "pra__paging_8h.html#ad1c2cf76045dc39f4be80de1c58fddb7", null ]
+];

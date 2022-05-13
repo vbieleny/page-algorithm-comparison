@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['kernel_5fmain_83',['kernel_main',['../pra__kernel_8h.html#a06f56b538384a04d000e2dd3f4603a32',1,'pra_kernel.h']]],
-  ['kernel_5fmemory_5finitialize_84',['kernel_memory_initialize',['../pra__kmalloc_8h.html#a6a18d969d61fda1ec4d37b279512044d',1,'pra_kmalloc.h']]]
+  ['halt_220',['halt',['../pra__system_8h.html#a9381ef0424399a9a2bc89bfa974a5e91',1,'pra_system.h']]]
 ];

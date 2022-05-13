@@ -7,7 +7,6 @@ static uint32_t next = 1;
 
 uint32_t pra_rand()
 {
-    // A very simple LCG (linear congruential generator)
     next = next * 1103515245 + 12345;
     return (uint32_t) next % (RAND_MAX + 1);
 }

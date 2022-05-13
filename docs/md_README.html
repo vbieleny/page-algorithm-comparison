@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('md_README.html',''); initResizable(); 
 Dependencies</h1>
 <p>Since this project compiles C code for specific architecture one of the dependencies is a GCC cross-compiler. For ease-of-use, you can use our <a href="https://github.com/vbieleny/prac-cli">CLI tool</a> to download and install a supported GCC toolchain.</p>
 <p>Once you have installed the CLI tool, you can run this command to automatically download this framework and the GCC toolchain.</p>
-<div class="fragment"><div class="line">prac init-toolchain</div>
+<div class="fragment"><div class="line">prac init</div>
 </div><!-- fragment --><p>Other dependencies include NASM for assembling bootloader source code and other assembly files. For creating final bootable ISO file, you're gonna need a <code>mkisofs</code> tool. Finally, to execute the code you will need a QEMU for i386.</p>
 <p>To install these dependencies on Ubuntu, execude this commands:</p>
 <div class="fragment"><div class="line">sudo apt update</div>
@@ -138,7 +138,7 @@ Writing test programs and test suite</h2>
 </ul>
 <p>To make creating test programs easier, there will be already a sample implementation of a test suite with two test programs.</p>
 <p>Creating a test program is easy. It is just a function with no arguments and no return value that implements all the code you want to test (i.e. a sorting algorithm).</p>
-<p>To run such a test program, we also need to define a test suite. This is done by creating a <code><a class="el" href="structtest__configuration__t.html">test_configuration_t</a></code> structure that contains which test programs are to be executed, what parameters to use and which page replacement algoritms to use.</p>
+<p>To run such a test program, we also need to define a test suite. This is done by creating a <code><a class="el" href="structtest__configuration__t.html" title="A strucuture defining the test suite configuration.">test_configuration_t</a></code> structure that contains which test programs are to be executed, what parameters to use and which page replacement algoritms to use.</p>
 <p>After creating such configuration, you can execute it by calling <code>run_test_suite(configuration);</code></p>
 <p>A very simple example of configuration definition si shown below.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> setup()</div>
@@ -148,7 +148,7 @@ Writing test programs and test suite</h2>
 <div class="line">        .name = <span class="stringliteral">&quot;Bubble Sort&quot;</span>,</div>
 <div class="line">        .callback = test_bubble_sort</div>
 <div class="line">    };</div>
-<div class="line">    page_replacement_algorithm_e algorithm = pra_fifo;</div>
+<div class="line">    <a class="code" href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">page_replacement_algorithm_e</a> algorithm = pra_fifo;</div>
 <div class="line">    <a class="code" href="structtest__parameters__t.html">test_parameters_t</a> parameters =</div>
 <div class="line">    {</div>
 <div class="line">        .pages_limit = 10,</div>
@@ -167,12 +167,12 @@ Writing test programs and test suite</h2>
 <div class="line"> </div>
 <div class="line">    <a class="code" href="pra__suite_8h.html#a27c07f27ffa47886fb92db793d11e607">run_test_suite</a>(configuration);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>To use an "allocation spread" parameter in your test programs, use <code>void* user_memory_random_allocate(size_t size)</code> function to allocate your memory randomly in selected allocation spread.</p>
+</div><!-- fragment --><p>To use an "allocation spread" parameter in your test programs, use <code>void* <a class="el" href="pra__malloc_8h.html#aee08d0fd44b78c306dc2bcfe3deddb7c" title="Allocates new memory block of specified size within the allocation spread of currently running test p...">user_memory_random_allocate(size_t size)</a></code> function to allocate your memory randomly in selected allocation spread.</p>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Writing a page replacement algorithm</h2>
 <p>This framework already implements some page replacement algorithms that you can use. You can find a list of these algoritms in [API reference](). To write a new page replacement algorithms, you need to create and implement a function that will handle page faults.</p>
 <p>This function signature is defined like this:</p>
-<div class="fragment"><div class="line"><span class="keyword">typedef</span> void (*page_replacement_function_t)(uint32_t error_code, <a class="code" href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a> *result);</div>
+<div class="fragment"><div class="line"><span class="keyword">typedef</span> void (*<a class="code" href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a>)(uint32_t error_code, <a class="code" href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a> *result);</div>
 </div><!-- fragment --><p>First parameter <code>error_code</code> is an error code specified by system when generating a page fault exception. You can read more about the structure of this error code <a href="https://wiki.osdev.org/Exceptions#Page_Fault">here</a>.</p>
 <p>Second parameter <code>result</code> is a pointer to a structure that will be used to aggregate statistical information about your page replacement algorithm. To get accurate results, you must use correctly fill the result structure when necessary. To ease filling this structure with all the information manually, you can use <code>page_fault_handler_result_fill</code> function to fill the results automatically by supplying the victim <code>page_table_entry_t</code> as a parameter.</p>
 <p>There are two other optional functions that you can implement. Those are <code>page_replacement_init_function_t</code> and <code>page_replacement_destroy_function_t</code> functions. Initialization function will be called before each test program is executed. You can use this function to initialize variables that are needed for page fault handler algorithm. Destroy function is called after each test program execution is finished and must destroy all initalized data to provide accurate results.</p>
@@ -204,11 +204,13 @@ License</h1>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
+<div class="ttc" id="apra__pfh_8h_html_a1b5e8e701f1a8b607fc9c380c391b4cb"><div class="ttname"><a href="pra__pfh_8h.html#a1b5e8e701f1a8b607fc9c380c391b4cb">page_replacement_algorithm_e</a></div><div class="ttdeci">page_replacement_algorithm_e</div><div class="ttdoc">Enum containing a list of all built-in page replacement algorithms.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:32</div></div>
 <div class="ttc" id="apra__suite_8h_html_a27c07f27ffa47886fb92db793d11e607"><div class="ttname"><a href="pra__suite_8h.html#a27c07f27ffa47886fb92db793d11e607">run_test_suite</a></div><div class="ttdeci">void run_test_suite(test_configuration_t configuration)</div><div class="ttdoc">Run the test suite specified as parameter.</div></div>
-<div class="ttc" id="astructtest__configuration__t_html"><div class="ttname"><a href="structtest__configuration__t.html">test_configuration_t</a></div><div class="ttdef"><b>Definition:</b> pra_suite.h:33</div></div>
-<div class="ttc" id="astructpage__fault__handler__result__t_html"><div class="ttname"><a href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a></div><div class="ttdef"><b>Definition:</b> pra_paging.h:28</div></div>
-<div class="ttc" id="astructtest__parameters__t_html"><div class="ttname"><a href="structtest__parameters__t.html">test_parameters_t</a></div><div class="ttdef"><b>Definition:</b> pra_suite.h:26</div></div>
-<div class="ttc" id="astructtest__execution__t_html"><div class="ttname"><a href="structtest__execution__t.html">test_execution_t</a></div><div class="ttdef"><b>Definition:</b> pra_suite.h:20</div></div>
+<div class="ttc" id="astructtest__configuration__t_html"><div class="ttname"><a href="structtest__configuration__t.html">test_configuration_t</a></div><div class="ttdoc">A strucuture defining the test suite configuration.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:59</div></div>
+<div class="ttc" id="astructpage__fault__handler__result__t_html"><div class="ttname"><a href="structpage__fault__handler__result__t.html">page_fault_handler_result_t</a></div><div class="ttdoc">Results for a single page fault.</div><div class="ttdef"><b>Definition:</b> pra_paging.h:39</div></div>
+<div class="ttc" id="apra__pfh_8h_html_abceb497dd5e30f4226a1947fa2d24744"><div class="ttname"><a href="pra__pfh_8h.html#abceb497dd5e30f4226a1947fa2d24744">page_replacement_function_t</a></div><div class="ttdeci">void(* page_replacement_function_t)(uint32_t, page_fault_handler_result_t *)</div><div class="ttdoc">Page fault handler for custom page replacement algorithm.</div><div class="ttdef"><b>Definition:</b> pra_pfh.h:27</div></div>
+<div class="ttc" id="astructtest__parameters__t_html"><div class="ttname"><a href="structtest__parameters__t.html">test_parameters_t</a></div><div class="ttdoc">A structure defining the parameters for the test run.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:43</div></div>
+<div class="ttc" id="astructtest__execution__t_html"><div class="ttname"><a href="structtest__execution__t.html">test_execution_t</a></div><div class="ttdoc">A structure defining the test program.</div><div class="ttdef"><b>Definition:</b> pra_suite.h:31</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
