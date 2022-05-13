@@ -12,7 +12,7 @@ static size_t terminal_column;
 static uint8_t terminal_color;
 static uint16_t* terminal_buffer;
 
-static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg)
+static inline uint8_t vga_entry_color(vga_color_e fg, vga_color_e bg)
 {
 	return fg | bg << 4;
 }

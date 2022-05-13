@@ -9,7 +9,7 @@ Since this project compiles C code for specific architecture one of the dependen
 Once you have installed the CLI tool, you can run this command to automatically download this framework and the GCC toolchain.
 
 ```shell
-prac init-toolchain
+prac init
 ```
 
 Other dependencies include NASM for assembling bootloader source code and other assembly files. For creating final bootable ISO file, you're gonna need a `mkisofs` tool. Finally, to execute the code you will need a QEMU for i386.

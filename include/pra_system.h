@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Defines system helper functions for kernel.
+ */
+
 #pragma once
 
 #include "pra_attrs.h"
@@ -17,9 +22,22 @@ typedef struct
     uint16_t index;
 } selector_error_code_t;
 
+/**
+ * @brief This function gets called when a kernel panic occurs. This function does not return.
+ * @param error_code the error code of a general protection fault
+ */
 PRA_NORETURN void pra_kernel_panic_handler(uint32_t error_code);
+
+/**
+ * @brief Halts the system. This function does not return.
+ */
 PRA_NORETURN void halt();
 
+/**
+ * @brief Parses the error code from the general protection fault.
+ * @param error_code the error code from general protection fault
+ * @return parsed error code from general protection fault
+ */
 PRA_ALWAYS_INLINE selector_error_code_t parse_selector_error_code(uint32_t error_code)
 {
     selector_error_code_t selector_error_code;

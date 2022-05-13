@@ -2,6 +2,8 @@
 #include "pra_pic.h"
 #include "pra_timer.h"
 
+extern void asm_timer_interrupt();
+
 static timer_callback_t timer_callback;
 
 void timer_initialize()
