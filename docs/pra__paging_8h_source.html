@@ -137,8 +137,8 @@ $(document).ready(function(){initNavTree('pra__paging_8h_source.html',''); initR
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="structpage__fault__statistics__t.html">   48</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    uint32_t soft_page_faults;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    uint32_t hard_page_faults;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    uint32_t page_fault_without_victim;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    uint32_t page_fault_with_victim;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    uint32_t victim_accessed_count;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    uint32_t victim_dirty_count;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <a class="code" href="structpage__fault__statistics__t.html">page_fault_statistics_t</a>;</div>
