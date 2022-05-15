@@ -108,7 +108,7 @@ void paging_add_result_to_statistics(page_fault_handler_result_t *result)
 {
     if (result->victim)
     {
-        page_fault_statistics.hard_page_faults++;
+        page_fault_statistics.page_fault_with_victim++;
         if (result->pte.accessed)
             page_fault_statistics.victim_accessed_count++;
         if (result->pte.dirty)
@@ -116,7 +116,7 @@ void paging_add_result_to_statistics(page_fault_handler_result_t *result)
     }
     else
     {
-        page_fault_statistics.soft_page_faults++;
+        page_fault_statistics.page_fault_without_victim++;
     }
 }
 

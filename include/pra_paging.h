@@ -47,8 +47,8 @@ typedef struct
  */
 typedef struct
 {
-    uint32_t soft_page_faults;
-    uint32_t hard_page_faults;
+    uint32_t page_fault_without_victim;
+    uint32_t page_fault_with_victim;
     uint32_t victim_accessed_count;
     uint32_t victim_dirty_count;
 } page_fault_statistics_t;
