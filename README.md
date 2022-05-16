@@ -112,7 +112,7 @@ Second parameter `result` is a pointer to a structure that will be used to aggre
 
 There are two other optional functions that you can implement. Those are `page_replacement_init_function_t` and `page_replacement_destroy_function_t` functions. Initialization function will be called before each test program is executed. You can use this function to initialize variables that are needed for page fault handler algorithm. Destroy function is called after each test program execution is finished and must destroy all initalized data to provide accurate results.
 
-You can see an implementation of Random page replacement algorithm [here]().
+You can see an implementation of Random page replacement algorithm [here](https://github.com/vbieleny/page-algorithm-comparison/blob/develop/src/pra_pfh_random.c).
 
 ### Executing a project
 
