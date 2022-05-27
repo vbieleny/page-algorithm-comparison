@@ -119,5 +119,4 @@ test-build:
 	$(MAKE) -C test all
 
 clean:
-	-rm -rf qemuout.txt bochsout.txt bochsout-iso.txt bx_enh_dbg.ini .template docs/html $(BUILDDIR)
-	$(MAKE) -C test $@
+	-rm -rf qemuout.txt bochsout.txt bochsout-iso.txt bx_enh_dbg.ini .template docs/html $(BUILDDIR) test/build
